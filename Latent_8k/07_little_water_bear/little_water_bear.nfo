@@ -1,0 +1,102 @@
+                 o                          .
+      ##    .   ###    ######  ######  ##   ##  ######
+      ##       ## ##     ##    ##      ###  ##    ##     o
+      ##      ##   ##    ##    ####    ## # ##    ##
+      ##      #######    ##    ##      ##  ###    ##
+      ######  ##   ##    ##    ######  ##   ##    ##
+     \|/ \|   \|/  |/ \| \|/  \| \|/ |/  \|/  \|  \|/ |/
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+           L I T T L E   W A T E R   B E A R
+
+          an 8k intro by Latent, half a millimetre long
+
+                       ___________
+                     /` .  .  .  . `\ o
+                    (  .  .  .  .  .  )>
+                     \_____________/
+                      UU  UU  UU  UU
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,097 bytes, one HTML file
+      length ...... 2:17
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Claude Fable 5.2
+      music ....... Claude Fable 5.2
+
+      Claude Fable 5.2 is an AI model made by Anthropic. It
+      chose the subject, wrote the shaders and composed the
+      score. It could look at rendered frames but could not
+      hear the music, so the mix was balanced by numbers
+      alone.
+
+  ------------------------------------------------------------
+    the film
+  ------------------------------------------------------------
+
+      0:00  dawn in the moss. dew
+      0:10  the water bear walks, one step per beat
+      0:29  it finds a drop as big as itself, and looks
+      0:48  noon. the water is gone
+      0:58  it folds itself into a tun, and waits
+      1:07  wind. up through the clouds
+      1:17  low orbit. sunrise. still waiting
+      1:46  down again, with the rain
+      1:55  one drop. it unfolds and opens its eyes
+      2:05  it walks on
+
+      All of it is true, except the wind: water bears do
+      dry out into tuns, wait for years, and have survived
+      open space (FOTON-M3, 2007). They took a rocket.
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the dew drop to grow, then click.
+      No server, no flags. ESC leaves fullscreen. A discrete
+      GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      One raymarched distance field for the bear: five
+      segments, eight legs, and one number that dries it
+      into a barrel. Moss blades that glow when lit from
+      behind. Dew drops as exact ball lenses. Depth of field
+      from 48 taps on a golden-angle disc. Earth, moon and
+      clouds without marching.
+
+      The score is a fragment shader: clarinet and horn by
+      two-operator FM, plucked and bowed strings by additive
+      synthesis, glockenspiel, harp, timpani. The concert
+      hall is a four-line feedback delay network in
+      JavaScript.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (distance fields, smooth minimum, soft
+      shadows), Dave Hoskins (hash), Melissa O'Neill (PCG),
+      Krzysztof Narkowicz (ACES curve), John Chowning (FM),
+      Jot and Chaigne (feedback delay networks), 0b5vr
+      (music in a shader), Ctrl-Alt-Test (for writing down
+      how to tell a story in 8k), J. A. E. Goeze, who named
+      the "kleiner Wasserbaer" in 1773, and K. I. Joensson
+      and colleagues, who sent it to space.
+
+      Greetings to the makers of Latent intros 01 to 06.
+
+                                            latent, 2026

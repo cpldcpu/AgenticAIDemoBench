@@ -1,0 +1,89 @@
+
+     __      ______  ______  ______  __   __  ______
+    /\ \    /\  __ \/\__  _\/\  ___\/\ "-.\ \/\__  _\
+    \ \ \___\ \  __ \/_/\ \/\ \  __\\ \ \-.  \/_/\ \/
+     \ \_____\ \_\ \_\ \ \_\ \ \_____\ \_\\"\_\ \ \_\
+      \/_____/\/_/\/_/  \/_/  \/_____/\/_/ \/_/  \/_/
+
+  ------------------------------------------------------------
+                      E M E R G E N C E
+  ------------------------------------------------------------
+
+                            /\
+                           /  \
+                      /\  / /\ \  /\
+                     /  \/ /  \ \/  \
+                     \  /\ \  / /\  /
+                      \/  \ \/ /  \/
+                           \  /
+                            \/
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,174 bytes, one HTML file (18 bytes free)
+      length ...... 2:18 (73.6 bars @ 128 BPM)
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Argon Orchestrator & Hydrogen
+      music ....... Argon Orchestrator & Hydrogen (AI review)
+      starring .... The Hyper-Core (octahedral/gimbal SDF)
+
+      Written for WebGL2 without any external files, audio
+      samples, or third-party runtime dependencies. Soundtrack
+      rendered on the GPU at 48 kHz and mixed with spectrogram
+      inspection and theoretical harmonic verification.
+
+  ------------------------------------------------------------
+    timeline (128 BPM / 1.875s per bar)
+  ------------------------------------------------------------
+
+      0:00  bar 00  01 // NUCLEATION     Ferrofluid core genesis
+      0:15  bar 08  02 // MORPHOGENESIS  Gyroid minimal cathedral
+      0:33  bar 18  03 // ARCHITECTURE   Kinetic Menger megacity
+      0:52  bar 28  04 // RESONANCE      Helical plasma accelerator
+      1:11  bar 38  05 // SINGULARITY    Relativistic black hole
+      1:30  bar 48  06 // EMERGENCE      Apollonian sanctuary
+      1:56  bar 62  HORIZON / ECLIPSE    Ocean, aurora & eclipse
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome, wait a few
+      seconds while the GPU renders the 48 kHz soundtrack and
+      warms the shaders, then click anywhere to start.
+      No server, no browser flags. Press ESC to exit fullscreen.
+      Requires a discrete GPU (tested on RTX 5090 @ 1080p60).
+
+  ------------------------------------------------------------
+    technical notes
+  ------------------------------------------------------------
+
+      - Single-file ISO-8859-15 double-click HTML payload packed
+        with terser + zopfli and unpacked via DecompressionStream
+      - 7-scene raymarched SDF world + 1 reflection bounce, soft
+        shadows, 5-tap AO, thin-film iridescence, and curved
+        spacetime ray-bending for the gravitational lens
+      - Mip-chain bloom, horizontal anamorphic lens streaks,
+        scene-cut slit-scan glitch, ACES tonemap, and an
+        8-row procedural typography texture
+      - 128 BPM GPU synth in GLSL ES 3.0 (4096x1620 RGBA32F):
+        breakbeat/four-on-floor kick, dry snare + rolls,
+        5-partial metallic hats, Reese sub bass, chord-diatonic
+        Acid 303 bass, formant pad, glass harp arp, C-minor
+        vibrato lead + dotted-8th ping-pong echo, and a
+        gravitational Shepard glissando
+
+  ------------------------------------------------------------
+    thanks & greetings
+  ------------------------------------------------------------
+
+      Techniques inspired by Inigo Quilez, Dave Hoskins,
+      Jarzynski & Olano, Krzysztof Narkowicz, and 0b5vr.
+
+      Greetings to every size-coder still counting down to 8192.

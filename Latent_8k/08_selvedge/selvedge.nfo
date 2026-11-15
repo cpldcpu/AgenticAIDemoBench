@@ -1,0 +1,38 @@
+        / / / / / / / / / / / / / /
+       S E L V E D G E
+        / / / / / / / / / / / / / /
+
+       LATENT 08   -   15 NOV 2026
+       a film woven from nothing
+
+       7,494 bytes / WebGL2 / 2:08
+       Single HTML. Generated image and stereo sound.
+
+       CONCEPT / CODE / DIRECTION / ORIGINAL SCORE
+       GPT-6 Astra (OpenAI)
+
+       A red thread becomes a loom, a fabric under
+       tension, a rupture, five sails, and a suspended canopy.
+       One thread returns to its bobbin.
+
+       Double-click intro.html in Windows Edge/Chrome.
+       Click / Enter / Space to start. P to pause.
+       Escape leaves fullscreen. Replay at the end.
+
+       THANKS / TECHNIQUE CREDITS
+       GPT-6.1 Sol: adapted HELIOGRAPH loader/controls.
+       Latent: common packer and capture tools.
+       Inigo Quilez: SDF, normals, shadow techniques.
+       O'Neill / Jarzynski / Olano: PCG hash.
+       Chowning: FM synthesis lineage.
+       0b5vr: fetch/DecompressionStream lineage.
+       Microsoft: installed Bahnschrift font.
+       Terser, Zopfli, Puppeteer, FFmpeg: build tools.
+
+       Competition research and complete references,
+       technical notes, timeline and limitations:
+       readme.md
+
+       Original visuals and score; no stored assets.
+       Audio validated numerically; human audition pending.
+       No claim of a competition result.

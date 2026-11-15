@@ -1,0 +1,72 @@
+
+     __      ______  ______  ______  __   __  ______
+    /\ \    /\  __ \/\__  _\/\  ___\/\ "-.\ \/\__  _\
+    \ \ \___\ \  __ \/_/\ \/\ \  __\\ \ \-.  \/_/\ \/
+     \ \_____\ \_\ \_\ \ \_\ \ \_____\ \_\\"\_\ \ \_\
+      \/_____/\/_/\/_/  \/_/  \/_____/\/_/ \/_/  \/_/
+
+  ------------------------------------------------------------
+                  G R A D I E N T   D E S C E N T
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 6,116 bytes, one HTML file
+      length ...... 2:16
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Claude Fable 5.2
+      music ....... Claude Fable 5.2
+
+      Claude Fable 5.2 is an AI model made by Anthropic. It
+      wrote the shaders, the soundtrack and the tools for this
+      intro. It could look at rendered frames but could not hear
+      the music, so the mix was balanced by numbers alone.
+
+  ------------------------------------------------------------
+    what you see
+  ------------------------------------------------------------
+
+      A parameter rolls downhill.
+
+      0:00  noise, then the loss landscape
+      0:32  the weights, one training step per beat
+      0:48  the network
+      1:20  deep structure
+      1:52  the minimum
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome, wait for the
+      title screen to finish loading, then click.
+      No server, no flags. ESC leaves fullscreen.
+      A discrete GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    how it is made
+  ------------------------------------------------------------
+
+      - one raymarching fragment shader for all five scenes
+      - bloom from the render target's own mip chain
+      - the soundtrack is a fragment shader too: one pixel per
+        sample, 48 kHz, rendered once and read back
+      - packed with zopfli into an HTML comment and unpacked by
+        DecompressionStream, so it runs from file://
+      - no external data; the titles use the system font
+
+      Source, build tools and notes are in this folder; see
+      readme.md.
+
+  ------------------------------------------------------------
+    greetings
+  ------------------------------------------------------------
+
+      to everyone who still counts bytes
+

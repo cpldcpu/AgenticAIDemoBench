@@ -1,0 +1,99 @@
+
+      ##         ###    ######  ######  ##   ##  ######
+      ##        ## ##     ##    ##      ###  ##    ##
+      ##       ##   ##    ##    ####    ## # ##    ##
+      ##       #######    ##    ##      ##  ###    ##
+      ######   ##   ##    ##    ######  ##   ##    ##
+          :                :        :               :
+                           .                        .
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+               M  A  R  G  I  N  A  L  I  A
+
+             an 8k intro by Latent, drawn in ink
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                 +----------+
+      type ........ 8k intro                     |  LATENT  |
+      platform .... Windows, browser (WebGL2)    +----------+
+      size ........ 7,369 bytes, one HTML file
+      length ...... 2:13
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Claude Opus 5.5
+      music ....... Claude Opus 5.5
+
+      Claude Opus 5.5 is an AI model made by Anthropic. It
+      wrote the shaders and the soundtrack for this intro. It
+      could look at rendered frames but could not hear the
+      music, so the mix was balanced by numbers alone.
+
+  ------------------------------------------------------------
+    the pages
+  ------------------------------------------------------------
+
+      0:00  the frame is inked in. hills, a vermilion sun
+      0:11  fig. 1 - 4: the far hills, the sea, an arcade
+            at dusk, reeds before rain
+      0:53  fig. 5: ink, dropped in water
+      0:59  the beat doubles into drum'n'bass. the frame
+            falls away, every second page is white on black,
+            the snares splash ink
+      1:41  back to half time
+      2:03  the drawing is erased. title, credits, seal
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the title page to finish loading,
+      then click. No server, no flags. ESC leaves fullscreen.
+      A discrete GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    how it is made
+  ------------------------------------------------------------
+
+      - the raymarcher outputs no colour, only tone, depth
+        and two pigments: indigo and vermilion
+      - a post shader draws that: wobbling outlines from
+        depth, four layers of cross-hatching by tone, line
+        boil at 12 fps, watercolour washes that bleed,
+        granulate and darken at their edges
+      - each shot is drawn in front of you: lines first,
+        then hatching, then the washes
+      - the soundtrack is a fragment shader, 48 kHz, 90 BPM
+        lo-fi hip-hop with FM electric piano and vinyl
+        crackle, which doubles into 180 BPM drum'n'bass
+      - packed with zopfli into an HTML comment and unpacked
+        by DecompressionStream, so it runs from file://
+
+      Source, build tools and notes are in this folder; see
+      readme.md.
+
+  ------------------------------------------------------------
+    thanks
+  ------------------------------------------------------------
+
+      No assets or libraries are included. Thanks for the
+      techniques go to Praun, Hoppe, Webb and Finkelstein
+      (real-time hatching), Curtis et al. (computer-generated
+      watercolor), Inigo Quilez (distance fields, noise,
+      soft shadows, AO), Dave Hoskins (hash without sine),
+      Jarzynski and Olano (PCG hash), John Chowning (FM) and
+      0b5vr (shader music and packing in the browser).
+
+  ------------------------------------------------------------
+    greetings
+  ------------------------------------------------------------
+
+      to everyone who draws in the margins of their notes
+      when they should be listening
+

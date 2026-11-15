@@ -1,0 +1,101 @@
+
+     __      ______  ______  ______  __   __  ______
+    /\ \    /\  __ \/\__  _\/\  ___\/\ "-.\ \/\__  _\
+    \ \ \___\ \  __ \/_/\ \/\ \  __\\ \ \-.  \/_/\ \/
+     \ \_____\ \_\ \_\ \ \_\ \ \_____\ \_\\"\_\ \ \_\
+      \/_____/\/_/\/_/  \/_/  \/_____/\/_/ \/_/  \/_/
+
+  ------------------------------------------------------------
+                 L A T E N T   S P A C E
+  ------------------------------------------------------------
+
+                  . : * # % % # * : .
+                 : * # % % % % % % # * :
+                . # % % % % % % % % % # .
+                : * # % % % % % % # * :
+                  ' : * # % % # * : '
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 6,772 bytes, one HTML file
+      length ...... 2:13
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Claude Sonnet 5.5
+      music ....... Claude Sonnet 5.5
+
+      Claude Sonnet 5.5 is an AI model made by Anthropic. It
+      wrote the shaders, the soundtrack and the tools for this
+      intro. It could look at rendered frames but could not hear
+      the music, so the mix was balanced by numbers alone.
+
+  ------------------------------------------------------------
+    what you see
+  ------------------------------------------------------------
+
+      > z ~ N(0, I)
+
+      0:00  noise, denoised in 50 steps into a mandelbulb
+      0:13  the drop: a tunnel of beads on glowing fibres
+      0:27  an iridescent gyroid
+      0:40  decode: sunset over an ocean
+      0:53  lerp between all of them, a cut every two bars
+      1:20  falling into the surface of the fractal
+      1:33  the last drop, a cut every bar
+      2:00  the picture is noised again, step by step
+      2:13  end
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome, wait for the
+      title screen to finish loading, then click.
+      No server, no flags. ESC leaves fullscreen.
+      A discrete GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    how it is made
+  ------------------------------------------------------------
+
+      - one raymarching fragment shader, four distance fields:
+        mandelbulb, folded beams, gyroid, ocean
+      - glow is integrated along the ray from the distance to
+        the glowing parts, no extra steps
+      - the denoising is a 50-step schedule in the post shader:
+        block size and noise amount, the digits come from a
+        font strip in the text texture
+      - the soundtrack is a fragment shader: one pixel per
+        sample, 48 kHz, 144 BPM, rendered once and read back
+      - packed with zopfli into an HTML comment and unpacked by
+        DecompressionStream, so it runs from file://
+
+      Source, build tools and notes are in this folder; see
+      readme.md.
+
+  ------------------------------------------------------------
+    thanks
+  ------------------------------------------------------------
+
+      No assets or libraries are included. Thanks for the
+      techniques go to Inigo Quilez (distance fields, soft
+      shadows, AO, palettes), Daniel White and Paul Nylander
+      (the mandelbulb), Mikael Hvidtfeldt Christensen
+      (distance estimated fractals), Alan Schoen (the gyroid),
+      Dave Hoskins (hash without sine), Jarzynski and Olano
+      (PCG hash), Krzysztof Narkowicz (ACES fit) and 0b5vr
+      (shader music and packing in the browser).
+
+  ------------------------------------------------------------
+    greetings
+  ------------------------------------------------------------
+
+      to everyone who still counts bytes,
+      and to everyone who has stared at noise until it
+      turned into something
+
