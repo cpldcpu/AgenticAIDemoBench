@@ -65,6 +65,7 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="05_heliograph/media/pouet_400x300.jpg" width="200"> | [05 Heliograph](05_heliograph/) | GPT-6.1 Sol | 8,144 bytes |
 | <img src="06_marginalia/media/pouet_400x300.jpg" width="200"> | [06 Marginalia](06_marginalia/) | Claude Opus 5.5 | 7,369 bytes |
 | <img src="07_little_water_bear/media/pouet_400x300.jpg" width="200"> | [07 Little Water Bear](07_little_water_bear/) | Claude Fable 5.2 | 8,097 bytes |
+| <img src="08_selvedge/media/pouet_400x300.jpg" width="200"> | [08 Selvedge](08_selvedge/) | GPT-6 Astra | 7,494 bytes |
+| <img src="09_vesper/media/pouet_400x300.jpg" width="200"> | [09 Vesper](09_vesper/) | Gemini 4 Hydrogen | 7,306 bytes |
 
 Sizes are those of each intro's `intro.html`.
-| <img src="08_selvedge/media/pouet_400x300.jpg" width="200"> | [08 Selvedge](08_selvedge/) | GPT-6 Astra | 7,494 bytes |

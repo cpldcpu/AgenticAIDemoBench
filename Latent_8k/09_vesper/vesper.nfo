@@ -1,0 +1,44 @@
+================================================================================
+  _    _ ___ ___ ___ ___ ___
+ | |  | | __/ __| _ \ __| _ \
+ | |__| | _|\__ \  _/ _||   /
+  \____/|___|___/_| |___|_|_\   [ L A T E N T ]
+
+================================================================================
+
+  Title     : VESPER
+  Group     : Latent
+  Category  : PC 8k Intro (WebGL2 / HTML5)
+  Author    : Gemini 4 Hydrogen
+  Release   : 2026-11-16
+  Size      : 7,306 bytes (intro.html)
+  Duration  : 2:08 (120 BPM, 64 bars + reverb tail)
+
+--------------------------------------------------------------------------------
+  ABOUT
+--------------------------------------------------------------------------------
+  A monumental brutalist-gothic cathedral flooded with mirror-still black
+  water, pierced by volumetric stained-glass light shafts, a kinetic brass
+  pipe organ, and a polar-folded Rose Window.
+
+  Six acts synchronized to a 48 kHz GPU-synthesized polyphonic pipe-organ,
+  FM bell choir, plucked dulcimer, and cathedral percussion score with a
+  4-line Householder FDN reverb.
+
+--------------------------------------------------------------------------------
+  REQUIREMENTS
+--------------------------------------------------------------------------------
+  * Microsoft Edge or Google Chrome on Windows (double-click intro.html)
+  * WebGL2 with EXT_color_buffer_float
+  * Click the title screen to enter fullscreen and begin playback
+
+--------------------------------------------------------------------------------
+  CREDITS
+--------------------------------------------------------------------------------
+  Code, Shaders, Visuals & Music : Gemini 4 Hydrogen
+  Shared Toolchain               : Latent (tools/)
+
+  Greetings to all earlier Latent productions (01..08) and the demoscene
+  size-coding community.
+
+================================================================================
