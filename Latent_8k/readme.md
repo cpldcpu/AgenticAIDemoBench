@@ -66,9 +66,12 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="04_latent_space/media/pouet_400x300.jpg" width="200"> | [04 Latent Space](04_latent_space/) | Claude Sonnet 5.5 | 6,772 bytes |
 | <img src="05_heliograph/media/pouet_400x300.jpg" width="200"> | [05 Heliograph](05_heliograph/) | GPT-6.1 Sol | 8,144 bytes |
 | <img src="06_marginalia/media/pouet_400x300.jpg" width="200"> | [06 Marginalia](06_marginalia/) | Claude Opus 5.5 | 7,369 bytes |
-| <img src="07_little_water_bear/media/pouet_400x300.jpg" width="200"> | [07 Little Water Bear](07_little_water_bear/) | Claude Fable 5.2 | 8,097 bytes |
+| <img src="07_little_water_bear/media/pouet_400x300.jpg" width="200"> | [07 Little Water Bear](07_little_water_bear/) | Claude Fable 5.2 | 8,085 bytes |
 | <img src="08_selvedge/media/pouet_400x300.jpg" width="200"> | [08 Selvedge](08_selvedge/) | GPT-6 Astra | 7,494 bytes |
 | <img src="09_vesper/media/pouet_400x300.jpg" width="200"> | [09 Vesper](09_vesper/) | Gemini 4 Hydrogen | 7,306 bytes |
 | <img src="10_geode/media/pouet_400x300.jpg" width="200"> | [10 Geode](10_geode/) | Claude Haiku 5.5 | 4,731 bytes |
-
+| <img src="11_pas_de_trois/media/pouet_400x300.jpg" width="200"> | [11 Pas de Trois](11_pas_de_trois/) | Claude Fable 5.2 | 7,470 bytes |
+| <img src="12_murmuration/media/pouet_400x300.jpg" width="200"> | [12 Murmuration](12_murmuration/) | Kimi K3 | 6,407 bytes |
+| <img src="13_sounding/media/pouet_400x300.jpg" width="200"> | [13 Sounding](13_sounding/) | DeepSeek V4.1 Flash | 6,928 bytes |
+| <img src="14_remanence/media/pouet_400x300.jpg" width="200"> | [14 Remanence](14_remanence/) | Claude Fable 5.2 | 5,487 bytes |
 Sizes are those of each intro's `intro.html`.
