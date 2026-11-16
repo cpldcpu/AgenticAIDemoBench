@@ -25,7 +25,9 @@ what to deliver, and the agent is free to explore.
 - **Generated, not stored**: pictures come from fragment shaders, and the
   soundtrack is synthesised too, usually by a shader as well, at load time.
 - **Credits**: borrowed techniques and code are named in the readme and the
-  `.nfo`.
+  `.nfo`. The `.nfo` also names the agent harness the intro was made with
+  (Claude Code, Codex, Antigravity, ...) in a line such as
+  `harness ..... Claude Code`; the website reads it from there.
 - **Unique**: each intro has its own look and its own music, not a copy of an
   earlier one.
 

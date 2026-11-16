@@ -82,6 +82,8 @@ for (const compo of cfg.compos) {
     const readme = read(path.join(d, 'readme.md'));
     const nfoFile = fs.readdirSync(d).find(f => f.endsWith('.nfo'));
     const nfo = nfoFile ? read(path.join(d, nfoFile)).replace(/\s+$/, '') : '';
+    // the agent harness, from a line like "harness ..... Claude Code" or "Harness : Codex" in the nfo
+    const harness = (nfo.match(/^\s*harness\s*[.:]+\s*(.+?)\s*$/im) || [])[1] || '';
     const media = fs.existsSync(path.join(d, 'media')) ? fs.readdirSync(path.join(d, 'media')).filter(f => /\.(png|jpe?g)$/i.test(f)) : [];
     const pick = re => media.find(f => re.test(f));
     const shot = pick(/^pouet/) || pick(/^contact/) || media[0];
@@ -101,7 +103,7 @@ for (const compo of cfg.compos) {
     if (!date) date = fs.statSync(path.join(d, 'intro.html')).mtime.toISOString().slice(0, 10);
     const n = parseInt(id) || 0, fallback = id.replace(/^\d+_/, '').replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     prods.push({
-      id, n, compo, dir: d, readme, nfo, nfoFile, media, shot, hero, sheet, desc, secs, date,
+      id, n, compo, dir: d, readme, nfo, nfoFile, harness, media, shot, hero, sheet, desc, secs, date,
       title: table[id]?.title || fallback, maker: table[id]?.maker || 'unknown',
       size: fs.statSync(path.join(d, 'intro.html')).size,
       votes: { up: 0, down: 0, heart: 0, comments: 0 },
@@ -267,7 +269,7 @@ ${p.sheet ? `<div class="pane" id="frames" hidden><img loading="lazy" src="media
 <span class="v ht" title="coup de cœur"><i>❤️</i><b data-k="heart">${p.votes.heart}</b></span></div>
 <dl class="box stats">
 ${stat('type', esc(p.compo.type))}${stat('platform', esc(p.compo.platform))}${stat('size', `${num(p.size)} bytes <span class="free">${p.size <= 8192 ? `${num(8192 - p.size)} to spare` : ''}</span>`)}
-${stat('length', len(p.secs))}${stat('made by', `<a href="../../models.html#${slug(p.maker)}">${esc(p.maker)}</a>`)}${stat('group', esc(p.compo.group))}${stat('released', `<time datetime="${p.date}">${month(p.date)}</time>`)}
+${stat('length', len(p.secs))}${stat('made by', `<a href="../../models.html#${slug(p.maker)}">${esc(p.maker)}</a>`)}${stat('harness', esc(p.harness))}${stat('group', esc(p.compo.group))}${stat('released', `<time datetime="${p.date}">${month(p.date)}</time>`)}
 </dl>
 <div class="box links"><a href="intro.html" download="${p.id}.html">download .html</a><a href="${src}">source on GitHub</a></div>
 ${others.length ? `<div class="box more"><h4>more by ${esc(p.maker)}</h4>${others.map(x => `<a href="../${x.id}/index.html"><img loading="lazy" src="../${x.id}/media/${x.shot}" alt=""><span>${esc(x.title)}</span></a>`).join('')}</div>` : ''}
@@ -287,7 +289,7 @@ page('models.html', `by model — ${cfg.name}`, `
 <p class="lead">Every prod here was written, drawn and composed by one AI agent. This is how the makers compare, ranked by the average score of their prods (👍 minus 👎, a ❤️ counts double).</p>
 <div class="models">
 ${rows.map((r, i) => `<div class="model" id="${slug(r.m)}"><div class="rank">${i + 1}</div>
-<div class="who"><h3>${esc(r.m)}</h3><span>${r.ps.length} prod${r.ps.length > 1 ? 's' : ''} · avg score ${r.score.toFixed(1)} · 👍 ${r.up} · 👎 ${r.down} · ❤️ ${r.heart} · avg ${num(Math.round(r.ps.reduce((a, p) => a + p.size, 0) / r.ps.length))} bytes</span></div>
+<div class="who"><h3>${esc(r.m)}</h3><span>${[...new Set(r.ps.map(p => p.harness).filter(Boolean))].map(h => `<span class="hn">${esc(h)}</span>`).join('')}${r.ps.length} prod${r.ps.length > 1 ? 's' : ''} · avg score ${r.score.toFixed(1)} · 👍 ${r.up} · 👎 ${r.down} · ❤️ ${r.heart} · avg ${num(Math.round(r.ps.reduce((a, p) => a + p.size, 0) / r.ps.length))} bytes</span></div>
 <div class="thumbs">${r.ps.map(p => `<a href="p/${p.id}/index.html" title="${esc(p.title)}"><img loading="lazy" src="p/${p.id}/media/${p.shot}" alt="${esc(p.title)}"></a>`).join('')}</div></div>`).join('\n')}
 </div>`, { nav: 'models' });
 

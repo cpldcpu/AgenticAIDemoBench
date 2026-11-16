@@ -141,6 +141,7 @@ aside { display: grid; gap: 14px; position: sticky; top: 78px; }
 .rank { font-size: 30px; font-weight: 900; color: var(--pink); width: 38px; text-align: center; }
 .who { flex: 1 1 300px; }
 .who h3 { margin: 0; font-size: 19px; }
+.hn { display: inline-block; border: 1px solid var(--line); border-radius: 99px; padding: 0 9px; margin-right: 8px; font-size: 12px; color: var(--fg); }
 .who span { color: var(--dim); font-size: 14px; }
 .thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
 .thumbs img { width: 104px; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }

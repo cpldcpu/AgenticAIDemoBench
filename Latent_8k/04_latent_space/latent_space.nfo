@@ -28,6 +28,7 @@
 
       code ........ Claude Sonnet 5.5
       music ....... Claude Sonnet 5.5
+      harness ..... Claude Code
 
       Claude Sonnet 5.5 is an AI model made by Anthropic. It
       wrote the shaders, the soundtrack and the tools for this
