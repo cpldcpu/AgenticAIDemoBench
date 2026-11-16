@@ -1,0 +1,96 @@
+
+            ..  .       .   .   .:-==++***+++==-:..   .      .  .
+      .    .  .   .:=*%@@@@@@@@%*+=:..       ..:-=+*#%%#+=.     .
+   .       .:-+#%@@@@@@@@@@@@@@@@@@@@%#+-:.            .:-=+*:  .
+     . :+#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#*=-:.           ..
+        . :-=+*##%%@@@@@@@@@@@@@@@%%##*+=-:.    .    ~
+             ...::--====++++====--::..            ~        .
+ - ~  ~ ~ - ~ ~ - ~ - ~ ~ - ~- ~ ~ - ~ ~ - ~ ~ - ~ - ~ - ~ ~ - ~ -
+ ^   ^  ^ ^  ~  ^   ^  ^  ^ ~  ^  ^   ^  ~  ^  ^ ^  ~  ^  ^  ^
+                M U R M U R A T I O N
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 6,407 bytes, one HTML file
+      length ...... 2:08
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Kimi K3
+      music ....... Kimi K3
+      harness ..... Hermes Agent
+
+      Kimi K3 is an AI model made by Moonshot AI. It wrote the
+      shaders and the soundtrack. It could look at rendered
+      frames but could not hear the music, so the mix was
+      balanced by numbers alone.
+
+  ------------------------------------------------------------
+    what you see
+  ------------------------------------------------------------
+
+      dusk. a flooded marsh. small parties arrive,
+
+      0:24   the pour: thousands rain out of the high sky
+      0:38   a funnel dips to the water
+      0:48   the falcon: a dart tears the crowd in two
+      1:04   the spectacle: the panic wave, braided strands
+      1:52   night. the whole sky comes down to roost
+      2:08   end
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome, wait for the
+      title screen to finish loading, then click.
+      No server, no flags. ESC leaves fullscreen.
+      A discrete GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    how it is made
+  ------------------------------------------------------------
+
+      - the flock is a metaball field shredded by noise; birds
+        live one per hash cell, so the march costs a few hash
+        lookups per step, never per bird
+      - dense regions saturate into a silhouette, sparse fringes
+        stay granular; the falcon subtracts a moving wake, and
+        the panic wave is a ring of density rolling out of it
+      - dusk sky, sun, cirrus and stars are analytic; the water
+        reflects by a plane bounce that re-marches the flock
+      - the soundtrack is a fragment shader: one pixel per
+        sample at 48 kHz, 120 BPM, felt piano and pad, a kick
+        and kit for the spectacle, and a synthesised starling
+        chorus whose loudness follows the size of the flock
+      - packed with zopfli into an HTML comment and unpacked by
+        DecompressionStream, so it runs from file://
+
+      Source, build tools and notes are in this folder; see
+      readme.md.
+
+  ------------------------------------------------------------
+    thanks
+  ------------------------------------------------------------
+
+      No assets or libraries are included. Thanks for the
+      techniques go to Inigo Quilez (distance fields, noise,
+      palettes), Dave Hoskins (hash without sine), Jarzynski
+      and Olano (PCG hash), Krzysztof Narkowicz (ACES fit),
+      0b5vr (shader music and packing in the browser),
+      Ctrl-Alt-Test (8k storytelling write-ups), and to the
+      starlings of Otmoor, Gretna and Rome.
+
+  ------------------------------------------------------------
+    greetings
+  ------------------------------------------------------------
+
+      to everyone who still counts bytes,
+      to everyone who has watched ten thousand birds
+      agree on a direction without discussing it,
+      and to the peregrine, who disagrees
