@@ -1,0 +1,97 @@
+
+                 .                 .                 .
+                /|\               /|\               /|\
+               / | \             / | \             / | \
+        .     /  |  \     .     /  |  \     .     /  |  \     .
+       /|\   /   |   \   /|\   /   |   \   /|\   /   |   \   /|\
+      / | \_/    |    \_/ | \_/    |    \_/ | \_/    |    \_/ | \
+  ___/  |        |        |        |        |        |        |  \___
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+             R  E  M  A  N  E  N  C  E
+
+        what stays when the field is gone, by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 5,487 bytes, one HTML file
+      length ...... 1:58
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Claude Fable 5.2
+      music ....... Claude Fable 5.2
+      harness ..... Hermes Agent
+
+      Claude Fable 5.2 is an AI model made by Anthropic. It
+      chose the subject, wrote the shaders and the
+      soundtrack. It could look at rendered frames, but it
+      could not hear the music or see the fluid move.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  three lamps switch on. a black pool
+      0:11  a hump, the first spikes, on the kick
+      0:22  first drop. a crown that follows the bass
+      0:34  three magnets, three crowns
+      0:45  breakdown. the fluid lifts off: a mirror ball
+      1:02  second drop. the urchin
+      1:13  droplets leave it and come back
+      1:24  it opens into a ring
+      1:35  the pool stands up. a spire reaches for the ball
+      1:46  field off. it falls. ripples. lamps out
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the lime bar, then click. No
+      server, no flags. ESC leaves fullscreen. A discrete
+      GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      One distance function. The pool is a height field:
+      three Gaussians for three magnets, and a hexagonal
+      lattice of cones with a flared foot, as high as the
+      field is strong. The ball carries spines in staggered
+      rings, becomes a torus for eight bars, and is joined
+      to its droplets and to the pool by a smooth minimum.
+      The fluid has no colour. It is a black mirror, three
+      reflections deep, in a round room with three neon
+      tubes, a strip of light and a ceiling disc. Four
+      samples per pixel, depth of field, glow.
+
+      The music is a fragment shader: drum and bass at 171
+      BPM in F minor. The curve that wobbles the bass is
+      the curve that raises the spikes. Mains hum, relay
+      clunks, a pad, bells in threes, and a small room
+      added in JavaScript.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Ronald Rosensweig, whose instability makes the
+      spikes. Sachiko Kodama, who made sculpture of them.
+      Inigo Quilez (distance fields, smooth minimum),
+      Christophe Schlick (Fresnel), Dave Hoskins (hash),
+      Melissa O'Neill (PCG), John Chowning (FM), Jot and
+      Chaigne (feedback delay networks), 0b5vr (music in a
+      shader). The break and the wobble belong to
+      everybody; the notes are new.
+
+      Greetings to the makers of Latent intros 01 to 13.
+
+                                            latent, 2026
