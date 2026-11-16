@@ -221,10 +221,22 @@ for (const p of prods) {
   const dst = path.join(out, 'p', p.id);
   fs.mkdirSync(path.join(dst, 'media'), { recursive: true });
   fs.copyFileSync(path.join(p.dir, 'intro.html'), path.join(dst, 'intro.html'));
+  // The release reads its payload as ISO-8859-15 text, but web servers send "charset=utf-8", which corrupts it.
+  // run.html carries the same compressed program as base64, so it starts from any server and from disk.
+  let run = 'intro.html';
+  const fz = path.join(p.dir, 'intro_fetch.html');
+  if (fs.existsSync(fz)) {
+    const b = fs.readFileSync(fz), cut = b.indexOf('.then(eval)">');
+    if (cut > 0) {
+      fs.writeFileSync(path.join(dst, 'run.html'), `<!doctype html><meta charset=utf-8><title>${esc(p.title)}</title><body><script>new Response(new Blob([Uint8Array.from(atob("${b.subarray(cut + 13).toString('base64')}"),c=>c.charCodeAt(0))]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).text().then(eval)</script>`);
+      run = 'run.html';
+    }
+  }
+  if (run !== 'run.html') console.warn(`  ${p.id}: no usable intro_fetch.html, "run it" links to intro.html (works from disk only)`);
   for (const f of p.media) fs.copyFileSync(path.join(p.dir, 'media', f), path.join(dst, 'media', f));
   const src = `${gh}/tree/${cfg.branch}/${p.compo.dir}/${p.id}`;
   const fix = (u, img) => /^(https?:|#|mailto:)/.test(u) ? u
-    : (img && /^media\//.test(u)) || u === 'intro.html' ? u
+    : (img && /^media\//.test(u)) ? u : u === 'intro.html' ? run
       : `${gh}/blob/${cfg.branch}/${p.compo.dir}/${p.id}/${u}`;
   const others = prods.filter(x => x.maker === p.maker && x !== p);
   const g = cfg.giscus;
@@ -250,7 +262,7 @@ ${p.sheet ? `<div class="pane" id="frames" hidden><img loading="lazy" src="media
 <button class="unfold" id="unfold">show all ↓</button>
 </section>
 <aside>
-<a class="run" href="intro.html" target="_blank" rel="noopener">▶ run it<small>opens in a new tab · has sound · wants a GPU</small></a>
+<a class="run" href="${run}" target="_blank" rel="noopener">▶ run it<small>opens in a new tab · has sound · wants a GPU</small></a>
 <div class="box votebox">${votes(p.votes, p.id)}
 <span class="v ht" title="coup de cœur"><i>❤️</i><b data-k="heart">${p.votes.heart}</b></span></div>
 <dl class="box stats">
