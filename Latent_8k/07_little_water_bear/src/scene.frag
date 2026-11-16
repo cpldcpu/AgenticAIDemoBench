@@ -46,7 +46,8 @@ float br(vec3 p){
     if(i<4)f=sat(dot(k,t)/dot(t,t)),d=sm(d,length(k-t*f)-(.15-.05*f)*(1.-DR),.06);
   }
   d=sm(d,length(p-vec3(s+.3-.3*DR,-.05,0))-.14+.14*DR,.08);
-  return d-(.02+.02*DR)*cos(p.x/s*12.566);
+  // the ripple and the bends make this field steeper than a true distance: scale it, or rays land inside the skin and the painted face is cut
+  return (d-(.02+.02*DR)*cos(p.x/s*12.566))*.8;
 }
 float map(vec3 p){
   vec3 q=p-BP;
@@ -107,7 +108,7 @@ vec3 env(vec3 d){
     return c;
   }
   if(E>0){
-    f=fb(vec2(atan(d.x,d.z)*3.,d.y*4.+(S>13?T:-T)*5.));
+    f=fb(vec2(atan(d.x,d.z)*3.,d.y*4.+(S>13?-T:T)*5.)); // clouds sink past on the way up, rise past on the way down
     c=mix(vec3(.25,.5,.9)+.4*s,vec3(0,.01,.03),AL);
     c=mix(c,mix(vec3(1.1),vec3(.2,.23,.27),RN)*(.6+.4*d.y+.4*s),smoothstep(.4,.7,f)*(1.-AL)*(1.-AL));
     return c+sr(d)*pow(AL,6.)+SC*pow(s,40.)*.1;
@@ -192,7 +193,7 @@ void main(){
       al=mix(vec3(.72,.7,.6),vec3(.36,.2,.07),DR);
       // eye spots and mouth
       q.z=abs(q.z);
-      if(DR<.4&&(length(q-vec3(1.25,.1,.17))<.065&&fract(T*.23)>.04||q.x>1.41))al=vec3(length(q-vec3(1.28,.13,.15))<.02?9:0),ss=-1.;
+      if(DR<.4&&(length(q-vec3(1.25,.1,.17))<.065&&fract(T*.23)>.04||q.x>1.41))al=vec3(length(q-vec3(1.27,.13,.14))<.02?9:0),ss=-1.;
       c=al*(SC*sat(dl*.7+.3)*sh+am.g)
         +(vec3(1,.5,.35)*SC*sat(.5+2.*ss)*.1+SC*sh*pow(sp,50.)*.5)*(1.-.8*DR)+am*fr*2.;
       // re-entry

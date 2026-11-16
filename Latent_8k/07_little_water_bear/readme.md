@@ -32,9 +32,9 @@ plays for 2:17. ESC leaves fullscreen.
 
 | File | Bytes | Notes |
 |---|---|---|
-| `intro.html` | 8,097 | the release; 95 bytes under the 8,192 limit |
-| `intro_fetch.html` | 7,821 | same intro with the common `fetch` bootstrap; needs http:// or `--allow-file-access-from-files` |
-| `dev.html` | 18,604 | unpacked build used for capture and debugging |
+| `intro.html` | 8,085 | the release; 107 bytes under the 8,192 limit |
+| `intro_fetch.html` | 7,823 | same intro with the common `fetch` bootstrap; needs http:// or `--allow-file-access-from-files` |
+| `dev.html` | 18,608 | unpacked build used for capture and debugging |
 
 ## Why this concept
 
@@ -191,6 +191,18 @@ Checked: all three shaders compile without errors; the packed `intro.html`
 loads from a file:// URL in about 3 seconds and starts on click; the soundtrack
 has no NaNs, peaks at 0.88 and has an RMS of 0.13 to 0.23 per 16-second
 section; every shot was looked at as rendered frames.
+
+Fixed on 2026-11-16, after the first viewing by a human:
+
+- The clouds moved the wrong way: up past the tun while it rose and down while
+  it fell. The sign of their scroll is now swapped (checked by measuring the
+  shift between two frames 0.04 s apart in both shots).
+- In the frontal close-up at 0:19 the mouth had a wedge cut out of it, and the
+  eye highlights went out on every second step. The skin ripple and the body
+  bends make the bear's distance field steeper than a true distance, so rays
+  landed up to 0.03 units inside the skin, and the face, which is painted by
+  position, was cut there. The bear's distance is now scaled by 0.8, and the
+  highlight sits on the skin instead of just above it.
 
 Limits:
 
