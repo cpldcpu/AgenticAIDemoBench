@@ -1,0 +1,123 @@
+<meta charset=utf-8><body><script>
+// GEODE - an 8k intro by Claude Haiku 5.5 for Latent.
+(async () => {
+  let W = 1920, H = 1080, t, z = 0, i = 0, k, s, l, r;
+  if (window.CAPW) { W = CAPW; H = CAPH } //DEV
+  const D = document;
+  D.body.innerHTML = `<canvas id=C width=${W} height=${H} style=position:fixed;inset:0;width:100vw;height:100vh;object-fit:contain;background:#000;cursor:none></canvas><div id=P0 style="position:fixed;inset:0;display:grid;place-content:center;text-align:center;background:radial-gradient(#2b1456,#05030d);color:#ece6ff;font:300 4.5vw Georgia,serif;letter-spacing:.25em;cursor:pointer;user-select:none"><div id=P1 style="margin:auto;margin-bottom:2vw;width:calc(var(--w)*.07vw);aspect-ratio:1;border-radius:50%;border:1px solid #6ef2e0;box-shadow:0 0 3vw #8a4dff99,inset 0 0 2vw #6ef2e066"></div>GEODE<div id=P2 style="font-size:1.1vw;letter-spacing:.35em;margin-top:1.5vw;opacity:.7"></div></div>`;
+  const Y = (s, w) => (P2.innerText = s, P1.style.setProperty('--w', w), new Promise(r => requestAnimationFrame(_ => setTimeout(r, 60))));
+  await Y('GROWING THE CRYSTALS', 25);
+  const g = C.getContext('webgl2');
+  g.getExtension('EXT_color_buffer_float');
+
+  const Q = f => {
+    const p = g.createProgram();
+    const t0 = performance.now(); //DEV
+    ['#version 300 es\nvoid main(){gl_Position=vec4(gl_VertexID%2*4-1,gl_VertexID/2*4-1,0,1);}', f].map((s, i) => {
+      const h = g.createShader(35633 - i);
+      g.shaderSource(h, s);
+      g.compileShader(h);
+      g.attachShader(p, h);
+      if (!g.getShaderParameter(h, 35713)) console.error('SHADER ' + i + ': ' + g.getShaderInfoLog(h)); //DEV
+    });
+    g.linkProgram(p);
+    g.getProgramParameter(p, 35714);
+    console.log('compile ' + f.length + ' bytes: ' + (performance.now() - t0 | 0) + ' ms'); //DEV
+    return p;
+  };
+  const X = (w, h, f) => {
+    g.bindTexture(3553, t = g.createTexture());
+    g.texImage2D(3553, 0, f, w, h, 0, 6408, 5126, null);
+    const F = g.createFramebuffer();
+    g.bindFramebuffer(36160, F);
+    g.framebufferTexture2D(36160, 36064, 3553, t, 0);
+    return F;
+  };
+
+  // Typography atlas -> texture unit 1 (8 lines, 128 px each)
+  const x = D.createElement('canvas').getContext('2d');
+  x.canvas.width = 2048;
+  x.canvas.height = 1024;
+  x.fillStyle = '#fff';
+  x.textAlign = 'center';
+  x.font = '300 78px Georgia,serif';
+  [
+    'G E O D E',
+    'L A T E N T   ·   8 K   I N T R O',
+    'I · DESCENT',
+    'II · THE GEODE',
+    'III · RESONANCE',
+    'IV · DROP',
+    'V · EXPANSION',
+    'CODE, VISUALS AND MUSIC: CLAUDE HAIKU 5.5'
+  ].map((s, i) => x.fillText(s, 1024, i * 128 + 90, 1960));
+  g.activeTexture(33985);
+  g.bindTexture(3553, g.createTexture());
+  g.pixelStorei(37440, 1);
+  g.texImage2D(3553, 0, 6408, 6408, 5121, x.canvas);
+  g.generateMipmap(3553);
+  g.texParameteri(3553, 10241, 9987);
+  g.activeTexture(33984);
+
+  // Music synthesis: 4096 x 1536 = 6,291,456 stereo samples; the track uses the first 6,144,000 (128 s)
+  X(4096, 1536, 34836);
+  g.viewport(0, 0, 4096, 1536);
+  g.useProgram(Q("#version 300 es\nprecision highp float;uniform vec4 R;out vec4 O;const float b=6.2831853;const float z[8]=float[8](0.,3.,7.,10.,7.,3.,0.,-2.);float d(float C){return 440.*exp2((C-69.)/12.);}float l(float c){uint e=uint(c)*747796405u+2891336453u;e=((e>>((e>>28u)+4u))^e)*277803737u;e=(e>>22u)^e;return float(e)/4294967295.;}float m(float a,float g){return sin(b*g*a)+.6*sin(b*g*1.004*a)+.3*sin(b*g*2.*a)+.2*sin(b*g*3.*a);}float s(float c,float g){if(c<0.)return 0.;float t=b*g*c;return exp(-c*2.2)*sin(t+2.5*exp(-c*3.)*sin(t*1.4));}float u(float c){return sin(b*(45.*c+5.*(1.-exp(-30.*c))))*exp(-7.*c);}void main(){float n=floor(gl_FragCoord.y)*4096.+floor(gl_FragCoord.x);float a=n/48000.;float h=floor(a*.5);float i=mod(h,4.);float f=i<.5?57.:i<1.5?53.:i<2.5?48.:55.;float v=i<.5?3.:4.;float j=step(8.,h),D=step(20.,h),o=step(36.,h),w=step(48.,h),p=step(60.,h);float k=o*(1.-w);float E=1.-smoothstep(122.,127.5,a);float F=1.-exp(-mod(a,2.)*2.);float G=(m(a,d(f))+m(a,d(f+v))+m(a,d(f+7.)))*.05*F;float H=floor(a*2.),x=l(H*3.1);float I=d(69.+floor(x*5.)*2.+f-57.);float J=s(mod(a,.5),I)*.12*step(.45,x)*(1.-j);float K=sin(b*d(f-24.)*a)*.12*(1.-j+p);float B=sin(b*d(f-12.)*a)*exp(-mod(a,.25)*5.)*.3*k;float L=u(mod(a,.5))*k*.8+u(mod(a,2.))*w*(1.-p)*.5;float M=mod(floor(a*2.),2.);float N=(l(n)*2.-1.)*exp(-mod(a,.5)*16.)*.25*k*M;float P=(l(n+3.)*2.-1.)*exp(-mod(a,.125)*90.)*.08*(k+.4*j*(1.-o));float q=mod(floor(a*4.),4.);float Q=q<.5?0.:q<1.5?v:q<2.5?7.:12.;float S=s(mod(a,.25),d(f+24.+Q))*.12*j*(1.-p);float T=floor(a*2.);float U=z[int(mod(T,8.))];float V=d(69.+f-57.+U);float W=mod(a,.5);float X=sin(b*V*a+.4*sin(b*5.*a))*exp(-W*3.)*.12*D*(1.-o);float r=G+J+K+B+L+N+P+S+X;r*=E;float y=.08*sin(b*.11*a);O=vec4(tanh(r*(1.+y)),tanh(r*(1.-y)),0.,1.);}"));
+  g.drawArrays(4, 0, 3);
+  const d = new Float32Array(25165824);
+  g.readPixels(0, 0, 4096, 1536, 6408, 5126, d);
+  g.deleteTexture(t);
+
+  // Cavern FDN reverb (4 damped delay lines with Householder feedback)
+  const N = 6144000, u = new AudioBuffer({ length: N, numberOfChannels: 2, sampleRate: 48e3 }),
+    a = u.getChannelData(0), b = u.getChannelData(1),
+    e = [2203, 3109, 4507, 5801].map(n => new Float32Array(n)), y = [0, 0, 0, 0], c = [0, 0, 0, 0];
+  for (; i < N; i++) {
+    l = d[i * 4]; r = d[i * 4 + 1]; s = 0;
+    for (k = 4; k--;) s += y[k] = e[k][i % e[k].length];
+    for (k = 4; k--;) e[k][i % e[k].length] = (k & 1 ? l : r) * .14 + (c[k] += (y[k] - s / 2 - c[k]) * .45) * .88;
+    a[i] = Math.tanh(l + y[0] + y[2]);
+    b[i] = Math.tanh(r + y[1] + y[3]);
+  }
+  window.audio = u; //DEV
+
+  // Visuals
+  await Y('CUTTING THE FACETS', 70);
+  const F = X(W, H, 34842), p1 = Q("#version 300 es\nprecision highp float;uniform vec4 R;out vec4 O;const float N=6.2831853;float b;float j(vec2 a){return fract(sin(dot(a,vec2(127.1,311.7)))*43758.5453);}float r(vec2 a){vec2 c=floor(a),k=fract(a);k=k*k*(3.-2.*k);return mix(mix(j(c),j(c+vec2(1.,0.)),k.x),mix(j(c+vec2(0.,1.)),j(c+vec2(1.)),k.x),k.y);}float w(vec2 a,float P){a=abs(a);return max(dot(a,vec2(.866025,.5)),a.y)-P;}float s(vec3 a,out float d){d=0.;if(b<16.){return 6.-length(a.xz)+.4*r(a.xz*.7+vec2(a.y*.35));}float Q=4.2+40.*smoothstep(96.,118.,b);float x=Q-length(a)+.08*r(a.xy*1.7+vec2(a.z*1.3));float y=max(.02,3.2*smoothstep(18.,40.,b));float o=atan(a.z,a.x)+.1*b,t=N/10.;o=mod(o+t*.5,t)-t*.5;vec2 z=length(a.xz)*vec2(cos(o),sin(o));float e=max(w(vec2(z.x-2.7,z.y),.42),abs(a.y+4.-y*.5)-y*.5);float C=cos(.2*b),D=sin(.2*b);float S=max(w(mat2(C,-D,D,C)*a.xz,.35),abs(a.y)-2.6);float E=min(e,S);d=E<x?1.:0.;return min(x,E);}float T(vec3 f,vec3 l,out float d,out float m){float g=0.,p;m=0.;for(int c=0;c<120;c++){p=s(f+l*g,d);m+=d*.012*exp(-3.*max(p,0.));if(p<.001*g)break;g+=p*.8;if(g>50.)break;}return g;}vec3 U(vec3 a){const vec3 F[4]=vec3[4](vec3(1,-1,-1),vec3(-1,-1,1),vec3(-1,1,-1),vec3(1,1,1));vec3 h=vec3(0.);float d;for(int c=0;c<4;c++)h+=F[c]*s(a+F[c]*.002,d);return normalize(h);}float V(vec3 a,vec3 h){float n=0.,d;for(int c=1;c<=4;c++){float G=.09*float(c);n+=(G-s(a+h*G,d))*pow(.6,float(c));}return clamp(1.-1.5*n,0.,1.);}void main(){b=R.z;vec2 H=(gl_FragCoord.xy*2.-R.xy)/R.y;vec3 f,q=vec3(0.);if(b<16.){f=vec3(1.2*sin(.4*b),3.-.5*b,1.2*cos(.3*b));q=f+vec3(cos(.2*b),-.4,sin(.2*b));}else if(b<40.){float i=.22*b;f=3.*vec3(cos(i),.5*sin(.3*b),sin(i));q=vec3(0.,-.4,0.);}else if(b<72.){float i=.35*b;f=2.4*vec3(cos(i),.5+.6*sin(.5*b),sin(i));q=vec3(0.,.5,0.);}else if(b<96.){float u=floor(b/4.);vec3 W=vec3(j(vec2(u,1.)),j(vec2(u,2.)),j(vec2(u,3.)))-.5;f=1.6*normalize(W+vec3(0.,.15,0.));}else{float i=.2*b;f=3.2*vec3(cos(i),.8,sin(i));}vec3 v=normalize(q-f);vec3 I=normalize(cross(v,vec3(0.,1.,0.)));vec3 X=cross(I,v);vec3 l=normalize(H.x*I+H.y*X+1.7*v);float d,m;float g=T(f,l,d,m);vec3 J=mix(vec3(.02,.01,.05),vec3(.12,.05,.22),smoothstep(-.3,.7,l.y));vec3 e=J;if(g<50.){vec3 a=f+l*g;vec3 h=U(a);float n=V(a,h);vec3 K=normalize(vec3(.35,1.,.25));float L=max(dot(h,K),0.);float M=pow(1.-max(dot(h,-l),0.),3.);if(d>.5){e=vec3(.3,.08,.75)*(.15+.9*L)*n;e+=vec3(.1,.8,.75)*M*.6;e+=vec3(.9,.8,1.)*pow(max(dot(reflect(l,h),K),0.),40.)*.3;}else{float Y=fract(a.y*1.2+.4*r(a.xz*.7));vec3 Z=mix(vec3(.09,.08,.15),vec3(.22,.16,.3),smoothstep(.25,.8,Y));e=Z*(.2+.8*L)*n+vec3(.05,.25,.25)*M*.5;}e+=vec3(.5,.15,1.)*m*.2;e=mix(e,J,1.-exp(-g*.05));}else{e+=vec3(.5,.15,1.)*m*.2;}O=vec4(e,1.);}"), p2 = Q("#version 300 es\nprecision highp float;uniform vec4 R;uniform sampler2D A,B;out vec4 O;vec3 r(vec3 f){return clamp((f*(2.51*f+.03))/(f*(2.43*f+.59)+.14),0.,1.);}float j(vec2 d,vec2 s,float l,float e){vec2 t=vec2(l,l*R.x/R.y/16.);vec2 c=(d-s)/t+.5;if(c.x<0.||c.x>1.||c.y<0.||c.y>1.)return 0.;vec2 m=vec2(c.x,(7.-e+c.y)/8.);return max(texture(B,m).a,.5*textureLod(B,m,2.2).a);}void main(){vec2 d=gl_FragCoord.xy/R.xy;float a=R.z;float u=step(72.,a)*step(a,96.)*exp(-mod(a,4.)*2.5);vec2 k=(d-.5)*vec2(R.x/R.y,1.);float g=atan(k.y,k.x),n=3.14159/3.;g=abs(mod(g,2.*n)-n);vec2 v=length(k)*vec2(cos(g),sin(g));vec2 h=mix(d,v*vec2(R.y/R.x,1.)+.5,u);vec3 b=texture(A,h).rgb;b+=.06*(textureLod(A,h,3.).rgb+textureLod(A,h,5.).rgb+textureLod(A,h,7.).rgb);float o=fract(sin(dot(floor(gl_FragCoord.xy/3.),vec2(12.9,78.2)))*43758.5);b+=step(.997,o)*step(16.,a)*vec3(.6,.9,1.)*.3*(.5+.5*sin(a*7.+o*90.));float p=step(72.,a)*step(a,96.)*exp(-mod(a,4.)*5.);p+=exp(-abs(a-16.)*6.)+exp(-abs(a-40.)*6.)+exp(-abs(a-72.)*6.)+exp(-abs(a-96.)*6.)+exp(-abs(a-120.)*6.);b+=p*vec3(.7,.5,1.)*.2;b=r(b*.95);vec2 c=d-.5;b*=1.-dot(c,c)*.8;b=pow(b,vec3(.4545));float q=smoothstep(1.,2.5,a)*(1.-smoothstep(7.,9.,a));b=mix(b,vec3(1.),j(d,vec2(.5,.56),.45,0.)*q);b=mix(b,vec3(.8,1.,.95),j(d,vec2(.5,.46),.3,1.)*q*.8);float i=a<16.?0.:a<40.?16.:a<72.?40.:a<96.?72.:a<120.?96.:120.;float e=a<16.?2.:a<40.?3.:a<72.?4.:a<96.?5.:a<120.?6.:7.;float w=smoothstep(i+.8,i+2.,a)*(1.-smoothstep(i+6.,i+7.5,a));float x=e==7.?.7:.3;float y=e==7.?.5:.14;b=mix(b,vec3(.9,.85,1.),j(d,vec2(.5,y),x,e)*w);b*=1.-smoothstep(123.,127.5,a);O=vec4(b,1.);}");
+  g.texParameteri(3553, 10241, 9987);
+  g.texParameteri(3553, 10242, 33071);
+  g.texParameteri(3553, 10243, 33071);
+  g.viewport(0, 0, W, H);
+  const fr = T => {
+    g.bindFramebuffer(36160, F);
+    g.useProgram(p1);
+    g.uniform4f(g.getUniformLocation(p1, 'R'), W, H, T, 0);
+    g.drawArrays(4, 0, 3);
+    g.bindFramebuffer(36160, null);
+    g.generateMipmap(3553);
+    g.useProgram(p2);
+    g.uniform4f(g.getUniformLocation(p2, 'R'), W, H, T, 0);
+    g.uniform1i(g.getUniformLocation(p2, 'B'), 1);
+    g.drawArrays(4, 0, 3);
+  };
+  fr(0);
+  g.readPixels(0, 0, 1, 1, 6408, 5121, new Uint8Array(4));
+  window.fr = fr; window.cv = C; window.gl = g; window.fbo = F; //DEV
+  if (window.CAP) return; //DEV
+  await Y('CLICK TO BEGIN', 100);
+  onclick = e => {
+    onclick = 0;
+    P0.remove();
+    C.requestFullscreen();
+    const s = new AudioContext().createBufferSource(), L = q => {
+      z || (s.start(), z = q);
+      fr((q - z) / 1e3);
+      requestAnimationFrame(L);
+    };
+    s.buffer = u;
+    s.connect(s.context.destination);
+    requestAnimationFrame(L);
+  };
+})();
+
+</script>

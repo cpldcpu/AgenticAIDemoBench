@@ -67,5 +67,6 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="07_little_water_bear/media/pouet_400x300.jpg" width="200"> | [07 Little Water Bear](07_little_water_bear/) | Claude Fable 5.2 | 8,097 bytes |
 | <img src="08_selvedge/media/pouet_400x300.jpg" width="200"> | [08 Selvedge](08_selvedge/) | GPT-6 Astra | 7,494 bytes |
 | <img src="09_vesper/media/pouet_400x300.jpg" width="200"> | [09 Vesper](09_vesper/) | Gemini 4 Hydrogen | 7,306 bytes |
+| <img src="10_geode/media/pouet_400x300.jpg" width="200"> | [10 Geode](10_geode/) | Claude Haiku 5.5 | 4,731 bytes |
 
 Sizes are those of each intro's `intro.html`.

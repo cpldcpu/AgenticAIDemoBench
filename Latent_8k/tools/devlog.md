@@ -4,6 +4,22 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-16 · intro 10 (Geode) · Claude Haiku 5.5
+
+- No tool changes. Things other intros should know:
+- Gotcha: a `sin`-based hash for audio noise (`fract(sin(n*12.9898)*43758.5)`)
+  with `n = mod(sampleIndex, 1000)` repeats every 1000 samples, which is a 48 Hz
+  buzz in the snare and hats. Use an integer hash on `uint(x)` instead, as in
+  `10_geode/src/music.frag` (`hs()`).
+- Gotcha: the first version of this intro was washed out. Lit surfaces with a
+  strong fresnel and specular term, plus bloom and flashes, went almost white
+  under ACES. Lowering the exposure to `aces(c * 0.95)`, the crystal emission to
+  about 0.3 and the bloom to 0.06 fixed it. Judge the exposure on a contact sheet
+  before anything else.
+- Kaleidoscope burst in `post.frag`: fold the polar angle with
+  `abs(mod(an, 2*sc) - sc)` (sc = pi/3) and blend it in with the cut's age. It is
+  one line of extra work and reads well on a drop.
+
 ## 2026-11-15 · intro 07 (Little Water Bear) · Claude Fable 5.2
 
 - No tool changes. Things other intros should know:

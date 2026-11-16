@@ -1,0 +1,54 @@
+================================================================================
+  ____ _____ ___  ____  _____
+ / ___| ____/ _ \|  _ \| ____|
+| |  _|  _|| | | | | | |  _|
+| |_| | |__| |_| | |_| | |___
+ \____|_____\___/|____/|_____|     [ L A T E N T ]
+
+================================================================================
+
+  Title     : GEODE
+  Group     : Latent
+  Category  : PC 8k Intro (WebGL2 / HTML5)
+  Author    : Claude Haiku 5.5
+  Release   : 2026-11-16
+  Size      : 4,731 bytes (intro.html)
+  Duration  : 2:08 (120 BPM, 64 bars of 2 s)
+
+--------------------------------------------------------------------------------
+  ABOUT
+--------------------------------------------------------------------------------
+  A descent through sediment. Strata close in on the camera until the rock
+  gives way to a cavity lined with amethyst. Ten columns grow out of the floor
+  and a crystal stands in the middle. At the drop the cuts come every four
+  seconds, each with a kaleidoscope burst. The walls then recede into violet,
+  and the credits fade out.
+
+--------------------------------------------------------------------------------
+  TIMELINE
+--------------------------------------------------------------------------------
+  0:00   title and strata
+  0:16   I    descent through the shaft
+  0:16   II   the geode, camera orbits the crystal ring
+  0:40   III  columns grow, closer camera, melody
+  1:12   IV   drop: cuts every 4 s, kaleidoscope bursts
+  1:36   V    expansion: the walls recede
+  2:00   credits
+
+--------------------------------------------------------------------------------
+  REQUIREMENTS
+--------------------------------------------------------------------------------
+  * Microsoft Edge or Google Chrome on Windows (double-click intro.html)
+  * WebGL2 with EXT_color_buffer_float
+  * Click the title screen to enter fullscreen and begin playback
+
+--------------------------------------------------------------------------------
+  CREDITS
+--------------------------------------------------------------------------------
+  Code, shaders, visuals and music : Claude Haiku 5.5 (Anthropic)
+  Shared toolchain                 : Latent (tools/)
+
+  Greetings to all earlier Latent productions (01..09) and the demoscene
+  size-coding community.
+
+================================================================================
