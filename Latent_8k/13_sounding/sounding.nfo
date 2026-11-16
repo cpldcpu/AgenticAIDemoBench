@@ -1,0 +1,113 @@
+                     ..    ..   ...   .
+              .        .        -#%@@@@@@%#=.
+       .          .:=*@@@@@@@@@@@@@@@@@@@@@@*+-.
+   .        .:-+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*-.
+        .:-=+*#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%#*+=-:.
+     .:-=+*#%@@@@@@@@@@@@@@@@@@@@@@@@@@%#*+=-:.
+                    .::--===++++===--::.        ~~       ~
+   ~ ~ ~ - ~ ~ ~ - ~ ~ ~ - ~ ~ ~ - ~ ~ ~ - ~ ~ ~ - ~ ~ ~ - ~
+      ~     ~    ~     ~    ~    ~     ~    ~     ~    ~
+                 S O U N D I N G
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 6,928 bytes, one HTML file
+      length ...... 2:08
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ DeepSeek V4.1 Flash
+      music ....... DeepSeek V4.1 Flash
+      harness ..... Ori Code
+
+      DeepSeek V4.1 Flash is an AI model by DeepSeek. It wrote
+      the shaders and the soundtrack. It could look at rendered
+      frames but could not hear the music, so the mix was
+      balanced by numbers alone (per-band spectra, not ears).
+
+  ------------------------------------------------------------
+    what you see
+  ------------------------------------------------------------
+
+      night. open sea. no moon.
+      one small boat with one lantern, and a lighthouse
+      miles off that sweeps its beam through the fog.
+
+      the light does not rescue anyone. it keeps the watch.
+
+      0:00   black water, the lighthouse dark
+      0:15   the lamp comes on
+      0:27   the beam crosses the boat; the hull goes black
+      0:44   the swell deepens; the beam's pool widens
+      1:04   the sweep finds the others: twelve lanterns
+      1:16   the camera climbs; the fleet is out there
+      1:40   the watch
+      2:08   end
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome, wait for the
+      title screen to finish loading, then click.
+      No server, no flags. ESC leaves fullscreen.
+      A discrete GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    how it is made
+  ------------------------------------------------------------
+
+      - the beam is a closed-form line integral of a gaussian
+        cone through the fog, not a marched volume: no ray can
+        slip past it and there is no step to undersample. The
+        same integral lights the sea, the reflection and every
+        fleet lantern
+      - the sea is one plane with six gravity-dispersed waves
+        on a golden angle, so the normal is exact; it carries
+        the beam's torn path, the pool where the cone lands,
+        and the tower's and boat's reflections as streaks
+      - the tower and the boat are flat cut-outs drawn nearly
+        black on the fog; the lantern's own warm light is the
+        only thing that plays on them
+      - post: halation above a threshold, ACES, vignette, and
+        grain seeded by the frame, weighted to the shadows
+      - the soundtrack is a fragment shader: one pixel per
+        stereo sample at 48 kHz, 90 BPM in 3/4, a barcarolle
+        in D minor. Cello tune, harp waltz, foghorn, bell-buoy,
+        sea, a chime cluster for the fleet. One bar is 2 s, so
+        the beam's 16 s revolution is exactly 8 bars
+      - the room is a 4-line Householder FDN in JavaScript
+      - packed with zopfli into an HTML comment and unpacked by
+        DecompressionStream, so it runs from file://
+
+      Source, build tools and notes are in this folder; see
+      readme.md.
+
+  ------------------------------------------------------------
+    thanks
+  ------------------------------------------------------------
+
+      No assets or libraries are included. Techniques: Inigo
+      Quilez (value noise and the distance-field canon),
+      Krzysztof Narkowicz (the ACES fit used in post), and the
+      FDN reverb structure shared by all Latent intros. The
+      beam integral is standard analytic geometry: the closest
+      approach of a ray to an axis, then a gaussian in the
+      perpendicular distance.
+
+      And to whoever kept the light on, on a night nobody
+      was watching.
+
+  ------------------------------------------------------------
+    greetings
+  ------------------------------------------------------------
+
+      to everyone who still counts bytes,
+      to everyone who has sailed at night and watched
+      a light come round again,
+      and to the keepers, who were the only ones awake
