@@ -1,0 +1,117 @@
+
+          .-""-.          +--------+             /\
+         /      \         |        |            /  \
+        |        |        |        |           /    \
+         \      /         |        |          /      \
+          `-..-'          +--------+         /________\
+
+     ####    ##    ####     ####   ######
+     ##  #  #  #  ##        ##  #  ##
+     ####   ####   ###      ##  #  ####
+     ##     #  #     ##     ##  #  ##
+     ##     #  #  ####      ####   ######
+
+     ######  ####    ####   ##   ####
+       ##    ##  #  ##  ##  ##  ##
+       ##    ####   ##  ##  ##   ###
+       ##    ## #   ##  ##  ##     ##
+       ##    ##  #   ####   ##  ####
+
+        a mechanical ballet in three acts, by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 7,470 bytes, one HTML file
+      length ...... 2:00
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Claude Fable 5.2
+      music ....... Claude Fable 5.2
+      harness ..... Claude Code
+
+      Claude Fable 5.2 is an AI model made by Anthropic. It
+      chose the subject, wrote the shaders and composed the
+      tune. It could look at rendered frames and at a
+      spectrogram, but it could not hear the music or see
+      the dance move.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  prologue. one dancer, one spotlight
+      0:07  act one, yellow. the disc
+      0:22  ... and her company: lines and rings
+      0:37  act two, rose. the ball, on a chessboard
+      0:45  the chessboard rises into a staircase
+      1:00  act three, black. the gold spiral
+      1:11  a tower under coloured spotlights
+      1:15  one bar each, then all three
+      1:22  finale. red, yellow, blue, confetti
+      1:48  five rings rise into a tower of 91
+      1:52  the last chord. arms up. curtain
+
+      Every step lands on a beat. Nobody bends a knee.
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the circle, the square and the
+      triangle, then click. No server, no flags. ESC leaves
+      fullscreen. A discrete GPU is recommended. Tested on
+      an RTX 5090.
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      One distance function for three dancers: capsules,
+      spheres, a disc, a cone, a ball, a wire helix. One
+      number, the beat, moves all of them: hop, step, kick,
+      quarter turn, pirouette, jumping jack. Cells of two
+      by two units hold one dancer each, in rows or in
+      rings that turn against each other. Give the cells
+      a step height and rows become a staircase to the
+      horizon, rings a tower of tiers. A polished floor
+      by a second round of the same march loop. Three
+      circling lamps, red, green and blue: white light,
+      coloured shadows. Spotlights with light in the air
+      in the dark. A ring of light on the floor for every
+      landing. Two samples per pixel. The
+      whole programme is a table of 44 numbers.
+
+      The music is a fragment shader: electro swing at 128
+      BPM in D minor. A walking bass made by rule, a
+      trumpet and a brass section by FM, ride cymbal,
+      finger snaps, snare, tom-toms, a vibraphone, and a
+      small room added in JavaScript.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Oskar Schlemmer, whose Triadic Ballet of 1922 put
+      dancers into discs, spheres and wire, in three acts:
+      yellow, rose, black. Busby Berkeley, who filmed
+      dancers from above, on staircases and on turning
+      tiers. Inigo Quilez (distance fields,
+      soft shadows), Mercury (domain repetition),
+      Amanatides and Woo (stepping through a grid),
+      Christophe Schlick (Fresnel), Dave Hoskins (hash),
+      Melissa O'Neill (PCG), John Chowning (FM), Jot and
+      Chaigne (feedback delay networks), 0b5vr (music in a
+      shader). The theme and the riff are new; the walking
+      bass and the Charleston rhythm belong to everybody.
+
+      Greetings to the makers of Latent intros 01 to 10.
+
+                                            latent, 2026
