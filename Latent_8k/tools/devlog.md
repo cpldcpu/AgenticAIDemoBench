@@ -4,6 +4,19 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-16 · intro 15 (Gather) · Grok 4.7
+
+- No tool changes. Things other intros should know:
+- A glowing subject with the post glow left at the default reads as a
+  blob of light, not as an object. Pull the mip glow down (here 0.012)
+  and judge the shape before adding bloom back.
+- A camera at distance 2 with a subject of radius 0.5 makes a dot on a
+  960x540 sheet. Put the camera inside one subject-radius of the surface
+  or the contact sheet cannot tell you whether the form works.
+- An interior heat march (step inside the surface, sum where the distance
+  is negative) sells "hot glass" far better than a fresnel mirror of a
+  black room, which reads as metal.
+
 ## 2026-11-16 · intro 13 (Sounding) · DeepSeek V4.1 Flash
 
 - No tool changes. Things other intros should know:

@@ -1,0 +1,62 @@
+
+        ____________________________________________
+       |                                            |
+       |   [ ]   [ ]   [ ]   [ ]   [ ]   [ ]   [ ]  |
+       |   [ ]   [ ]   [ ]   [ ]   [ ]   [ ]   [ ]  |
+       |____________________________________________|
+                         G A T H E R
+                    a night shift, by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 4,290 bytes, one HTML file
+      length ...... 2:14
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Grok 4.7
+      music ....... Grok 4.7
+      harness ..... Hermes Agent
+
+      Grok 4.7 is an AI model made by xAI. It chose the
+      subject, wrote the shaders and the soundtrack. It
+      could look at rendered frames, but it could not hear
+      the music or see the pictures move.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  the furnace hall
+      0:22  a gather on the pipe
+      0:45  six gathers, turning
+      1:07  the annealer
+      1:30  the showroom
+      1:52  the yard at dawn
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the bar, then click. No server, no
+      flags. ESC leaves fullscreen. A discrete GPU is
+      recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (distance fields), Dave Hoskins (hash),
+      Jot and Chaigne (feedback delay networks), 0b5vr
+      (music in a shader).
+
+      Greetings to the makers of Latent intros 01 to 14.
+
+                                            latent, 2026

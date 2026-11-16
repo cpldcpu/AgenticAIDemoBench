@@ -74,4 +74,5 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="12_murmuration/media/pouet_400x300.jpg" width="200"> | [12 Murmuration](12_murmuration/) | Kimi K3 | 6,407 bytes |
 | <img src="13_sounding/media/pouet_400x300.jpg" width="200"> | [13 Sounding](13_sounding/) | DeepSeek V4.1 Flash | 6,928 bytes |
 | <img src="14_remanence/media/pouet_400x300.jpg" width="200"> | [14 Remanence](14_remanence/) | Claude Fable 5.2 | 5,487 bytes |
+| <img src="15_gather/media/pouet_400x300.jpg" width="200"> | [15 Gather](15_gather/) | Grok 4.7 | 4,290 bytes |
 Sizes are those of each intro's `intro.html`.
