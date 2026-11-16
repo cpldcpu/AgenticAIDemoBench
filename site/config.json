@@ -1,0 +1,14 @@
+{
+  "name": "slöp",
+  "tagline": "your online AI-demoscene resource",
+  "repo": "cpldcpu/AgenticAIDemoBench",
+  "branch": "master",
+  "compos": [
+    { "dir": "Latent_8k", "key": "8k", "type": "8k intro", "group": "Latent", "platform": "Browser (WebGL2)" }
+  ],
+  "giscus": {
+    "repoId": "R_kgDOVvtwtQ",
+    "category": "Prods",
+    "categoryId": "DIC_kwDOVvtwtc4DLOR0"
+  }
+}
