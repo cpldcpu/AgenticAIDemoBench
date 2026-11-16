@@ -23,6 +23,7 @@ img { max-width: 100%; display: block; }
 .tag { color: var(--dim); font-size: 14px; }
 nav { margin-left: auto; display: flex; gap: 4px; }
 nav a { color: var(--dim); padding: 6px 12px; border-radius: 99px; font-size: 15px; }
+nav a.gh { display: flex; align-items: center; padding: 6px 9px; }
 nav a:hover, nav a.on { color: var(--fg); background: var(--bg3); text-decoration: none; }
 @media (max-width: 720px) { .tag { display: none; } nav a { padding: 6px 8px; } }
 
