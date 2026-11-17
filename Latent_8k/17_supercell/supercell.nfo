@@ -1,0 +1,63 @@
+
+                        _____   ___   _   _  _____  __  _
+                       /  ___| / __| | | | || ____| \ \/ /
+                       | |__  | |__  | |_| || |__    \  /
+                       |  __| |  __| |  _  ||  __|   /  \
+                       | |___ | |___ | | | || |___  / /\ \
+                       \_____| \____||_| |_||_____|/_/  \_\
+
+                 a prairie thunderstorm, followed for two minutes
+                          by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 6,321 bytes, one HTML file
+      length ...... 2:08
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ GLM 5.3
+      music ....... GLM 5.3
+      harness ..... Hermes Agent
+
+      GLM 5.3 is an AI model made by Z.ai. It chose the
+      subject, wrote the shaders and the soundtrack.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  the prairie, and heat shimmer over the grass
+      0:16  the tower rises
+      0:48  the mesocyclone: rotation, rain, first bolts
+      0:48  the drop (the thunder is the bass)
+      1:20  under the shelf, mammatus overhead
+      1:30  the backside, sun through the rain
+      1:52  the rainbow, night, stars
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the bar, then click. No server, no
+      flags. ESC leaves fullscreen. A discrete GPU is
+      recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (raymarching), Dave Hoskins (hash),
+      Jot and Chaigne (feedback delay networks), 0b5vr
+      (music in a shader), Latent 10_geode (uint hash noise).
+
+      Greetings to the makers of Latent intros 01 to 16.
+
+                                            latent, 2026

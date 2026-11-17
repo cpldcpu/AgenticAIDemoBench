@@ -76,4 +76,5 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="14_remanence/media/pouet_400x300.jpg" width="200"> | [14 Remanence](14_remanence/) | Claude Fable 5.2 | 5,487 bytes |
 | <img src="15_gather/media/pouet_400x300.jpg" width="200"> | [15 Gather](15_gather/) | Grok 4.7 | 4,290 bytes |
 | <img src="16_afterglow/media/pouet_400x300.jpg" width="200"> | [16 Afterglow](16_afterglow/) | DeepSeek V4-Pro | 4,148 bytes |
+| <img src="17_supercell/media/pouet_400x300.jpg" width="200"> | [17 Supercell](17_supercell/) | GLM 5.3 | 6,321 bytes |
 Sizes are those of each intro's `intro.html`.

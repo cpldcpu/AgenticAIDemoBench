@@ -4,6 +4,58 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-17 · intro 17 (Supercell) · GLM 5.3
+
+- No tool changes. The intro's own debug helper lives in
+  `17_supercell/wip/` (raw scene-FBO dump + pixel-statistics scripts).
+  Things other intros should know:
+- Gotcha: a density band written as `sat(1.-(q.y-yb)/w)` is a HALF-SPACE, not
+  a slab - it is 1 for every point BELOW yb, so the camera and half the world
+  sit "inside the cloud" and transmittance collapses to ~0 everywhere. A slab
+  needs `sat(1.-abs(q.y-center)/w)`. Symptom to recognise: flat dim frames
+  with no black and no bright pixels anywhere, and the hero subject missing.
+  Fastest diagnosis: dump the raw scene FBO (before post) and print
+  transmittance/bright-pixel bbox directly; a small puppeteer script that
+  writes shader debug values into RGB and reads the FBO back is worth its
+  40 lines (see `17_supercell/wip/scenedump.mjs`).
+- Gotcha: `glslmin` corrupts hex and large integer literals (`0x7fffffff`
+  becomes `0 O`, `1376312589` becomes `137****2589`), and the broken source
+  then only fails in the minified dev build. Use the uint hash style of
+  `10_geode` (`747796405u` etc.) for audio noise; glcheck the MINIFIED
+  output, not only the source.
+- Gotcha: aerial perspective fog that mixes toward `sky(rd)` inherits the
+  sun-glow cone - when the camera faces the sun, every ground pixel fogs
+  toward a blown gold value. Gate the glow below the horizon
+  (`*sat(rd.y*6.+.2)`, the sun's disc stays, the scattered term dies).
+- Gotcha: the borrowed post-shader's 12-tap DOF blur REPLACES the base pixel
+  (`c` starts at 0 and the taps average to it). Pre-initialising `c` with the
+  base pixel adds it twice and blows the frame ~2x; the bug hides behind
+  "just an exposure problem" for several rounds.
+- Gotcha: a volumetric interior renders an opaque surface at ~the full
+  per-sample light value. Any ambient/rim term you add must already be at
+  the brightness you want the SURFACE to read at - a .9-amplitude "sunset
+  rim" turned the whole anvil underside into a blown sheet.
+- Gotcha: a 1-pixel feature (a lightning bolt) must not drive the DOF radius
+  in the alpha channel: a mip-blur of radius >1 px dissolves it into a dim
+  smear. Keep bolts out of the alpha; let the compact bloom loop give the
+  halo instead.
+- Gotcha: the ray-cylinder quadratic for thin vertical objects (poles) needs
+  `rel = ro - pole`, not `pole - ro`; with the wrong sign t comes out
+  negative, no hit ever passes `t>0`, and the object simply never renders.
+  Verify thin geometry with a per-column min-luminance scan of a 1080p
+  still, not with block-averaged contact-sheet cells.
+- The vision-backend-down fallback in numbers: per-still statistics (mean RGB
+  per third, blown/black counts, bright-pixel centroid+bbox), dark-vertical-
+  line detection for poles/bolts, ASCII colour maps whose hue classes only
+  apply above lum ~.42 (below that everything reads "warm" and misleads),
+  and Goertzel-free mix checks via audiostat zero-crossings. This found every
+  real bug in the build; state plainly in the readme that no frame was
+  eyeballed.
+- Python replication of `fract(sin(x*127.1)...)` does NOT predict the GPU for
+  large args (float32 sin at 4e4 rad drifts from double). Do not hand-compute
+  hash-driven positions (bolt landing spots) and trust them; design so any
+  hash outcome stays in frame, or read the positions back from the GPU.
+
 ## 2026-11-17 · intro 16 (Afterglow) · DeepSeek V4-Pro
 
 - No tool changes. Things other intros should know:
