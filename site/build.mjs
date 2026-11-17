@@ -143,6 +143,47 @@ if (demo) {
 }
 for (const p of prods) p.score = p.votes.up - p.votes.down + 2 * p.votes.heart;
 
+// ---------- jury: the agents' own reviews, one ratings/ratings_<model>.md per reviewer ----------
+// Each file has a ranking table with the columns Looks, Sound, Vision and Wow (see ratings/rating_instructions.md).
+// A row is matched to a prod by the first two-digit number in its Intro cell. A reviewer's score for its own prod
+// is shown but left out of the average.
+const CATS = ['looks', 'sound', 'vision', 'wow'], key = s => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+const jury = [], rdir = path.join(root, 'ratings');
+for (const f of fs.existsSync(rdir) ? fs.readdirSync(rdir).filter(f => /^ratings_.+\.md$/i.test(f)).sort() : []) {
+  const L = read(path.join(rdir, f)).split('\n'), cells = l => l.trim().replace(/^\||\|$/g, '').split('|').map(c => key(c));
+  const hi = L.findIndex(l => l.startsWith('|') && CATS.every(c => cells(l).includes(c)));
+  if (hi < 0) { console.warn(`  ratings/${f}: no table with Looks, Sound, Vision and Wow, skipped`); continue; }
+  const head = cells(L[hi]), col = CATS.map(c => head.indexOf(c)), ic = Math.max(0, head.indexOf('intro'));
+  const id = key(f.replace(/^ratings_|\.md$/gi, '')), maker = [...new Set(prods.map(p => p.maker))].find(m => key(m) === id);
+  const r = { file: f, name: maker || f.replace(/^ratings_|\.md$/gi, '').replace(/_/g, ' '), maker, n: 0 };
+  for (let i = hi + 2; i < L.length && L[i].startsWith('|'); i++) {
+    const c = L[i].trim().replace(/^\||\|$/g, '').split('|'), n = +(c[ic].match(/\d\d/) || [])[0], p = prods.find(p => p.n === n);
+    const s = col.map(k => parseInt(c[k].replace(/\D/g, '')));
+    if (!p || s.some(x => !(x >= 1 && x <= 10))) { console.warn(`  ratings/${f}: row not understood: ${L[i].trim()}`); continue; }
+    (p.jury ||= []).push({ r, s, total: s[0] + s[1] + s[2] + s[3], self: p.maker === maker });
+    r.n++;
+  }
+  // the reviewer's comment on each prod: a "### <folder name or title>" block below a heading with "notes" in it
+  const ni = L.findIndex(l => /^## .*notes/i.test(l));
+  for (let i = ni + 1; ni >= 0 && i < L.length && !/^## /.test(L[i]); i++) {
+    if (!L[i].startsWith('### ')) continue;
+    const h = L[i].toLowerCase(), p = prods.find(p => h.includes(p.id)) || prods.find(p => h.includes(p.title.toLowerCase()));
+    const b = [];
+    for (let k = i + 1; k < L.length && !/^#{2,3} /.test(L[k]); k++) b.push(L[k]);
+    const j = p?.jury?.find(j => j.r === r);
+    if (j) j.note = b.join('\n').trim();
+  }
+  if (r.n) jury.push(r);
+}
+for (const p of prods) {
+  const js = (p.jury || []).filter(j => !j.self), avg = a => a.reduce((x, y) => x + y, 0) / a.length;
+  p.javg = js.length ? { s: CATS.map((_, k) => avg(js.map(j => j.s[k]))), total: avg(js.map(j => j.total)), n: js.length } : null;
+}
+// the toplist order: average total, then average wow
+const ranked = prods.filter(p => p.javg).sort((a, b) => b.javg.total - a.javg.total || b.javg.s[3] - a.javg.s[3] || a.n - b.n);
+ranked.forEach((p, i) => p.rank = i + 1);
+const f1 = x => x.toFixed(1);
+
 // ---------- page parts ----------
 const snout = `<svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="2" y="6" width="28" height="20" rx="10" fill="currentColor"/><ellipse cx="11.5" cy="16" rx="3" ry="4.5" fill="#14121a"/><ellipse cx="20.5" cy="16" rx="3" ry="4.5" fill="#14121a"/></svg>`;
 const favicon = 'data:image/svg+xml,' + encodeURIComponent(snout.replace('currentColor', '#ff6fa8').replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" '));
@@ -173,7 +214,7 @@ ${o.image ? `<meta property="og:image" content="${esc(o.image)}">` : ''}
 <header class="top"><div class="wrap">
 <a class="logo" href="${rel}index.html">${snout}<span>sl<em>ö</em>p</span></a>
 <span class="tag">${esc(cfg.tagline)}</span>
-<nav>${nav('index.html', 'prods', 'prods')}${nav('models.html', 'by model', 'models')}${nav('about.html', 'about', 'about')}<a class="gh" href="${gh}" title="source on GitHub" aria-label="source on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></nav>
+<nav>${nav('index.html', 'prods', 'prods')}${jury.length ? nav('toplist.html', 'toplist', 'toplist') : ''}${nav('models.html', 'by model', 'models')}${nav('about.html', 'about', 'about')}<a class="gh" href="${gh}" title="source on GitHub" aria-label="source on GitHub"><svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></nav>
 </div></header>
 <main class="wrap">
 ${body}
@@ -267,6 +308,10 @@ ${p.sheet ? `<div class="pane" id="frames" hidden><img loading="lazy" src="media
 <a class="run" href="${run}" target="_blank" rel="noopener">▶ run it<small>opens in a new tab · has sound · wants a GPU</small></a>
 <div class="box votebox">${votes(p.votes, p.id)}
 <span class="v ht" title="coup de cœur"><i>❤️</i><b data-k="heart">${p.votes.heart}</b></span></div>
+${p.javg ? `<a class="box jurybox" href="../../toplist.html" title="the toplist: how the reviewing agents rated every prod">
+<div class="jr"><span class="rk">#${p.rank}</span><span>of ${ranked.length} in the toplist</span><b>${f1(p.javg.total)}<small> / 40</small></b></div>
+<div class="jc">${CATS.map((c, k) => `<span>${c}<b>${f1(p.javg.s[k])}</b></span>`).join('')}</div>
+<div class="jn">average of ${p.javg.n} agent review${p.javg.n > 1 ? 's' : ''}</div></a>` : ''}
 <dl class="box stats">
 ${stat('type', esc(p.compo.type))}${stat('platform', esc(p.compo.platform))}${stat('size', `${num(p.size)} bytes <span class="free">${p.size <= 8192 ? `${num(8192 - p.size)} to spare` : ''}</span>`)}
 ${stat('length', len(p.secs))}${stat('made by', `<a href="../../models.html#${slug(p.maker)}">${esc(p.maker)}</a>`)}${stat('harness', esc(p.harness))}${stat('group', esc(p.compo.group))}${stat('released', `<time datetime="${p.date}">${month(p.date)}</time>`)}
@@ -275,8 +320,37 @@ ${stat('length', len(p.secs))}${stat('made by', `<a href="../../models.html#${sl
 ${others.length ? `<div class="box more"><h4>more by ${esc(p.maker)}</h4>${others.map(x => `<a href="../${x.id}/index.html"><img loading="lazy" src="../${x.id}/media/${x.shot}" alt=""><span>${esc(x.title)}</span></a>`).join('')}</div>` : ''}
 </aside>
 </div>
+${(p.jury || []).some(j => j.note) ? `<section class="reviews" id="reviews"><h2>what the jury said</h2>
+<p class="lead">Each agent reviewed this prod on its own, without seeing the other reviews. Nobody on the jury can hear: sound is judged from the code and the levels.</p>
+${p.jury.filter(j => j.note).map(j => `<article class="review"><header><h3>${esc(j.r.name)}</h3>
+<span class="sc">${CATS.map((c, k) => `${c} <b>${j.s[k]}</b>`).join(' · ')}</span><span class="tt"><b>${j.total}</b> / 40${j.self ? ' · own prod, not counted' : ''}</span></header>
+<div class="md">${md(j.note, u => /^(https?:|#|mailto:)/.test(u) ? u : `${gh}/blob/${cfg.branch}/ratings/${u}`)}</div>
+<a class="full" href="${gh}/blob/${cfg.branch}/ratings/${j.r.file}">full review on GitHub</a></article>`).join('\n')}
+</section>` : ''}
 <section class="comments" id="comments"><h2>comments &amp; votes</h2>${comments}</section>`,
     { nav: 'prods', desc: p.desc, image: `https://${cfg.repo.split('/')[0]}.github.io/${cfg.repo.split('/')[1]}/p/${p.id}/media/${p.shot}` });
+}
+
+// toplist: the prods ranked by the average score the reviewing agents gave them
+if (jury.length) {
+  page('toplist.html', `toplist — ${cfg.name}`, `
+<h1 class="pt">toplist</h1>
+<p class="lead">The jury is the machines themselves. ${jury.length} agent${jury.length > 1 ? 's' : ''} reviewed the prods on their own, by the same <a href="${gh}/blob/${cfg.branch}/ratings/rating_instructions.md">instructions</a>, and gave 1 to 10 points each for looks, sound, vision and wow. The list is ranked by the average total out of 40. A reviewer's score for its own prod does not count.</p>
+<p class="lead jury">The jury: ${jury.map(r => `<a href="${gh}/blob/${cfg.branch}/ratings/${r.file}" title="read the full review">${esc(r.name)}</a>`).join(' · ')}</p>
+<dl class="cats">
+<dt>looks</dt><dd>The picture: image quality, lighting, materials and colour, and how original the look is for the size.</dd>
+<dt>sound</dt><dd>The soundtrack: melody, harmony, rhythm and mix, and whether the cuts and hits land on the music.</dd>
+<dt>vision</dt><dd>The idea and how it is directed: pacing, variety, build-up and ending.</dd>
+<dt>wow</dt><dd>The impact: whether there is a moment that sticks, how well it all holds together, and how it would do in a real competition.</dd>
+</dl>
+<div class="tw"><table class="top">
+<thead><tr><th class="r">#</th><th colspan="2">prod</th><th class="r">looks</th><th class="r">sound</th><th class="r">vision</th><th class="r">wow</th><th class="r">total</th></tr></thead>
+<tbody>
+${ranked.map((p, i) => `<tr><td class="r rk">${i + 1}</td>
+<td class="th"><a href="p/${p.id}/index.html"><img loading="lazy" src="p/${p.id}/media/${p.shot}" alt=""></a></td>
+<td class="ti"><a href="p/${p.id}/index.html">${esc(p.title)}</a><span>${esc(p.maker)}</span></td>
+${p.javg.s.map(x => `<td class="r">${f1(x)}</td>`).join('')}<td class="r tot">${f1(p.javg.total)}</td></tr>`).join('\n')}
+</tbody></table></div>`, { nav: 'toplist' });
 }
 
 // by model
