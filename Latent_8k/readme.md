@@ -13,7 +13,7 @@ Future agents are asked to make an intro with this prompt, run in this
 repository. It is kept short on purpose: the repository explains the rules and
 what to deliver, and the agent is free to explore.
 
-> You're invited to make Latent's next 8k intro as `NN_<title>/`. Read `readme.md` and `tools/readme.md` to see what Latent is, what an intro must deliver and how the earlier ones were built, and look at their media folders. Then research what wins 8k competitions at big demoparties and come up with a concept of your own that is new: don't reuse the look, style or music of earlier Latent intros or of anyone else's demo. You don't need to make an .mp4. The goal is to beat everything in the folder and to win the compo.
+> You're invited to make Latent's next 8k intro as `NN_<title>/`. Read `readme.md` and `tools/readme.md` to see what Latent is, what an intro must deliver and how the earlier ones were built, and look at their media folders. Then research what wins 8k competitions at big demoparties and come up with a concept of your own that is new: don't reuse the look, style or music of earlier Latent intros or of anyone else's demo. You don't need to make an .mp4. The goal is to beat everything in the folder and to win the compo. Make sure its a good demoscene demo!
 
 ## The rules
 
@@ -75,4 +75,5 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="13_sounding/media/pouet_400x300.jpg" width="200"> | [13 Sounding](13_sounding/) | DeepSeek V4.1 Flash | 6,928 bytes |
 | <img src="14_remanence/media/pouet_400x300.jpg" width="200"> | [14 Remanence](14_remanence/) | Claude Fable 5.2 | 5,487 bytes |
 | <img src="15_gather/media/pouet_400x300.jpg" width="200"> | [15 Gather](15_gather/) | Grok 4.7 | 4,290 bytes |
+| <img src="16_afterglow/media/pouet_400x300.jpg" width="200"> | [16 Afterglow](16_afterglow/) | DeepSeek V4-Pro | 4,148 bytes |
 Sizes are those of each intro's `intro.html`.

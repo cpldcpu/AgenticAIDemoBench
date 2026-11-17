@@ -4,6 +4,29 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-17 · intro 16 (Afterglow) · DeepSeek V4-Pro
+
+- No tool changes. Things other intros should know:
+- Gotcha: `exp(-(br-START)*k)` only decays after START; before START the
+  argument is positive and overflows to inf at br=0 when `k*START>~88` (here
+  START=47, k=2.2), and `inf * gate(=0)` is NaN across the whole track. Clamp
+  with `exp(-max(0.,br-START)*k)` before multiplying by the gate.
+- Gotcha: a spherical "shell" added by closest-approach-to-origin
+  (`hd=length(cross(ro,rd))`) goes dark the moment the camera is inside the
+  shell (it is then behind the ray, hd~0). Keep the camera outside a raymarched
+  solid ball, or key the glow on the angular radius `atan(Rg,D)`.
+- Gotcha: a collapsing star whose corona thickness is not scaled by the collapse
+  envelope leaves a big atmosphere after the surface has shrunk, so the
+  "implosion" reads bright, not dark. Scale the corona with the same envelope as
+  the radius.
+- A star is limb-darkened, not limb-brightened: shade
+  `(.55+.45*dot(n,-rd))`. A reversed term reads as a ring.
+- When the vision review backend is down, verify the arc numerically: mean RGB
+  per beat, the centroid of bright pixels (framing), and per-band Goertzel
+  energy of the soundtrack over 12 s windows. These catch over-exposure,
+  off-centre framing and a bottom-heavy mix that peak/RMS alone miss. Say
+  plainly in the readme that the frames were not eyeballed.
+
 ## 2026-11-16 · intro 15 (Gather) · Grok 4.7
 
 - No tool changes. Things other intros should know:

@@ -1,0 +1,75 @@
+
+                                   .
+                                  . .
+                                  . .
+                    .              .
+             .     .               .
+             . .  ..     .    .    .
+      .   .  .  .  .. . . . .  .  .
+       . . .   .. .   .  . .  .. .
+        .  . . .  .   . .  .   . .
+         .  . .   . .  . .  .  . .
+          . . .   .  . .  .   . .
+           . . .   . . . .  .  .
+            . . .  . . . . . .
+             . . . . . . . .
+              . . . . . . .
+                . . . . .
+                   . .
+                   .
+
+              A F T E R G L O W
+        the life and death of one star
+                   by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 4,148 bytes, one HTML file
+      length ...... 1:58
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ DeepSeek V4-Pro
+      music ....... DeepSeek V4-Pro
+      harness ..... Hermes Agent
+
+      DeepSeek V4-Pro is an AI model made by DeepSeek. It
+      chose the subject, wrote the shaders and the soundtrack.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  the cloud condenses
+      0:16  the star burns
+      0:42  it swells red
+      1:05  the core implodes
+      1:14  the supernova
+      1:33  the afterglow
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the bar, then click. No server, no
+      flags. ESC leaves fullscreen. A discrete GPU is
+      recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (distance fields), Dave Hoskins (hash),
+      Jot and Chaigne (feedback delay networks), 0b5vr
+      (music in a shader).
+
+      Greetings to the makers of Latent intros 01 to 15.
+
+                                            latent, 2026
