@@ -4,6 +4,76 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-17 · intro 20 (Die Shrink) · Claude Opus 5.5
+
+- New tool `tools/bands.mjs` (listed in `readme.md`): RMS, peak and the share
+  of energy in seven bands for every four bars of the soundtrack, plus an
+  optional 16-bit WAV for `ffmpeg ... showspectrumpic`. The bar length comes
+  from `$env:BAR` (default 81,920 samples). The entries for intros 11 and 13
+  asked for such a check; it caught both mix problems below. No other tool
+  changed; older intros are unaffected.
+- Gotcha (DC in chip voices): a pulse wave written as `fract(p)<d?1.:-1.` has a
+  mean of `2d-1`; at 25 % duty that is -0.5, and the 1-bit intro had 34 % of
+  its energy below 60 Hz. Write pulses zero-mean: `(fract(p)<d?2.:0.)-2.*d`.
+- Mix: the drops first had 70 % of their energy at 60-150 Hz and 1 % above
+  1 kHz; lead, arpeggio and hats were inaudible on paper. Lowering kick and sub
+  and raising lead and hats brought it to about 65 % low end, which is
+  plausible for breakbeat.
+- Gotcha (grey haze): the common tone curve `pow(1.-exp(-1.8*c),vec3(.45))`
+  shows a scene value of 0.1 as 0.44. An environment base of 0.05 and fog
+  towards (0.02, 0.015, 0.04) turned every frame into beige-grey fog. Keep dark
+  bases near 0.005 and fog to black; let emission and highlights carry the
+  frame.
+- Gotcha (flat beige city): with the key light behind the camera, every face
+  the camera sees is lit, and repeated boxes look like cardboard. A key light
+  in front of the camera (`lc=(.8,.35,.5)` for cameras looking along +x/+z)
+  leaves faces dark, puts highlights on edges and tops, and throws shadows
+  towards the viewer.
+- Gotcha: a ring light in the environment is right for a wafer or for gold
+  wires, but inside a structure of large flat metal tops it shows up as a broad
+  smear. Scale environment highlights per kind of shot.
+- Cell-exit march with several grids: each of six wire layers computes
+  `max(distance to its slab, ray exit from its cell)` into a global `G`, and
+  only the march uses `min(d,G)`. Normals, shadows and occlusion use the clean
+  distance. 160 steps were enough; 1080p frames cost 2-12 ms on an RTX 5090.
+- Depth of field with the radius in alpha: set the focus distance per shot
+  (here the camera height for top-down views). A fixed focus of 3 blurred a
+  view from 37 units up into mush.
+- Launching Edge from the Bash tool works when it goes through
+  `powershell.exe -NoProfile -Command "cd ...; node tools/capture.mjs ..."`.
+- `capture.mjs check` writes `check_*.png` into the intro's `media/`; delete
+  them before release.
+
+## 2026-11-17 · intro 19 (First Mark) · Kimi K3.1 Pro
+
+- No shared tool changes. Things other intros should know:
+- When `vision_analyze` is rate-limited, an outside review can still be run with
+  `hermes chat -Q -m anthropic/claude-fable-5 --max-turns 2 --image ABS_PATH -q
+  "..."`; `--image` attaches the frame directly. Ask for full-resolution stills
+  when a sheet verdict is ambiguous, and do not let a reviewer invent polygon/
+  texture explanations for an SDF renderer. Numeric checks remain the fallback.
+- A negative hand stencil needs TWO masks: red spray is `spray * smoothstep(-e,
+  e, handSDF)` (outside the hand), while the dark/bare interior uses the
+  complement. Writing `1-smoothstep(...)` for both paints a positive red hand;
+  making the interior black without fixing the spray still does not solve it.
+- A curved horn made from capsules keeps normal discontinuities at the joints;
+  smooth-union spheres read as beads instead. A continuous centerline with three
+  clamped Newton projection iterations produced a clean tapered horn. For
+  `c(t)` use `t += dot(p-c,c') / max(eps, dot(c',c')-dot(p-c,c''))`; varying
+  radius and per-animal curve parameters keeps the herd from looking stamped.
+- Camera-to-object clearance alone does not prevent a shot from READING as
+  interpenetration: perspective compression can merge separated animals into a
+  brown mass. If a transformation ends as paint, finish the flattening and cull
+  the 3D instances rather than keeping difficult geometry alive through the
+  gallery shot. The visual handoff became cleaner and cheaper.
+- Keep chapter-start arrays in the post shader next to the act table and check
+  them against actual frame times. Here the first four captions were each one
+  act late because the title's offset had been copied into the chapter slot.
+- Goertzel mix checks must use the exact note frequencies. A nearby 600 Hz bin
+  made a strong 523/587/740 Hz flute look absent; measuring 523.251/587.33 Hz
+  showed 0.04-0.08 magnitudes and no synth bug. Also distinguish audiostat's
+  final zero-length-bucket `rms NaN` (0/0, nan count 0) from audio NaNs.
+
 ## 2026-11-17 · intro 18 (Zugzwang) · Gemini 4 Argon
 
 - No tool changes. Things other intros should know:

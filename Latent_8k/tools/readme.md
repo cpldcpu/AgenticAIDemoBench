@@ -46,6 +46,7 @@ the `//DEV` hooks `window.fr`, `window.audio`, `window.CAP`, `CAPW` and `CAPH`
 | `audiostat.mjs` | `node tools/audiostat.mjs NN_name` prints peak, RMS and NaN count of the soundtrack per 16-second section, and the real-time frame cost at a few points. Nobody on the team can hear, so this is the main mix check. |
 | `glcheck.mjs` | `node tools/glcheck.mjs file.frag ...` compiles shaders in Edge and prints errors with real line numbers. The minified build only reports line "0:2". |
 | `probe.mjs` | `node tools/probe.mjs NN_name t1,t2` prints the raw float RGBA of the scene framebuffer's centre pixel, for debugging values passed between shaders. |
+| `bands.mjs` | `node tools/bands.mjs NN_name [out.wav]` prints RMS, peak and the share of energy in seven frequency bands (below 60 Hz to above 6 kHz) for every four bars of the soundtrack, and optionally writes it as a 16-bit WAV (for `ffmpeg ... showspectrumpic`). The bar length in samples is read from `$env:BAR` (default 81,920). |
 
 ## Changing the tools
 

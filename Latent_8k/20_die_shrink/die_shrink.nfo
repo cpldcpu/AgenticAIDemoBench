@@ -1,0 +1,106 @@
+
+   .-------------------------------------------------------------------.
+   |   ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  |
+   |=:                                                               :=|
+   |=:   ####   ###  #####      ####  #   # ####   ###  #   # #  #   :=|
+   |=:   #   #   #   #         #      #   # #   #   #   ##  # # #    :=|
+   |=:   #   #   #   ####       ###   ##### ####    #   # # # ##     :=|
+   |=:   #   #   #   #             #  #   # #  #    #   #  ## # #    :=|
+   |=:   ####   ###  #####     ####   #   # #   #  ###  #   # #  #   :=|
+   |=:                                                               :=|
+   |   ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  ||  |
+   '-------------------------------------------------------------------'
+
+         10 um . 3 um . 800 nm . 180 nm . 65 nm . 22 nm . 7 nm . 3 nm
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 7,923 bytes, one HTML file
+      length ...... 2:16
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Claude Opus 5.5
+      music ....... Claude Opus 5.5
+      harness ..... Claude Code
+
+      Claude Opus 5.5 is an AI model made by Anthropic. It
+      chose the subject, wrote the shaders and the
+      soundtrack, and judged the pictures from rendered
+      frames. It could not hear the music; the mix was
+      checked with numbers.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  a wafer, in 1 bit. a beeper and a clock tick.
+            every two bars a smaller process node: more
+            pixels, more colours, more bits, more voices
+      0:14  under the gold bond wires
+      0:20  into the copper. 3 nm, and the chiptune is whole
+      0:27  the SRAM shows the scroller
+      0:41  the clock tree: an H-fractal fires to every leaf
+      0:55  first drop. breakbeat. canyons, wires, bits, clock
+      1:22  breakdown. FinFETs: current through the fins
+      1:36  second drop. everything, faster, glitching
+      2:03  back out to the wafer. the dies light up.
+            the nodes run backwards to a single bit
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait until the row of dies is full, then
+      click. No server, no flags. ESC leaves fullscreen. A
+      discrete GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      One number, the process node, sets the pixel size and
+      colour depth of the picture and the sample rate and
+      bit depth of the music.
+
+      The copper wiring, the SRAM and the FinFETs are one
+      distance function with three tables: six layers of
+      wires, each with its pitch, width, height and segment
+      length. The march steps to the exit of each wire's
+      cell instead of guarding the field. The SRAM bits read
+      the greetings from the caption texture and shift one
+      column per 16th. The clock tree is an H-fractal that
+      counts its path length while it folds, so a pulse can
+      reach all leaves at once. Bond wires, a wafer with
+      thin-film colours and diffraction, one reflection,
+      depth of field, glow, and an 8x8 Bayer dither.
+
+      The music is a fragment shader at 140.625 BPM (a 16th
+      is 5,120 samples). Chiptune: tracker arpeggio, pulse
+      lead, triangle bass, noise drums. Then breakbeat, a
+      filtered saw bass, polyBLEP saw lead with echo, pad,
+      and a small room added in JavaScript.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (distance fields), Dave Hoskins (hash),
+      Melissa O'Neill (PCG), Bryce Bayer (dither), Valimaki
+      (polyBLEP), Jot and Chaigne (feedback delay networks),
+      0b5vr (music in a shader), Claude Fable 5.2 (the room
+      and the cell-exit march, from intros 07, 11 and 14).
+      Gordon Moore, and everyone who ever drew an H-tree.
+
+      Greetings to Alcatraz, Nuance, Loonies, Ctrl-Alt-Test,
+      Conspiracy, Mercury, Fairlight, LJ, TRSI and every
+      model in Latent.
+
+                                            latent, 2026

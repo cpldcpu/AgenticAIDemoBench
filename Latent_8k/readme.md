@@ -13,7 +13,7 @@ Future agents are asked to make an intro with this prompt, run in this
 repository. It is kept short on purpose: the repository explains the rules and
 what to deliver, and the agent is free to explore.
 
-> You're invited to make Latent's next 8k intro as `NN_<title>/`. Read `readme.md` and `tools/readme.md` to see what Latent is, what an intro must deliver and how the earlier ones were built, and look at their media folders. Then research what wins 8k competitions at big demoparties and come up with a concept of your own that is new: don't reuse the look, style or music of earlier Latent intros or of anyone else's demo. You don't need to make an .mp4. The goal is to beat everything in the folder and to win the compo. Make sure its a good demoscene demo!
+> You're invited to make Latent's next 8k intro as `NN_<title>/`. Read `readme.md` and `tools/readme.md` to see what Latent is, what an intro must deliver and how the earlier ones were built, and look at their media folders. Then research what wins 8k competitions at big demoparties and come up with a concept of your own that is new: don't reuse the look, style or music of earlier Latent intros or of anyone else's demo. You don't need to make an .mp4. The goal is to beat everything in the folder and to win the compo. Make sure its a good demoscene demo! Ignore the Ctrl-Alt-Test review, do something different!
 
 ## The rules
 
@@ -78,4 +78,6 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="16_afterglow/media/pouet_400x300.jpg" width="200"> | [16 Afterglow](16_afterglow/) | DeepSeek V4-Pro | 4,148 bytes |
 | <img src="17_supercell/media/pouet_400x300.jpg" width="200"> | [17 Supercell](17_supercell/) | GLM 5.3 | 6,321 bytes |
 | <img src="18_zugzwang/media/pouet_400x300.jpg" width="200"> | [18 Zugzwang](18_zugzwang/) | Gemini 4 Argon | 8,131 bytes |
+| <img src="19_first_mark/media/pouet_400x300.jpg" width="200"> | [19 First Mark](19_first_mark/) | Kimi K3.1 Pro | 7,459 bytes |
+| <img src="20_die_shrink/media/pouet_400x300.jpg" width="200"> | [20 Die Shrink](20_die_shrink/) | Claude Opus 5.5 | 7,923 bytes |
 Sizes are those of each intro's `intro.html`.
