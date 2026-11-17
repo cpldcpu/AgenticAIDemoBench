@@ -4,6 +4,71 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-17 · intro 18 (Zugzwang) · Gemini 4 Argon
+
+- No tool changes. Things other intros should know:
+- Gotcha (D3D11 compile time vs. multi-object SDFs): calling a detailed piece
+  SDF 12 times inside `map()` made ANGLE/D3D11 (`fxc`) take 51 seconds to
+  compile because `fxc` inlines every call site (12 calls x 3 `map()` sites =
+  36 copies). Precomputing the active hero object positions once per pixel in
+  `main()` before the raymarch loop, selecting the single closest candidate via
+  fast bounding cylinders (`dbBest`) inside `map()`, and evaluating the detailed
+  SDF only once at the end of `map()` cut D3D11 compile time from 51 s to 3.9 s
+  and saved ~1.8 kB of compressed size.
+- Gotcha (second-closest bounding volume in single-site SDF selection): when
+  evaluating only the closest candidate's detailed SDF, do NOT early-exit on
+  `dbBest > 0.25` by returning `min(d, dbBest)` or clamp the return value of
+  `map()` with `min(d, max(dbSec, 0.08))`. Both introduce hard discontinuities
+  into `map()` along the bounding cylinder in empty space, which the soft-shadow
+  raymarcher (`sh = min(sh, k * a / s)`) and AO probe sample as concentric
+  stepped contour rings across nearby surfaces. Instead, return pure continuous
+  `d` from `map()`, and pass `max(dbSec, 0.05)` via a side-channel global (`GD`)
+  used only by the primary raymarch loop.
+- Gotcha (shadow striping across variable-height grid cells): in a stepped grid
+  where each cell `u = round(p.xz / 2.)` has its own height `tileH(u)`,
+  evaluating only the current cell's box makes `map()` blind to a taller
+  neighboring tile until a shadow ray physically crosses the cell boundary,
+  causing discrete shadow steps to jump into or over the neighbor's wall and
+  paint 18 alternating light/dark bands across adjacent surfaces. Evaluate the
+  2x2 neighborhood `floor(p.xz / 2.) + vec2(i & 1, i >> 1)` in `map()` so the
+  stepped terrain is a true continuous Euclidean SDF across all cell borders,
+  and use Quilez's soft-shadow triangulation (`b = a*a/(2.*ph)`).
+- Gotcha (dark terminator stripe from opposing warm backlight): adding warm sun
+  color `SC * max(0., dot(n, -SD))` on backfaces while `dl = max(0., dot(n, SD))`
+  is on frontfaces leaves a zero-energy valley right at the terminator
+  (`dot(n, SD) = 0`) where only dark cool ambient `HZ` illuminates the surface,
+  painting a dark vertical stripe down spheres and cylinders. Fold `bk` into the
+  cool sky hemisphere ambient `HZ` instead.
+- Gotcha (cell-border guard strip in repeated grids): in a `2.0 x 2.0` grid
+  (`lc = p.xz - round(p.xz/2.)*2.`, where `lc` spans `[-1, 1]`), writing
+  `g = min(.98 - abs(lc.x), .98 - abs(lc.y))` and disabling the cell-wall guard
+  when `g < 0.` turns off the guard inside the `0.02`-wide border strip of
+  EVERY internal cell (`0.98 < |lc| <= 1.0`), causing rays that land in that
+  strip to jump `d = 1.5` units straight through the neighboring cell's object
+  and slice it vertically along the cell plane. Use `1.01 - abs(lc)` so `g < 0.`
+  only triggers outside the clamped grid.
+- Camera personal-space clearance in domain-repeated scenes: when a low-angle
+  camera moves inside a repeated grid of objects, a background cell object
+  spawning `1.0–2.8` units in front of `ro` gets blurred by Bokeh DoF into a
+  giant blob covering half the frame. Suppress cell objects within ~3 units of
+  the camera (`if (length(id*cellSize - RO.xz) < 3.2) cKind = -1;`).
+- Gotcha (tilting/toppling an object on a floor): pivoting a cylinder of radius
+  `R` to the left (`-x`) around its right base edge (`+R`) swings the entire
+  base and lower body downward below `y = 0` into the floor like a seesaw. Pivot
+  around the edge in the direction of the fall (`-R`), and rotate the query
+  point into the object's local space before evaluating its bounding cylinder
+  so the bound tilts with the object.
+- Gotcha (starfield diagonal tiling): `h1(floor(d.xy*N) + floor(d.z*N)*19.)`
+  adds a scalar `floor(d.z*N)*19.` equally to both `.x` and `.y`, so stars
+  repeat diagonally across `z`-slices in visible bands. Multiply `floor(d.z*N)`
+  by an asymmetric `vec2(17.3, 31.7)`.
+- Size coding with `glslmin.mjs`: `glslmin.mjs` assigns 1-character names
+  (`a..z`, `A..Z`, 52 total) globally across the file by token frequency, not
+  per function scope, and keeps all GLSL built-in names (`smoothstep`,
+  `length`, `vec3`) verbatim. Reusing the same short local variable names
+  (`a,b,c,d,e,f,g,h,n,q,r,s,u,v,w`) across functions keeps every identifier in
+  the 1-character pool and improves Zopfli repetition.
+
 ## 2026-11-17 · intro 17 (Supercell) · GLM 5.3
 
 - No tool changes. The intro's own debug helper lives in

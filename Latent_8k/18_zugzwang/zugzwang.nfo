@@ -1,0 +1,98 @@
+
+                        +---+---+---+---+---+---+---+---+
+                        | r |   | b | q | k |   |   | r |
+                        +---+---+---+---+---+---+---+---+
+                        |   |   | p |   |   | p | p |   |
+                        +---+---+---+---+---+---+---+---+
+                        |   |   |   |   | Q |   | N |   |
+                        +---+---+---+---+---+---+---+---+
+
+      ______  _   _   ____  ______ __        __    _     _   _   ____
+     |__  / | | | | / ___||__  /  \ \      / /   / \   | \ | | / ___|
+       / /  | | | || |  _   / /    \ \ /\ / /   / _ \  |  \| || |  _
+      / /_  | |_| || |_| | / /_     \ V  V /   / ___ \ | |\  || |_| |
+     /____|  \___/  \____|/____|     \_/\_/   /_/   \_\|_| \_| \____|
+
+            an architectural chess match in six acts, by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,131 bytes, one HTML file (61 bytes free)
+      length ...... 2:08
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Gemini 4 Argon
+      music ....... Gemini 4 Argon
+      harness ..... Hermes Agent
+
+      Gemini 4 Argon is an AI model made by Google. It
+      researched the compo, chose the subject, sculpted the
+      Staunton distance fields, directed the 16 shots, and
+      composed the Neo-Baroque score.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  I · OPENING (1. e4 c5)
+            Warm alabaster and slate courtyard; the e-pawn
+            hops two squares, Black answers c5, and the
+            White Knight vaults the rank.
+
+      0:20  II · THE GAMBIT
+            Cerulean twilight; squares heave into a 3D
+            canyon, Bishops fire diagonal beams, and a
+            captured piece slices into spinning gold discs.
+
+      0:44  III · ZEITNOT
+            Crimson time trouble; a giant beveled brass
+            escapement wheel and pendulum swing behind the
+            besieged White King as the clock ticks in 16ths.
+
+      1:08  IV · THE EIGHTH RANK
+            Starry cobalt night; a lone White Pawn climbs
+            an ascending stairway, spins inside two golden
+            coronation rings, and crowns itself Queen.
+
+      1:28  V · ZUGZWANG
+            Daylight amphitheatre; the new Gold Queen and
+            Knight deliver the royal fork, and the towering
+            Black King tilts off its base in slow motion.
+
+      1:52  VI · CHECKMATE
+            Dawn silver-slate mirror board; the fallen
+            Black King lies on its side before the standing
+            White Queen and King.
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the golden bar, then click. No
+      server, no flags. ESC leaves fullscreen. A discrete
+      GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Howard Staunton & Nathaniel Cook (the 1849 chess
+      pattern), Inigo Quilez (SDF primitives and soft
+      shadows), Amanatides and Woo (grid stepping),
+      Krzysztof Narkowicz (ACES filmic curve), Melissa
+      O'Neill / Latent 10_geode (uint PCG hash), Jean-Marc
+      Jot and Antoine Chaigne (Householder FDN reverb),
+      Latent 07_little_water_bear & 11_pas_de_trois
+      (single-loop shadow/AO and cell-exit guard).
+
+      Greetings to the makers of Latent intros 01 to 17.
+
+                                            latent, 2026
