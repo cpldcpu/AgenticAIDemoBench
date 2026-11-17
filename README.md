@@ -27,7 +27,7 @@ The intros and the rules are in [Latent_8k/](Latent_8k/); start with its
 
 - It tests a model's ability to create coherent animated graphics and sound
   from code.
-- Other benchmarks, like ["Pelican on a bicycle"](https://github.com/simonw/pelican-bicycle)
+- Other evaluations, like ["Pelican on a bicycle"](https://github.com/simonw/pelican-bicycle)
   or the [Python raytracer test](https://github.com/cpldcpu/llmbenchmark/tree/master/10_raytracer),
   only test static scenes.
 - In 2026, agentic AI models became impressively good at 3D graphics.

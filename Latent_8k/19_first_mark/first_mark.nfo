@@ -1,0 +1,86 @@
+
+                       .  .  .   .  .
+                    .       _______       .
+                       _____/       \_____
+                      /                     \
+                     |   FIRST MARK          |
+                      \_____           _____/
+                            \_________/
+                       .       | |       .
+                    .   .      | |   .     .
+
+      A hand in ochre. A beast in the wall. A herd in the dark.
+
+  ---------------------------------------------------------------------
+      type ........ 8k intro
+      platform .... Windows browser, WebGL2
+      size ........ 7,459 bytes, one HTML file (733 bytes free)
+      length ...... 2:08, 64 bars at 120 BPM
+      released .... November 2026
+      group ....... Latent
+  ---------------------------------------------------------------------
+      credits
+  ---------------------------------------------------------------------
+      code ........ Kimi K3.1 Pro
+      music ....... Kimi K3.1 Pro
+      harness ..... Hermes Agent
+
+      Kimi K3.1 Pro is an AI model made by Moonshot AI. It chose the
+      subject, wrote the distance fields and score, directed the seven
+      movements and revised the piece through eight visual reviews.
+
+      Outside-looking review only: Claude Fable 5. No reviewer code,
+      meshes, textures, recordings or samples are in the release.
+
+  ---------------------------------------------------------------------
+      the programme
+  ---------------------------------------------------------------------
+      0:00  I · A SPARK
+            Torchlight, cave air, a negative hand in red spray.
+
+      0:16  II · THE WALL
+            Pigment gathers into an aurochs; struck stones answer.
+
+      0:32  III · OFF THE STONE
+            The painting thickens, cracks and steps out of the rock.
+            Wooden strings and frame drums follow its weight.
+
+      0:48  IV · THE HERD
+            Eleven animals, three lanes, four camera setups. Gallop
+            drums, seed pods, breath flute and an octave climax.
+
+      1:20  RETURN TO STONE
+            The herd separates, flattens and becomes the gallery.
+
+      1:36  V · DEEP TIME
+            Mirrored animals, small hands, counted dots, calcite.
+
+      1:52  VI · THE HAND REMAINS
+            The first mark and the last breath.
+
+  ---------------------------------------------------------------------
+      how to run
+  ---------------------------------------------------------------------
+      Double-click intro.html in Edge or Chrome on Windows 10 or 11.
+      Wait for the red progress bar, then click. No server, no flags.
+      ESC leaves fullscreen. A discrete GPU is recommended.
+
+      Tested on Edge / ANGLE D3D11 / RTX 5090 at 1920x1080.
+      All shader checks passed. Packed click-through passed.
+      Audio: zero NaNs, maximum peak 0.872.
+
+  ---------------------------------------------------------------------
+      thanks and sources
+  ---------------------------------------------------------------------
+      Inigo Quilez (SDF construction), Krzysztof Narkowicz (ACES),
+      Jean-Marc Jot & Antoine Chaigne (FDN reverb), Melissa O'Neill
+      and Latent 10_geode (integer hash), the shared Latent tools.
+
+      Research: Revision PC 8k archives 2023-2026, Laurent Le Brun's
+      2025 demoscene review, and Ctrl-Alt-Test's animated-movie-in-8kB
+      making-of. No earlier intro's scene, look, melody or sound design
+      was reused.
+
+      Greetings to the makers of Latent intros 01 to 18.
+
+                                                        latent, 2026
