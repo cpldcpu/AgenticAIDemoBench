@@ -1,0 +1,203 @@
+<meta charset=utf-8><body><script>
+// UNA CORDA - an 8k intro by Latent. Lines ending in //DEV are stripped from the release build.
+// A nocturne in D-flat major for a modelled grand piano. The score below is expanded into a list of
+// played notes (rubato, pedalling, dynamics, a human hand); each note is then rendered by the GPU
+// as one draw call, and the same list drives the strings, hammers, dampers and keys on screen.
+(async () => {
+  let W = 1920, H = 1080, t, z = 0, i = 0, k, s, l, r, q, b, S = 7, v, m, P;
+  if (window.CAPW) { W = CAPW; H = CAPH } //DEV
+  const D = document, M = Math, N = [], G = [], X = [];
+  D.body.innerHTML = `<canvas id=C width=${W} height=${H} style=position:fixed;inset:0;width:100%;height:100%;object-fit:contain;background:#000;cursor:none></canvas><div id=P0 style="position:fixed;inset:0;display:grid;place-content:center;text-align:center;background:#000;color:#dcb27a;font:italic 6vw Georgia">Una Corda<div id=P2 style=font-size:2vw></div></div>`;
+  const Y = s => (P2.innerText = s, new Promise(r => requestAnimationFrame(_ => setTimeout(r, 60))));
+  const g = C.getContext('webgl2'), R = _ => (S = S * 16807 % 2147483647) / 2147483647,
+    // set uniform R of program p, and samplers A and B to units a and b
+    U = (p, a, b, ...v) => (g.useProgram(p), g.uniform4f(g.getUniformLocation(p, 'R'), ...v), g.uniform1i(g.getUniformLocation(p, 'A'), a), g.uniform1i(g.getUniformLocation(p, 'B'), b));
+  g.getExtension('EXT_color_buffer_float');
+  g.getExtension('EXT_float_blend');
+
+  // ---------------- the score ----------------
+  // 46 bars of 4/4, counted in 24ths of a bar. Pitches are MIDI note + 30 as characters.
+  // Chord voicings for the left hand (bass, then three notes upward), one letter each:
+  //  a Db  b Db/F  c Bbm7  d Gbmaj7  e Ebm7  f Ab7  g F7/A  h Bbm  i Gb  j Gbm6  k Bbm/Ab  l F7
+  //  m Eb7/G  n Cø7/Gb  o Db7  p Ebm  q Dbmaj7  r Gbm6/Db
+  const VO = 'CJSVGOV[@GOVHOSXELT[>ENT?GNQ@GOX<CLT<CKQ>GOS;BKQ=EOU<BLQCJMSELQTCJNSCKQT',
+    // one chord per half bar: intro, A, A, B (agitato), climax, cadenza, A (una corda), coda
+    CH = 'aaaaaaccddefabghijfaaaccddefabghijflhkdlhkmdnlhoipnlhiefqhjfffffaaccddefabghijfhraraqaraaaaa',
+    DY = '3345545553566566665667677899886423323443332211', // loudness per bar
+    TP = '5544454446444544462222111233476955565568788999', // slowness per bar (rubato)
+    // the melody: pitch, length. "!" is a rest. A' repeats the theme, its first four bars an octave up
+    TH = 'k<l4k2i6g8b4d6f6g6k6p<n6l6k4i2f6k<l4k2s6r<p4o2p6p8n4l6o6',
+    MU = '!H!Bb6' + TH + 'n6l4i2g<' + TH + 'n6l4i2c4f4i4' +
+      'k4p8n4k8l8k4i4f4c4d4g8k4l6k2s8r2p2n6k6i6l6k4i2f6g6k6n6q6p8n4l6s6u6s6r6o6' +
+      'w<x4w2s6x<w4u2r6s<s1r1p1n1k1i1g1f1d1b1_1[1o<n<' +
+      'V1Z1]1`1b1f1i1l1n1r1u1x1z1x1w1u1s1r1p1n1l1k1i1g1f6g6i6b6' +
+      TH + 'n6l4i2k<o6l6k<o6l6k4i4g4g2k2n2r2s2w2z<{2x2u2s2o2l2k<sH!H';
+  // rubato: the length of every 24th, eased from bar to bar
+  for (q = 0, t = 1; q <= 1104; q++) G[q] = t, b = q / 24 | 0, t += (3.2 + .12 * (TP[b] - (TP[b] - (TP[b + 1] || 9)) * (q % 24) / 24)) / 24;
+  // the damper pedal is changed at every bar and at every new harmony
+  for (q = 0; q < 88; q++) (q % 2 < 1 || CH[q] != CH[q - 1]) && X.push(G[q * 12]);
+  X.push(G[1104] + 9);
+  // a note: pitch, velocity, grid position, length. Released when the key comes up or the pedal lifts, whichever is later
+  const A = (m, v, q, d, o) => {
+    t = G[q] + (R() - .5) * .014 + (o || 0);
+    for (l of X) if (l > t + .05) break;
+    for (r of N) (r[0] | 0) == m && r[4] > t && r[2] < t && (r[4] = r[3] = t);
+    N.push([m + (q > 767 && q < 960) * .5, M.min(1, v * (.94 + R() * .12)), t, G[q + d] - .03, M.max(G[q + d] - .03, l + .07)]);
+  };
+  // the left hand
+  for (q = 0; q < 88; q++) {
+    k = VO.substr((CH.charCodeAt(q) - 97) * 4, 4);
+    b = q / 2 | 0;
+    v = .2 + .6 * (DY[b] - (DY[b] - DY[b + 1]) * (q % 2) / 2) / 9;
+    if (b > 29 && b < 32) { for (i = 0; i < 4; i++) A(k.charCodeAt(i) - 30 - !i * 12, v * .7, q * 12, 12, i * .04); continue }
+    for (i = 0; i < 6; i++) A(k.charCodeAt(i > 3 ? 6 - i : i) - 30, v * (i ? .6 + .06 * (i == 3) : .75), q * 12 + i * 2, 2);
+    b > 17 && b < 30 && A(k.charCodeAt(0) - 42, v * .55, q * 12, 12);
+  }
+  // the final chord, rolled from the bottom: Db over five octaves
+  [25, 37, 44, 53, 61, 68, 77].map((m, i) => A(m, .45 - i * .02, 1056, 24, i * .07));
+  // the right hand
+  for (q = i = 0; i < MU.length; i += 2) {
+    m = MU.charCodeAt(i) - 30 + (q > 767 && q < 864) * 12; s = MU.charCodeAt(i + 1) - 48;
+    b = q / 24 | 0;
+    if (m > 9) {
+      v = (.3 + .6 * DY[b] / 9) * (.85 + .15 * M.sin(M.PI * (q % 96) / 96) + .004 * (m - 75) + (s > 7) * .06);
+      A(m, v, q, s, -.012);
+      // agitato and climax: the tune in octaves, with the harmony under the long notes
+      if (b > 17 && b < 30) {
+        A(m - 12, v * .8, q, s, -.006);
+        if (s > 5 && b > 25) for (k = 1; k < 4; k++) A(VO.charCodeAt((CH.charCodeAt(q / 12 | 0) - 97) * 4 + k) - 18, v * .5, q, s);
+      }
+    }
+    q += s;
+  }
+
+  // ---------------- the piano: one draw per note, added up in a float framebuffer ----------------
+  await Y('voicing ' + N.length + ' hammers');
+  const ns = (G[1104] + 9) * 48e3 | 0, rows = ns / 4096 + 1 | 0;
+  // program from fragment source; fullscreen triangle from gl_VertexID
+  const Q = f => {
+    const p = g.createProgram();
+    const t0 = performance.now(); //DEV
+    ['#version 300 es\nvoid main(){gl_Position=vec4(gl_VertexID%2*4-1,gl_VertexID/2*4-1,0,1);}', f].map((s, i) => {
+      const h = g.createShader(35633 - i);
+      g.shaderSource(h, s);
+      g.compileShader(h);
+      g.attachShader(p, h);
+      if (!g.getShaderParameter(h, 35713)) console.error('SHADER ' + i + ': ' + g.getShaderInfoLog(h)); //DEV
+    });
+    g.linkProgram(p);
+    g.getProgramParameter(p, 35714);
+    console.log('compile ' + f.length + ' bytes: ' + (performance.now() - t0 | 0) + ' ms'); //DEV
+    return p;
+  };
+  const F0 = (w, h, f) => {
+    g.bindTexture(3553, t = g.createTexture());
+    g.texImage2D(3553, 0, f, w, h, 0, 6408, 5126, null);
+    const F = g.createFramebuffer();
+    g.bindFramebuffer(36160, F);
+    g.framebufferTexture2D(36160, 36064, 3553, t, 0);
+    return F;
+  };
+  const t1 = performance.now(); //DEV
+  F0(4096, rows, 34836);
+  g.viewport(0, 0, 4096, rows);
+  P = Q("#version 300 es\nprecision highp float;uniform vec4 R;out vec4 O;float k(float g){return fract(sin(g*91.3458)*47453.5453);}void main(){float g=floor(gl_FragCoord.y)*4096.+floor(gl_FragCoord.x)-R.z,b=g/48e3,e=floor(R.x),h=R.x-e,c=R.y*(1.-h*.3),f=e-69.,i=440.*exp2(f/12.+(.2*f+2e-4*f*f*f)/1200.),B=1e-4*exp2((e-48.)/9.5)+1.2e-4*exp2((30.-e)/10.),r=(1.15-c)*.42*clamp(i/260.,.12,1.)*(1.+h*.4),o=1800.+9e3*c*c,s=(k(e)-.5)*1.3e-3,p=b-R.w,j=0.,a,l,m,n,q;if(g<0.)discard;for(float d=1.;d<72.;d++){a=d*i*sqrt(1.+B*d*d);if(a>16e3)break;l=(.25+.75*abs(sin(d*.3927)))*exp(-(d-1.)*r)/(1.+a*a/(o*o))*a/(a+140.)*inversesqrt(d);m=exp(-b*(.4+i*.004+a*a*3e-7));n=exp(-b*(.08+i*.0009+a*a*8e-8))*(.25+h*.4);if(p>0.&&e<89.)l*=exp(-p*(5.+a*.012));q=6.2832*k(d+e);j+=l*((m+n)*sin(6.2832*fract(a*b))+(m-n)*sin(6.2832*fract(a*(1.+s)*b)+q*.3));}j*=1.-exp(-b*(900.+2e3*c));j+=c*c*exp(-b*35.)*(sin(565.*b)+.6*sin(1018.*b+1.)+.4*sin(1530.*b+2.))*.3*(1.-h*.6)+(k(g*.913+e)-.5)*c*c*c*exp(-b*400.)*.15;O=vec4(vec2(1.-f/80.,1.+f/80.)*j*pow(c,2.2)*.1,0,0);}");
+  g.enable(3042); g.blendFunc(1, 1); g.enable(3089);
+  for (r of N) {
+    q = r[2] * 48e3 | 0;
+    U(P, 0, 0, r[0], r[1], q, r[4] - r[2]);
+    g.scissor(0, q / 4096, 4096, M.min(r[4] - r[2] + 3, 30) * 12);
+    g.drawArrays(4, 0, 3);
+  }
+  g.disable(3042); g.disable(3089);
+  const d = new Float32Array(rows * 16384);
+  g.readPixels(0, 0, 4096, rows, 6408, 5126, d);
+  g.deleteTexture(t);
+  console.log('music ' + N.length + ' notes, ' + (performance.now() - t1 | 0) + ' ms'); //DEV
+  // the hall: eight damped delay lines mixed by a Householder matrix (a feedback delay network)
+  const u = new AudioBuffer({ length: ns, numberOfChannels: 2, sampleRate: 48e3 }), a = u.getChannelData(0), c = u.getChannelData(1),
+    e = [1693, 1951, 2287, 2539, 2857, 3181, 3557, 3911].map(n => new Float32Array(n)), y = [], h = [0, 0, 0, 0, 0, 0, 0, 0];
+  for (i = 0, m = 1e-9; i < ns; i++) {
+    l = d[i * 4]; r = d[i * 4 + 1]; s = 0;
+    for (k = 8; k--;) s += y[k] = e[k][i % e[k].length];
+    for (k = 8; k--;) e[k][i % e[k].length] = (k & 1 ? l : r) * .15 + (h[k] += (y[k] - s / 4 - h[k]) * .4) * .001 ** (e[k].length / 12e4);
+    m = M.max(m, M.abs(a[i] = l + (y[0] + y[2] + y[4] + y[6]) * .3), M.abs(c[i] = r + (y[1] + y[3] + y[5] + y[7]) * .3));
+  }
+  // a gentle compressor: an envelope with ~0.7 s release sets the gain, so quiet passages come up and peaks never clip
+  for (i = k = 0; i < ns; i++) k = M.max(M.abs(a[i] /= m), M.abs(c[i] /= m), k * .99997), a[i] *= l = 1.2 / (.3 + k), c[i] *= l;
+  window.audio = u; window.notes = N; window.grid = G; //DEV
+
+  // title and credits -> texture unit 1
+  const x = D.createElement('canvas').getContext('2d');
+  x.canvas.width = 2048;
+  x.canvas.height = 1024;
+  x.fillStyle = '#fff';
+  x.textAlign = 'center';
+  // four rows of 256: title, subtitle, credits, and the maker's name cast into the plate
+  ['italic 210px Georgia', '80px Georgia', '72px Georgia', 'bold 150px Georgia'].map((f, i) => {
+    x.font = f;
+    x.fillText(['Una Corda', 'nocturne in D♭ major', 'code & music: Claude Opus 5.5 · Latent', 'LATENT & SONS'][i], 1024, i * 256 + 185, 1980);
+  });
+  g.activeTexture(33985);
+  g.bindTexture(3553, g.createTexture());
+  g.texImage2D(3553, 0, 6408, 6408, 5121, x.canvas);
+  g.generateMipmap(3553);
+  g.texParameteri(3553, 10241, 9987);
+  // the state of the 88 strings -> texture unit 2: struck, ringing, damper lifted, seconds since struck
+  g.activeTexture(33986);
+  g.bindTexture(3553, g.createTexture());
+  g.texParameteri(3553, 10241, 9728);
+  g.texParameteri(3553, 10240, 9728);
+  const K = new Float32Array(352);
+  g.activeTexture(33984);
+
+  // visuals
+  const F = F0(W, H, 34842), p1 = Q("#version 300 es\nprecision highp float;uniform vec4 R;uniform sampler2D A,B;out vec4 O;const float r=.0141;float ah,as,K,v,ai,m,ac;vec3 P,aj;const float at[7]=float[7](0.,2.,3.,5.,7.,8.,10.);float U(float n){return clamp(n,0.,1.);}float Q(vec2 a){vec3 e=fract(a.xyx*.1031);e+=dot(e,e.yzx+33.33);return fract((e.x+e.y)*e.z);}float ad(vec2 n){vec2 j=floor(n),H=n-j;H*=H*(3.-2.*H);return mix(mix(Q(j),Q(j+vec2(1,0)),H.x),mix(Q(j+vec2(0,1)),Q(j+1.),H.x),H.y);}vec4 V(float h){return texelFetch(B,ivec2(h,0),0);}float W(float h){return v>0.?1e3:2.*exp(-.03*h)+.03;}float ae(vec3 a,vec3 f){a=abs(a)-f;return length(max(a,0.))+min(max(a.x,max(a.y,a.z)),0.);}float X(vec2 e){float I=abs(e.x)-.72,f=(e.y-max(W(e.x/r+43.5),.5)-.13)*.3,D=max(.1-abs(I-f),0.);return max(max(I,-.36-e.y),max(I,f)+D*D*2.5);}float aA(vec2 e){float x=X(e),n=abs(abs(e.x-.02)-.31),b=min(min(abs(x+.07)-.045,max(e.y+.035,-.33-e.y)),min(n-.017,abs(e.y-.8+.4*e.x)-.026));b=max(b,-length(vec2(n,mod(e.y,.09)-.045))+.009);b=max(b,-length(vec2(mod(e.x,.1)-.05,e.y+.15))+.016*step(.32,abs(e.x)));return max(b,x+.025);}float ak(vec3 a){float h=clamp(floor(a.x/r+44.),0.,87.),n=a.x-(h-43.5)*r,b,c,k;vec4 z=V(h);m=1.;b=max(abs(a.y+.085)-.01,X(a.xz));c=a.x/r+43.5;k=-.06*exp(-.03*c)/r;c=max(max(abs(a.z-W(c))/sqrt(1.+k*k)-.011,abs(a.y+.04)-.034),abs(a.x)-.62);if(c<b)b=c,m=3.;if(v>0.)return min(a.y+.07,b);c=max(aA(a.xz),abs(a.y+.03)-.013)-.003;if(c<b)b=c,m=0.;c=max(length(a.yz-vec2(.012,-.06))-.01,abs(a.x)-.63);if(c<b)b=c,m=0.;for(k=-1.;k<2.;k++){c=max(length(vec2(n-k*.0045,a.z+.2+.05*mod(k+h,2.)))-.0032,abs(a.y-.008)-.027);if(c<b)b=c,m=5.;}if(h<68.){c=ae(vec3(n,a.y-.022-.009*min(z.b,1.),a.z-.056),vec3(r*.34,.016,.022))-.0015;if(c<b)b=c,m=4.;}k=z.r*.014-.024;c=min(ae(vec3(n,a.y-k,a.z),vec3(r*.36,.009,.008))-.004,max(length(vec2(n,a.y-k+.01))-.0025,abs(a.z+.1)-.1));if(c<b)b=c,m=6.;c=max(abs(X(a.xz)+.025)-.025,abs(a.y+.14)-.19);if(c<b)b=c,m=2.;if(K>0.){c=max(max(abs(a.x)-.66,abs(a.z+.445)-.085),abs(a.y+.15)-.03);if(c<b)b=c,m=2.;c=max(abs(abs(a.x)-.645)-.02,max(abs(a.z+.44)-.09,abs(a.y+.11)-.05));if(c<b)b=c,m=2.;float o=clamp(floor((a.x+.611)/.0235),0.,51.),i=21.+12.*floor(o/7.)+at[int(mod(o,7.))];ac=step(1.5,V(i-21.).b);c=ae(vec3(a.x+.611-(o+.5)*.0235,a.y+.112+ac*.007,a.z+.44),vec3(.0105,.009,.08))-.001;if(c<b)b=c,m=7.;o=floor((a.x+.611)/.0235+.5);i=21.+12.*floor((o-1.)/7.)+at[int(mod(o-1.,7.))];k=mod(o-1.,7.);ac=step(1.5,V(i-20.).b);c=ae(vec3(a.x+.611-o*.0235,a.y+.1+ac*.007,a.z+.405),vec3(.0065,.008,.047))-.0012;if(k!=1.&&k!=4.&&abs(a.x)<.6&&c<b)b=c,m=8.;vec2 e=mat2(.83,-.56,.56,.83)*(a.xy-vec2(-.72,.06));c=max(abs(e.y-.008)-.008,X(vec2(e.x-.72,a.z)));if(c<b)b=c,m=2.;c=max(length(a.xz-vec2(.6-.05*a.y,.4))-.008,abs(a.y-.5)-.45);if(c<b)b=c,m=2.;c=max(min(length(vec2(abs(a.x)-.6,a.z+.2)),length(a.xz-vec2(-.5,1.9)))-.05-.015*sin(a.y*30.),abs(a.y+.63)-.32);if(c<b)b=c,m=2.;c=a.y+.95;if(c<b)b=c,m=9.;c=4.-a.z+.12*sin(a.x*7.+sin(a.x*3.))+.04*sin(a.x*23.);if(c<b)b=c,m=10.;}return b;}vec3 aB(vec3 a){vec3 p=vec3(0);for(int j=0;j<4;j++){vec3 c=.5773*(2.*vec3((((j+3)>>1)&1),((j>>1)&1),(j&1))-1.);p+=c*ak(a+c*2e-4);}return normalize(p);}vec3 al(vec3 a){vec3 w=P-a;return aj*max(smoothstep(.75,.95,dot(normalize(-w),normalize(vec3(0,-.1,.5)-P))),v)/dot(w,w);}vec4 aC(vec3 x,vec3 b,float au){vec4 C=vec4(0),J;float av=abs(b.y)<1e-5?1e-5:b.y,L=(-.006-x.y)/av,S=(.006-x.y)/av,I,f,h,p,s,am,n,T,E,d,o,e,Y;I=max(min(L,S),0.);f=min(max(L,S),au);if(I>=f)return C;L=floor((x.x+b.x*I)/r+44.);S=floor((x.x+b.x*f)/r+44.);p=min(abs(S-L),12.);for(float j=0.;j<13.;j++){if(j>p)break;h=L+j*sign(S-L);if(v>0.)h=mod(h,88.);if(h<0.||h>87.)continue;J=V(h);am=W(h);e=h<20.?1.:h<28.?2.:3.;s=h<20.?.0024-h*4e-5:h<28.?.0014:.00055;for(float k=0.;k<3.;k++){if(k>=e)break;n=(L+j*sign(S-L)-43.5)*r+(k-(e-1.)*.5)*.0042;vec2 c=vec2(n,0)-x.xy;T=dot(c,b.xy)/dot(b.xy,b.xy);E=x.z+b.z*T;if(T<0.||T>au||E<-.2-.05*mod(k-1.+h,2.)||E>am+.06)continue;d=U((E+.06)/(am+.06));o=T*ai+1e-4;Y=s+J.g*.0022*sin(3.14*d)*(1.-.5*v);c-=b.xy*T;f=length(c);I=max(0.,min(f+o,Y)-max(f-o,-Y))/(2.*o)*(s+.3*(Y-s))/Y;vec3 w=normalize(P-vec3(n,0,E)),D=h<28.?vec3(.95,.5,.25):vec3(.8,.82,.85);float Z=w.z,an=-b.z;D*=al(vec3(n,0,E))*(.15*sqrt(1.-Z*Z)+pow(max(sqrt((1.-Z*Z)*(1.-an*an))-Z*an,0.),90.))+.002;E=v>0.?E-x.z+1.:E;vec3 i=mix(vec3(1,.45,.15),vec3(.8,.85,1),U(h/88.+v*.4))*(J.g*sin(3.14*d)*3.+J.r*8.*exp(-abs(E-J.a*(2.+12.*v))*8.))*(1.+v);C+=(1.-C.a)*I*vec4(D+i,1);C.rgb+=(1.-C.a)*i*exp(-f*250.)*.5;}}return C;}void main(){ah=R.z;as=R.w;vec2 H=gl_FragCoord.xy,aw=(2.*H-R.xy)/R.y;float f=as,d,C=floor(f),F=0.,t=.002,ao=1.6,M,y,b,i,af=1.;vec3 g,q,aa=vec3(0,1,0),ax=vec3(0),ap=vec3(0);K=0.;v=0.;P=vec3(.5,3.,-1.);aj=vec3(1,.82,.62)*12.;if(f<2.){d=f/2.;g=vec3(-.2+.06*d,.05,-.02);q=g+vec3(1,-.28,.3);F=.12;t=.012;}else if(f<6.){d=(f-2.)/4.;g=vec3(-.5+.5*d,.3,-.32);q=vec3(-.35+.5*d,0,.3);t=.006;}else if(f<10.){d=(f-6.)/4.;g=vec3(.1-.15*d,.11,-.04+.08*d);q=g+vec3(-.1,-.16,1);F=.3;t=.008;}else if(f<14.){d=(f-10.)/4.;g=vec3(.25-.3*d,.2,-.55);q=vec3(.15-.3*d,-.02,-.15);t=.008;}else if(f<18.){d=(f-14.)/4.;g=vec3(.1,1.7+.5*d,.9);q=vec3(0,0,.9);aa=vec3(sin(d*.5-1.4),0,cos(d*.5-1.4));ao=2.;t=0.;}else if(f<26.){d=fract(f/2.);if(f<20.){g=vec3(.45-.3*d,.12,-.15);q=vec3(-.2,0,.5);F=.4;t=.006;}else if(f<22.){g=vec3(-.2+.1*d,.1,-.09);q=g+vec3(.15,-.12,.14);aa=vec3(.3,1,0);F=.15;t=.01;}else if(f<24.){g=vec3(.1-.1*d,.08,-.3);q=vec3(-.05-.1*d,0,-.2);F=.13;t=.01;}else{d=d*1.2-.6;g=vec3(1.3*sin(d),.9,.6-1.3*cos(d));q=vec3(0,-.05,.7);t=.003;}}else if(f<32.){v=1.;d=f-26.;g=vec3(.3*sin(C*2.),.04+.04*fract(C*.37)+max(f-30.,0.)*max(f-30.,0.)*.3,ah*1.5);q=g+vec3(.3*sin(C*5.),-.12+max(f-30.,0.)*.3,1);aa=vec3(.2*sin(C*3.+d),1,0);F=1.;t=.004;P=g+vec3(0,2,20);aj=vec3(.6,.7,1)*400.;}else if(f<36.){K=1.;d=(f-32.)/4.;g=vec3(2.1-.4*d,.1,-1.9+.3*d);q=vec3(0,-.15,.6);t=.006;}else if(f<40.){K=1.;d=(f-36.)/4.;g=vec3(-1.+.25*d,.14,-.95);q=vec3(.1,-.11,-.4);t=.008;}else if(f<44.){d=(f-40.)/4.;g=vec3(.15,.4+.8*d,.25);q=vec3(.25,0,.3);aa=vec3(-1,0,0);t=.003;}else{K=1.;d=(f-44.)/2.;g=vec3(1.6+.5*d,2.4+d,-1.6);q=vec3(0,-.3,.8);t=0.;}vec3 o=normalize(q-g),ay=normalize(cross(aa,o)),aD=cross(o,ay),u=normalize(aw.x*ay+aw.y*aD+ao*o);ai=1.4/R.y/ao;F=F>0.?F:length(q-g);for(int ag=0;ag<2;ag++){y=ag>0?.003:0.;for(int j=0;j<160;j++){b=ak(g+u*y);if(abs(b)<y*ai*.5||y>30.)break;y+=b*.8;}vec3 a=g+u*y,p=vec3(0,1,0),N=v>0.?vec3(.02,.03,.08)*(1.-u.y)+vec3(1,.6,.3)*.3*exp(-abs(u.y)*40.)+step(.997,Q(floor(u.xy*400.)))*vec3(.6)*U(u.y*8.):vec3(.3,.25,.2)*smoothstep(.8,.9,dot(u,normalize(vec3(-.6,1,.4))))+vec3(.006,.008,.012)*U(u.y),l,aq;float s=0.,G=40.,x=1.,ab=1.;i=m;if(y<30.){p=aB(a);vec3 w=normalize(P-a),D;vec4 J=V(clamp(floor(a.x/r+44.),0.,87.));if(i<.5){l=vec3(.85,.52,.17);s=.3+.1*ad(a.xz*300.);G=50.;ab=.35;vec2 e=vec2(a.x*1.6+.5,(a.z+.14)*7.+.5);if(abs(e.x-.5)<.5&&abs(e.y-.5)<.5){d=texture(A,vec2(e.x,(4.-e.y)*.25)).r;l*=1.-.6*d;}}else if(i<1.5){l=vec3(.55,.36,.18)*(.7+.3*sin(a.x*300.+6.*ad(a.xz*vec2(20,3))));}else if(i<2.5){l=vec3(.004);s=.08+.5*pow(1.-abs(dot(p,u)),4.);G=300.;if(X(a.xz)<-.03&&a.y<.04)l=vec3(.12,.05,.02),s=.04;}else if(i<3.5){l=vec3(.5,.28,.12);}else if(i<4.5){l=a.y<.016+.009*min(J.b,1.)?vec3(.01):vec3(.09,.045,.02);s=.03;}else if(i<5.5){l=vec3(.5);s=.5;G=60.;ab=.2;}else if(i<6.5){l=a.y<-.02+J.r*.014?vec3(.6,.1,.06):vec3(.8,.77,.68);}else if(i<7.5){l=vec3(.8,.78,.7);s=.05;G=200.;}else if(i<8.5){l=vec3(.01);s=.1;G=200.;}else if(i<9.5){l=vec3(.05,.025,.012)*(.6+.4*ad(a.xz*vec2(2,30)));s=.08;G=200.;}else{l=vec3(.12,.006,.008)*(.5+.5*sin(a.x*23.+sin(a.x*7.)));}M=1.;for(float z=.004;z<1.5;){b=ak(a+p*.001+w*z);M=min(M,12.*b/z);z+=max(b,.006);if(M<.01)break;}M=U(M);if(a.y<-.001){d=-a.y/w.y;vec2 e=a.xz+w.xz*d;b=e.x/r+43.5;M*=1.-.6*(1.-v)*step(e.y,W(b))*step(-.2,e.y)*smoothstep(.3*r,0.,abs(fract(b)-.5)*r-.003)*smoothstep(1.5,.1,d);}D=normalize(w-u);vec3 az=al(a)*M;aq=mix(vec3(.04),l,1.-ab);N=l*ab*az*max(dot(p,w),0.)+aq*az*pow(max(dot(p,D),0.),G)*(G+8.)/25.+l*vec3(.04,.045,.06)*(.6+.4*p.y)*x;w=normalize(vec3(-.4,.5,.9));D=normalize(w-u);N+=K*step(i,8.5)*vec3(.25,.3,.4)*(l*max(dot(p,w),0.)*ab+aq*pow(max(dot(p,D),0.),G)*(G+8.)/25.);N+=(i<.5||i>3.&&i<7.?l:l*.4)*vec3(1,.5,.2)*J.g*exp(min(a.y,0.)*40.)*step(a.z,W(clamp(floor(a.x/r+44.),0.,87.)))*(1.-K*.5);if(v>0.){N=vec3(.001)+.02*vec3(.4,.6,1)*smoothstep(-1.,1.,a.z-g.z);s=.7;}}vec4 ar=aC(g,u,y);N=mix(N,ar.rgb/max(ar.a,1e-4),ar.a);if(ag<1){float c=y>30.?30.:y;for(float z=0.;z<1.;z+=1./32.){vec3 e=g+u*c*(z+Q(H)/32.);ap+=al(e)*(.0008+.08*pow(ad(e.xy*30.+ah*.1+e.z*17.),12.))*c/32.*(.5+K);}O.a=min(abs(1.-F/y)*t*300.,4.);}ax+=N*af+ap*af;ap=vec3(0);af*=s;if(af<.01||y>30.)break;g=a+p*.002;u=reflect(u,p);}O.rgb=min(ax,40.);}"), p2 = Q("#version 300 es\nprecision highp float;uniform vec4 R;uniform sampler2D A,B;out vec4 O;float l(vec2 d){vec3 c=fract(d.xyx*.1031);c+=dot(c,c.yzx+33.33);return fract((c.x+c.y)*c.z);}void main(){vec2 j=gl_FragCoord.xy,c=j/R.xy,h=c-.5,g,d;float e=R.w,i=6.28*l(j+fract(R.z)*99.),m=texture(A,c).a,n=0.,k,f,q;vec3 b=vec3(0),o=b;for(float a=0.;a<48.;a++){k=sqrt(a/48.)*m*.012;g=k*vec2(cos(a*2.4+i),sin(a*2.4+i));vec4 p=textureLod(A,c+g*vec2(R.y/R.x,1),m*.7);f=step(k,p.a*.012+1e-4)+.03;b+=p.rgb*f;n+=f;}b/=n;for(float a=2.;a<9.;a++){g=exp2(a)/R.xy*vec2(cos(i+a),sin(i+a));o+=(textureLod(A,c+g,a)+textureLod(A,c-g,a)).rgb;}b+=o*.012;b*=1.-dot(h,h)*1.1;b=b*(2.51*b+.03)/(b*(2.43*b+.59)+.14);q=fract(e/4.);b=pow(b,vec3(.45))*smoothstep(0.,1.5,e)*smoothstep(46.,44.5,e)*min(smoothstep(31.9,32.1,e)+smoothstep(31.9,31.7,e),1.);for(float a=0.;a<3.;a++){f=a<1.?sin(3.14*clamp((e-.4)/2.3,0.,1.)):a<2.?sin(3.14*clamp((e-.9)/1.8,0.,1.)):sin(3.14*clamp((e-42.)/3.5,0.,1.));d=vec2(h.x/(a<1.?.62:.55)+.5,(h.y-(a<1.?.08:a<2.?-.06:-.3))/(a<1.?.62:.55)*R.y/R.x*8.+.5);if(f>0.&&abs(d.x-.5)<.5&&abs(d.y-.5)<.5){d.y=(a+1.-d.y)/4.;b+=f*(texture(B,d).r*vec3(1,.88,.7)+textureLod(B,d,3.).r*vec3(.3,.15,.05));}}O=vec4(b+(l(j+R.z*83.)-.5)*.02,1);}");
+  g.texParameteri(3553, 10242, 33071);
+  g.texParameteri(3553, 10243, 33071);
+  g.viewport(0, 0, W, H);
+  const fr = T => {
+    // pedal: down, except for a moment at each change
+    for (l of X) if (l > T - .08) break;
+    l = l > T ? .7 : 0;
+    for (i = 0; i < 88; i++) K.set([0, 0, l, 99], i * 4);
+    for (r of N) if ((s = T - r[2]) >= 0 && s < 30) {
+      i = (r[0] | 0) * 4 - 84;
+      K[i] = M.max(K[i], r[1] * M.exp(-s * 9));
+      K[i + 1] += r[1] * M.exp(-s * (.3 + r[0] / 200)) * (T > r[4] ? M.exp((r[4] - T) * 6) : 1);
+      T < r[3] && (K[i + 2] = 1);
+      K[i + 3] = M.min(K[i + 3], s);
+    }
+    for (q = 0; G[q + 1] <= T && q < 1103;) q++;
+    g.activeTexture(33986);
+    g.texImage2D(3553, 0, 34836, 88, 1, 0, 6408, 5126, K);
+    g.activeTexture(33984);
+    g.bindFramebuffer(36160, F);
+    U(p1, 1, 2, W, H, T, s = (q + M.min(1, M.max(0, (T - G[q]) / (G[q + 1] - G[q])))) / 24);
+    g.drawArrays(4, 0, 3);
+    g.bindFramebuffer(36160, null);
+    g.generateMipmap(3553);
+    U(p2, 0, 1, W, H, T, s);
+    g.drawArrays(4, 0, 3);
+  };
+  fr(0);
+  g.readPixels(0, 0, 1, 1, 6408, 5121, new Uint8Array(4));
+  window.fr = fr; window.cv = C; window.gl = g; window.fbo = F; //DEV
+  if (window.CAP) return; //DEV
+  await Y('click to play');
+  onclick = e => {
+    onclick = 0;
+    P0.remove();
+    C.requestFullscreen();
+    const s = new AudioContext().createBufferSource(), L = q => {
+      z || (s.start(), z = q);
+      fr((q - z) / 1e3);
+      requestAnimationFrame(L);
+    };
+    s.buffer = u;
+    s.connect(s.context.destination);
+    requestAnimationFrame(L);
+  };
+})();
+
+</script>

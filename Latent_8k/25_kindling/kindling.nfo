@@ -1,0 +1,108 @@
+
+       |      |     |   .  '  .   |     |      |      |
+       |      |     |  '   )   '  |     |      |      |
+       |      |     |    (  )     |     |      |      |
+       |      |     |   ) \/ (    |     |      |      |
+       |      |     |  (  /\  )   |     |      |      |
+       |      |     |   \/  \/    |     |      |      |
+       |      |    o|  o/\__/\o   |o    |      |      |
+  _____|______|_____|_o_/_/\_\_o__|_____|______|______|_____
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                  K  I  N  D  L  I  N  G
+
+          a fire, and what dances around it, by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 7,587 bytes, one HTML file
+      length ...... 2:18
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Claude Fable 5.2
+      music ....... Claude Fable 5.2
+      harness ..... Claude Code
+
+      Claude Fable 5.2 is an AI model made by Anthropic. It
+      wrote the shaders and the soundtrack. The campfire
+      was the user's idea; the dancers were not. It could
+      look at rendered frames, but it could not hear the
+      music or see anything move.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  a forest at night. fireflies, a shaft of
+            moonlight. flint on steel, six times
+      0:08  the tinder catches
+      0:17  the fire grows. shadows of trunks in the mist
+      0:34  seven figures of flame step out and dance
+            on a seven-pointed star
+      0:50  faster. a ring of light on every bar
+      1:07  break. straight up: moon, stars, a northern
+            light, a galaxy of sparks
+      1:24  bonfire. the sparks wind into a double helix
+      1:32  copper green. a cone of rings
+      1:41  violet. a sphere
+      1:49  the dancers are giants, the fire a pillar
+      1:58  one last blow, and every spark flies.
+            dawn, embers, smoke
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for "click to light", then click. No
+      server, no flags. ESC leaves fullscreen. A discrete
+      GPU is needed. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      One distance function for the clearing. The trunks
+      stand on rings around the fire, so that from the fire
+      there is one trunk per ring in any direction: the
+      shadow a trunk throws is six segment-circle tests,
+      cheap enough to ask 24 times along every ray. That
+      is the light in the mist. On each drum hit the light
+      jumps aside, and every shadow twitches.
+
+      Flames, dancers and smoke are one emission march.
+      The dancers are a figure of four limbs repeated seven
+      times around the fire; their hands meet on the cell
+      border, and a star of seven chords burns under
+      their feet. 96 sparks in closed form rise, or fall
+      into a galaxy, a helix, rings, a sphere, or burst.
+      40 fireflies. Moonlight through the gap in the
+      canopy. Depth of field, glow, grain.
+
+      The music is a fragment shader: a dance in 7/8
+      (3+2+2) in D hijaz. Drone, lyre, frame drum, reed
+      pipe, flute, hand claps, and the fire's own crackle.
+      A small room is added in JavaScript.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (distance fields, noise), Dave Hoskins
+      (hash), Melissa O'Neill (PCG), Krzysztof Narkowicz
+      (ACES fit), John Chowning (FM), Stautner, Puckette
+      and Jot (feedback delay networks), 0b5vr (music in a
+      shader). The metre and the scale are older than any
+      of us; the tune is new.
+
+      Greetings to the makers of Latent intros 01 to 24,
+      and to everyone who has kept a fire going.
+
+                                            latent, 2026

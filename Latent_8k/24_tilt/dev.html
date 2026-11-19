@@ -1,0 +1,114 @@
+<meta charset=utf-8><body><script>
+// TILT - an 8k intro by Latent. Lines ending in //DEV are stripped from the release build.
+(async () => {
+  let W = 1920, H = 1080, t, z = 0, i = 0, k, s, l, r;
+  if (window.CAPW) { W = CAPW; H = CAPH } //DEV
+  const D = document;
+  D.body.innerHTML = `<canvas id=C width=${W} height=${H} style=position:fixed;inset:0;width:100vw;height:100vh;object-fit:contain;background:#000;cursor:none></canvas><div id=P0 style="position:fixed;inset:0;display:grid;place-content:center;text-align:center;background:#000;color:#ffe;font:900 4vw Segoe UI Black,sans-serif;letter-spacing:1vw;cursor:pointer;user-select:none">T I L T<p id=P1 style="margin:2vw auto;height:.3vw;background:#f41;width:calc(var(--w)*9vw)"></p><div id=P2 style="font:1.1vw Consolas,monospace;color:#4df"></div></div>`;
+  const Y = (s, w) => (P2.innerText = s, P1.style.setProperty('--w', w), new Promise(r => requestAnimationFrame(_ => setTimeout(r, 60))));
+  await Y('INSERTING COIN', 1);
+  const g = C.getContext('webgl2');
+  g.getExtension('EXT_color_buffer_float');
+
+  const Q = f => {
+    const p = g.createProgram();
+    const t0 = performance.now(); //DEV
+    ['#version 300 es\nvoid main(){gl_Position=vec4(gl_VertexID%2*4-1,gl_VertexID/2*4-1,0,1);}', f].map((s, i) => {
+      const h = g.createShader(35633 - i);
+      g.shaderSource(h, s);
+      g.compileShader(h);
+      g.attachShader(p, h);
+      if (!g.getShaderParameter(h, 35713)) console.error('SHADER ' + i + ': ' + g.getShaderInfoLog(h)); //DEV
+    });
+    g.linkProgram(p);
+    g.useProgram(p);
+    g.uniform1i(g.getUniformLocation(p, 'B'), 1);
+    console.log('compile ' + f.length + ' bytes: ' + (performance.now() - t0 | 0) + ' ms'); //DEV
+    return p;
+  };
+  const X = (w, h, f) => {
+    g.bindTexture(3553, t = g.createTexture());
+    g.texImage2D(3553, 0, f, w, h, 0, 6408, 5126, null);
+    const F = g.createFramebuffer();
+    g.bindFramebuffer(36160, F);
+    g.framebufferTexture2D(36160, 36064, 3553, t, 0);
+    return F;
+  };
+
+  const x = D.createElement('canvas').getContext('2d');
+  x.canvas.width = 2048;
+  x.canvas.height = 1152;
+  x.fillStyle = '#fff';
+  x.textAlign = 'center';
+  x.font = '900 82px "Segoe UI Black",sans-serif';
+  [
+    'T I L T',
+    'I · SKILL SHOT — BALL 1',
+    'II · POP BUMPERS — 1000 PTS',
+    'III · DROP TARGETS — LOCK LIT',
+    'IV · JACKPOT MULTIBALL',
+    'V · PLUMB BOB — DANGER',
+    'VI · TILT — GAME OVER',
+    'CODE + MUSIC: GEMINI 4 ARGON · LATENT'
+  ].map((s, i) => x.fillText(s, 1024, i * 128 + 94, 1880));
+  g.activeTexture(33985);
+  g.bindTexture(3553, g.createTexture());
+  g.texImage2D(3553, 0, 6408, 6408, 5121, x.canvas);
+  g.generateMipmap(3553);
+  g.texParameteri(3553, 10241, 9987);
+  g.activeTexture(33984);
+
+  X(4096, 1200, 34836);
+  g.viewport(0, 0, 4096, 1200);
+  Q("#version 300 es\nprecision highp float;out vec4 O;const int G[32]=int[32](64,67,76,74,69,71,71,67,64,67,79,76,74,74,71,0,76,79,84,81,78,76,76,71,72,71,69,67,64,64,0,0);const int H[8]=int[8](40,36,33,35,40,38,36,35);int o;float y(int p){uint f=uint(p)*747796405u+2891336453u;f=((f>>((f>>28u)+4u))^f)*277803737u;return float((f>>22u)^f)/4294967296.;}float h(float f){return clamp(f,0.,1.);}float E(float i){return 2764.6*exp2((i-69.)/12.);}float q(int r){int s=o/r;float t=float(o-s*r)/float(r);return mix(y(s),y(s+1),t*t*(3.-2.*t))*2.-1.;}float l(float u,float i){float e=E(i)*u,x=exp(-max(0.,u)*(i<53.?12.:8.5));return(sin(e+(i<53.?2.4*sin(e*2.):1.6*sin(e*2.76))*exp(-max(0.,u)*26.))+.5*sin(e*(i<53.?3.:5.4))*exp(-max(0.,u)*32.))*x*h(u*1300.);}vec2 z(float u,float i){vec2 e=E(i)*u*vec2(.997,1.003),w=vec2(0);for(float m=1.;m<8.;m++)w+=sin(e*m+m*1.2)/pow(m,.72);return w;}void main(){o=int(gl_FragCoord.x)+int(gl_FragCoord.y)*4096;int a=min(o/81920,59),p=o-a*81920,f=p/5120,x=f>>1,v=f>>2,c=f&15,j=a&7;ivec3 C=ivec3(j==1||j==6?60:j==2?57:j==5?62:59,j==1||j==6?64:j==2?60:64,j==3||j==7?71:j==5?69:67);float k=float(p)/48e3,g=float(p%5120)/48e3,F=g+float(f&1)*.10667,n=F+float(x&1)*.21333,t=float(a)+k/1.70667,r=y(o)-y(o-1),w=float(H[j]),b,e;vec2 d=vec2(0);if(a<6){b=float(p%6826)/48e3;e=380.+75.*float(a)+22.*float(p/6826);d+=(sin(6.283*e*b)*exp(-b*65.)+.6*q(4)*exp(-b*170.))*h(b*3e3)*.22*vec2(.4,.9);}else if(a==6){d+=sin(6.283*(220.+1100.*k*k)*k)*exp(-k*3.)*.26*vec2(.3,.95);if(v>0)d+=l(n,float(C[v-1]+12))*.32*vec2(.8,.5);}else if(a==7)d+=l(F,float(C[x%3]+12+(x>>1)*5))*.28;if(a>=2&&a<49||a>=52&&a<59){b=a>=52?-5.:0.;e=a<8?.006:a>=52?.006*h((59.-t)*.25):.009*(.4+.6*h(n*6.));vec2 D=z(k,w+12.+b)*.6;for(int s=0;s<3;s++)D+=z(k,float(C[s])+b);d+=D*h(k*6.)*h((1.7-k)*5.)*e;}if(a>=8&&a<46){b=float(C[(f+(a&3))%3]+(a>=32&&(f&1)==1?24:12));e=.5+.35*sin(float(f)*1.7);if(a>=32||(f&1)==0||c==3||c==11)d+=l(g,b)*(a>=32?.25:.2)*vec2(1.-e,e);if(a<20&&(c==0||c==6||c==12)||a>=32&&(c&3)==0)d+=(sin(6.283*(180.+420.*exp(-g*60.))*g)*exp(-g*32.)+.5*q(3)*exp(-g*110.))*.16*vec2(e,1.-e);if(a>=22&&a<=30&&(a&1)==0&&v==0)d+=l(n,76.+float(a-22))*.34+q(3)*exp(-n*90.)*.22;if(a==30||a==31)d+=l(g,64.+float((a-30)*16+c))*.22*vec2(.2+.025*float(c),.9);if(a>=16){int i=a>=32?10240:20480,m=G[(o/i)&31];if(m>0){b=float(p%i)/48e3;e=b+1.5e-3*sin(b*38.)*h(b*4.-.3);vec2 D=z(e,float(m)+(a>=32?12.:0.))+(a>=32?z(e,float(m)+19.)*.6:vec2(0));d+=D*h(b*40.)*h((float(i)/48e3-b)*28.)*(a>=32?.058:.048);}}b=a>=32?.95:.82;if(c==0||c==6||c==8||a>=32&&c==14)d+=sin(6.283*(52.+125.*exp(-g*45.))*g)*exp(-g*16.)*h(g*900.)*.24*b;if(c==4||c==12||(a&7)==7&&c>=13)d+=(sin(6.283*210.*g)*exp(-g*28.)+(q(3)*.5+r*1.1)*exp(-g*16.))*h(g*1200.)*.28*b;d+=(r*.95+q(2)*.45)*exp(-g*((c&3)==2?20.:(c&1)==0?48.:75.))*.13*b*vec2(.85,1.15);}if(a>=4&&a<49){if(a<8||a>=46){if((v&1)==0)d+=l(n,w)*.2;}else if((c&1)==0||c==3||c==11||c==15)d+=l(g,w+float(c==3||c==7||c==11||c==14?12:c==15?7:0))*.21;}if(a>=46&&a<49)d+=l(n,83.)*.22*vec2(v&1,1-(v&1));if(a==49||a==50){b=float(a-49)*1.70667+k;d+=(tanh(sin(6.283*180.*b+3.*sin(6.283*90.*b))*3.)*exp(-max(0.,b)*1.8)*.24+sin(6.283*max(35.,520.-160.*b)*b)*exp(-max(0.,b)*1.2)*.22+r*exp(-max(0.,b)*3.5)*.28)*h(b*500.);}if(a>=52&&a<56)d+=q(8)*(.04+.02*sin(k*18.))*exp(-max(0.,t-52.)*.35);if(a==56&&v==0)d+=(l(n,54.)*.25+q(4)*exp(-n*70.)*.22)*h(n*1e3);d*=h((59.5-t)*.5);O=vec4(tanh(d*.9),0,1);}");
+  g.drawArrays(4, 0, 3);
+  const d = new Float32Array(19660800);
+  g.readPixels(0, 0, 4096, 1200, 6408, 5126, d);
+  g.deleteTexture(t);
+  const u = new AudioBuffer({ length: 4915200, numberOfChannels: 2, sampleRate: 48e3 }), a = u.getChannelData(0), b = u.getChannelData(1),
+    e = [1187, 1601, 2111, 2689].map(n => new Float32Array(n)), y = [0, 0, 0, 0], c = [0, 0, 0, 0];
+  for (; i < 4915200; i++) {
+    l = d[i * 4]; r = d[i * 4 + 1]; s = 0;
+    for (k = 4; k--;) s += y[k] = e[k][i % e[k].length];
+    for (k = 4; k--;) e[k][i % e[k].length] = (k & 1 ? l : r) * .055 + (c[k] += (y[k] - s / 2 - c[k]) * .55) * .72;
+    a[i] = l + y[0] + y[2];
+    b[i] = r + y[1] + y[3];
+  }
+  window.audio = u; //DEV
+
+  await Y('ENERGIZING SOLENOIDS', 2);
+  const F = X(W, H, 34842), p1 = Q("#version 300 es\nprecision highp float;uniform vec4 R;uniform sampler2D B;out vec4 O;float L,k,H,p,I;int e,f;vec3 K,S,T,z,C[3],M;const vec2 N[3]=vec2[3](vec2(-1.65,3.2),vec2(1.35,3.2),vec2(-.15,1.3));float s(float q){return clamp(q,0.,1.);}float o(float a,float i,float q){return smoothstep(a,i,q);}mat2 Y(float a){float j=cos(a),D=sin(a);return mat2(j,-D,D,j);}float P(vec3 b,vec3 i){return length(max(abs(b)-i,0.));}float Z(vec2 b){return abs(b.x)>.48||abs(b.y)>.45?0.:textureLod(B,vec2(b.x+.5,(.55-b.y)/9.),0.).r;}vec3 y(int g){return g==0?vec3(.08,.9,1):g==1?vec3(1,.16,.62):vec3(1,.76,.12);}vec3 ac(vec2 b,out float r){r=0.;if(length(vec2(b.x,max(0.,b.y-3.6)))>4.55)return vec3(.01);bool q=f==5;float u=sin(b.y*12.+sin(b.x*4.)*.5)*.015,m=.72+.28*sin(b.x*50.)*sin(b.y*50.),l,a,c,h;vec3 j=vec3(.02,.03,.075)+u,n;if(b.x>3.35&&b.y<3.8){u=step(.45,fract(b.y*1.8))*step(abs(b.x-4.05),.38);j=mix(j,mix(y(2),vec3(1,.18,.08),s((-b.y-4.2)/3.2)),u*.8);r=u*(q?0.:.35+.65*step(I,b.y));return j;}vec2 d=b-vec2(-.15,-.6);l=length(d);a=atan(d.y,d.x);j=mix(j,vec3(.96,.36,.08),step(.3,sin(a*12.))*o(3.6,1.2,l)*o(.7,1.1,l)*.55);j=mix(j,vec3(.96,.88,.7),(o(.05,0.,abs(abs(l-2.35)-.12))+o(.05,0.,abs(abs(b.x)-3.15))*step(abs(b.y),4.2))*.8);j=mix(j,y(0),o(.05,0.,abs(l-3.1))*.75);h=clamp(round((b.x+1.65)/1.5),0.,2.);c=o(.03,-.02,length(b-vec2(h*1.5-1.65,4.9))-.34);j=mix(j,y(int(h))*m,c);r+=c*(q?0.:f==0?o(6.1+h*.22,6.2+h*.22,k):.5+.5*sin(k*6.283+h*2.))*1.6;int g=b.y<2.25?2:b.x<-.15?0:1;n=y(g);c=length(b-N[g]);j=mix(j,n,o(.05,0.,abs(c-1.05))*.85);h=q?0.:o(.12,0.,abs(c-.85-(1.-M[g])*1.5))*M[g];j+=n*h*1.5;r+=h*1.8;h=clamp(round(b.y/.72),-2.,2.);c=o(.03,-.02,max(abs(b.y-h*.72)-.2,abs(b.x+2.35)-.28));j=mix(j,mix(vec3(.1,.95,.45),y(2),(h+2.)*.25)*m,c);r+=c*(q?.05:f>2||f==2&&k>26.+h*2.?1.:.18)*1.4;c=o(.03,-.02,l-1.25);n=q?vec3(.9,.08,.06):mix(y(1),y(0),.5+.5*sin(a*4.-k*6.283));h=Z(vec2(d.x*.42,-d.y*.9));j=mix(mix(j,n*m*.65,c),vec3(1,.95,.8),c*h);r+=c*(q?.8*h:.5+.7*h+(f==3?.9:0.));d=abs(b-vec2(-.15,-4.8));c=o(.03,-.02,(d.x+d.y)*.707-.48);j=mix(j,vec3(1,.22,.08)*m,c);r+=c*(q?1.2:.5+.5*sin(k*12.56))*1.3;if(q){h=Z(vec2((b.x+.15)*.16,-b.y*.22));j+=vec3(1.2,.08,.05)*h;r+=h*1.8;}return j;}float U(vec3 b){float c=b.y,a,i,l,h;p=0.;z=b;if(f==4){c=6.-length(b.xz);a=min(length(vec2(length(b.xz)-1.05,b.y))-.09,P(b-vec3(-1.45,0,0),vec3(.4,.07,.14))-.02);if(a<c){c=a;p=4.;}i=o(48.8,49.05,k);a=mix((.42+.52*o(46.,48.8,k))*sin(k*6.283),.56,i);vec3 d=b-vec3(a,.15*a*a,(1.-i)*.28*cos(k*6.283));d.xy*=Y(-a*.32);l=length(d.xz);a=max(l-.48*s((.95-d.y)/1.55)-.04,abs(d.y-.15)-.78)-.015*cos(d.y*35.);i=max(l-.055,abs(d.y-2.1)-1.3);if(a<c){c=a;p=4.;z=d;}if(i<c){c=i;p=2.;z=d;}if(k>=48.95){d=b-vec3(.96,0,0);a=length(d)-.22-.06*sin(d.y*40.+L*90.);if(a<c){c=a;p=9.;}}return c;}l=length(b.xz-vec2(-.15,-.6));if(f==3){a=min(max(abs(l-2.35)-.14,b.y-.38),max((abs(b.x+.15)+abs(b.z+4.8))*.707-.46,b.y-.45))-.02;if(a<c){c=a;p=5.;}}a=max(abs(length(vec2(b.x,max(0.,b.z-3.6)))-4.55)-.18,abs(b.y-.42)-.45)-.03;i=min(P(b-vec3(3.35,.36,-2.),vec3(.1,.38,5.4)),P(vec3(abs(b.x+.15)-2.8,b.y-.36,b.z+5.8+abs(b.x+.15)*.45),vec3(1.2,.38,.12)))-.03;a=min(a,i);if(a<c){c=a;p=b.y>.68?2.:3.;}h=clamp(round((b.x+2.4)/1.5),0.,3.)*1.5-2.4;a=length(vec2(b.x-h,length(vec2(b.y-.25,(b.z-4.9)*.7))-.35))-.04;if(a<c){c=a;p=2.;}vec2 n=b.xy-vec2(4.05,.38);l=length(n);a=max(l-.085,abs(b.z-I+1.8)-1.8);i=max(l-.22,abs(b.z-I)-.14)-.02;h=max(.4,I+7.55);a=min(a,max(length(vec2(l-.21,(fract((b.z+7.65)/h*8.+atan(n.y,n.x)/6.283)-.5)*h/8.))-.042,max(-7.65-b.z,b.z-I+.12)));if(a<c){c=a;p=2.;}if(i<c){c=i;p=4.;}int g=b.z<2.25?2:b.x<-.15?0:1;vec3 d=b-vec3(N[g].x,0,N[g].y);l=length(d.xz);h=M[g]*.12;a=atan(d.x,d.z);i=min(max(l-.28,abs(d.y-.25)-.25),max(l-.56,abs(d.y-.22+h)-.04));if(i<c){c=i;p=2.;}i=max(l-.22-.06*cos(a*5.),abs(d.y-.76+h*.5)-.05);if(i<c){c=i;p=4.;}i=(max(l-.82-.035*cos(a*12.)+(d.y-.52)*.35,abs(d.y-.58+h*.5)-.16)-.03)*.85;if(i<c){c=i;p=6.+float(g);z=d;}d=vec3(1.3-abs(b.x+.15),b.y,b.z+5.8);d.xz*=Y((f==2||f==3?.86*exp(-fract(k+(b.x<-.15?-.15:.35))*8.):0.)-.38);h=s(d.x/1.22);a=max(length(d.xz-vec2(1.22*h,0))-mix(.25,.13,h),abs(d.y-.24)-.2)-.02;if(a<c){c=a;p=1.;z=d;}d=vec3(abs(b.x+.15)-2.2,b.y-.24,b.z+4.1);a=P(d,vec3(.25,.2,.65))-.02;if(a<c){c=a;p=1.;z=d;}h=clamp(round(b.z/.72),-2.,2.);a=f>2?.48:f==2?o(25.8+h*2.,26.1+h*2.,k)*.48:0.;d=b-vec3(-2.95,.32-a,h*.72);a=P(d,vec3(.06,.28,.26))-.015;if(a<c){c=a;p=6.+mod(h+2.,3.);z=d;}d=b-vec3(-.15,0,.2);a=atan(d.z,d.x);l=length(d.xz);n=vec2(l-2.35,d.y-1.35-.5*sin(a));h=min(min(length(vec2(abs(n.x)-.14,n.y)),length(vec2(abs(n.x)-.07,n.y+.08)))-.032,max(abs(length(n)-.15)-.025,abs(sin(a*5.))*l-.04))*.85;if(h<c){c=h;p=2.;}for(int Q=0;Q<3;Q++){if(Q>0&&f!=3)break;a=length(b-C[Q])-.38;if(a<c){c=a;p=2.;z=b-C[Q];}}return c;}vec3 W(vec3 c){float D=s(dot(c,K)),u=s(c.y*4.+.2);vec3 j=mix(T*1.1,T*.3,o(-.1,.7,c.y))+S*(pow(D,12.)*.25+pow(D,120.)*1.1)*u;if(f!=4&&c.y>.05)j+=(f==5?vec3(1.4,.08,.05):vec3(.2,.8,1.2))*step(.65,sin(c.x*18.+c.z*6.))*exp(-abs(c.y-.35)*8.)*.45;return j;}void main(){vec2 aa=(gl_FragCoord.xy*2.-R.xy)/R.y;L=R.z;k=L/1.70667;float a,i=0.,j;for(int g=0;g<6;g++){j=float[6](0.,8.,20.,32.,46.,52.)[g];if(k>=j)f=g,i=j;}a=(k-i)/(f==0?2.8:f==3?3.5:f==4?3.:f==5?8.:4.);e=(f<4?f*3:f==4?13:15)+int(a);H=fract(min(a,3.99));K=normalize(vec3(f==4?.55:-.38,.72,.52));T=f==5?vec3(.28,.03,.04):f==4?vec3(.18,.1,.06):f==3?vec3(.14,.18,.38):vec3(.08,.14,.28);S=f==5?vec3(2.2,.25,.18):f==4&&k>=48.95?vec3(1.6,2.4,3.2):vec3(2.2,1.9,1.5);I=f==0?(k<6.?mix(-4.8,-6.9,o(0.,5.8,k)):mix(-6.9,-4.5,o(6.,6.12,k))):-4.6;M=f==1||f==3?exp(-fract(k*2.+vec3(0,.33,.67))*6.):vec3(0);if(f==0){a=max(0.,k-6.55)*1.9;C[0]=vec3(cos(a)*4.05,.38,k<6.?I+.52:k<6.55?mix(-6.38,3.6,(k-6.)/.55):3.6+sin(a)*1.5);}else if(f==1){int g=int(k*2.)%3;vec2 m=mix(N[g],N[(g+1)%3],.35+.3*fract(k*2.));C[0]=vec3(m.x,.38,m.y);}else if(f==2){if(k<28.){i=abs(sin(k*1.57));C[0]=vec3(e<7?mix(-.85,-1.5,i):mix(-2.45,-.6,i*.75),.38,e<7?mix(-4.9,-1.5,i):mix(clamp(floor((k-22.)*.5)-2.,-2.,2.)*.72,-.8,i*.75));}else{a=mix(-1.57,4.71,(k-28.)/4.);C[0]=vec3(-.15+cos(a)*2.35,1.71+.5*sin(a),.2+sin(a)*2.35);}}else if(f==3){for(int g=0;g<3;g++){a=L*2.2+float(g)*2.094;i=e==9?mix(.45,2.5,H):g==2?2.35:2.1+.6*sin(a*1.5);j=g==2&&e!=9?1.71+.5*sin(a):.38;C[g]=e==12&&g<2?vec3(g<1?-.52+H*.15:.32-H*.15,.64,-.6+(g<1?1.:-1.)*(H-.4)*.6):vec3(-.15+cos(a)*i,j,(e==9?1.5:-.4)+sin(a)*i*(g==2?1.:1.35));}}else if(f==5){a=o(52.,57.2,k);C[0]=vec3(-.15+.18*sin(a*6.283)*(1.-a),.38-.35*o(56.2,57.2,k),mix(1.4,-7.2,a));}vec3 m=e==2||e==8?C[0]:vec3(e<2?4.05:e==3?-1.3:e==5?.8:e==7?-2.3:f==4?.35:-.15,f==4?.08:e==4||e==11?.25:.45,e<2?-6.1:f==1?2.4:e==6?-4.6:e==9?.8:e==10?-1.2:e==15?mix(-2.2,-5.6,H):f==4?0.:-.4);a=(e<2?-.1:e==3||e==7?.88:e==5?-.75:e==8?.8:e==13?-.42:e==15?.04:-.2)+(e==3||e==6||e==7||e==14?-.3:e==15?-.04:.4)*H;i=e==4||e==11?1.18:e==1?.64:e==2||e==8||e==9?.56:e>=12&&e<=14?.24:.34;float h=e==1?1.65:e==4||e==10||e==11?5.4:e==12||e==14?2.15:e==15?4.4:3.1,F=.05,c,t;vec3 v=m+h*vec3(cos(i)*sin(a),sin(i),-cos(i)*cos(a)),w=normalize(m-v),l=normalize(cross(vec3(0,1,0),w)),n=normalize(w*1.75+aa.x*l+aa.y*cross(w,l));for(int g=0;g<95;g++){if(F>32.)break;c=U(v+n*F);if(c<.0012+F*6e-4)break;F+=c*.88;}t=(F<32.&&c<.02)?p:-1.;vec3 b=v+n*F,d=z,V=W(n),x=vec3(0),r;j=.2;if(t>=0.){for(int g=0;g<4;g++){r=.5773*(2.*vec3((g+3)>>1&1,g>>1&1,g&1)-1.);x+=r*U(b+r*.002);}x=normalize(x);w=reflect(n,x);l=W(w);m=vec3(.1);v=vec3(0);a=t<.5?0.:max(0.,-b.y/min(-.01,w.y));i=0.;r=f==4?vec3(0):ac((b+w*a).xz,i);if(t>.5&&f!=4&&w.y<-.02&&a<14.)l=mix(l,r*(.7+1.8*i),exp(-a*.15));float u=1.,D=.04,ab=s(.35+U(b+x*.2)*3.2),X=s(dot(x,K)),E=pow(s(1.+dot(x,n)),4.),G=.35*E,J=.5;if(X>0.)for(int g=0;g<16;g++){a=U(b+x*.03+K*D);u=min(u,s(6.*a/D));D+=clamp(a,.035,.28);}if(t<.5){if(f==4){a=sin(b.x*8.+sin(b.z*3.)*2.)*.5+.5;m=mix(vec3(.14,.05,.02),vec3(.28,.11,.04),a);G=.15*E;J=.25;}else{m=r;G=(.12+.55*E)*(f==5?.85:.55);J=.65;v=m*i*1.45;}}else if(t<1.5){bool q=abs(d.y-.22)<.075&&x.y<.55;m=q?vec3(.95,.24,.06):vec3(.92,.9,.84);G=q?.05:.25*E;J=q?.2:.7;}else if(t<2.5){m=vec3(.08,.09,.11);G=.85+.15*E;J=2.2;}else if(t<3.5){m=sin(b.z*2.5)>0.?vec3(.85,.18,.08):vec3(.08,.22,.55);G=.25*E;}else if(t<4.5){a=.55+.45*sin(w.y*10.+w.x*6.);m=mix(vec3(.28,.15,.03),vec3(1,.78,.28),a*ab);G=.45+.4*E;J=1.6;v=m*(.25+l*.4);if(f==4&&k>=48.95)v+=vec3(.5,.9,1.6)*exp(-length(b-vec3(.96,0,0))*2.2)*1.8;}else if(t<5.5){m=mix(y(0),y(1),.5+.5*sin(b.x*2.+L*5.));v=m*1.6;}else if(t<8.5){int g=int(t-6.);a=step(cos(atan(d.x,d.z)*5.)*.12+.38,length(d.xz));m=mix(vec3(1,.96,.85),y(g),a);v=m*(f==5?.04:.65+1.6*M[g]+.35*(1.-a))*(.55+.45*E);G=.35*E;J=1.1;}else{m=vec3(1);v=vec3(1.8,3.2,5.5);}V=m*(S*X*u+T*(.65+.35*x.y+.25*s(dot(x,-K)))*ab)+l*G+S*X*u*pow(s(dot(w,K)),48.)*J+v;V=mix(V,W(n),o(12.,28.,F));j=s(abs(F-h)/14.);}O=vec4(clamp(V,0.,5.),j);}"), p2 = Q("#version 300 es\nprecision highp float;uniform vec4 R;uniform sampler2D A,B;out vec4 O;float l(float c){return clamp(c,0.,1.);}void main(){vec2 p=gl_FragCoord.xy,e=p/R.xy,k=e-.5,h;float m=R.z,f=m/1.70667,u=f>=46.&&f<50.2?sin(m*75.)*exp(-fract(f)*3.5)*.02:0.;e.x=clamp(e.x+u,.001,.999);float i=texture(A,e).a*.85+.02,q=0.,j,n;vec3 b=vec3(0),r=b;for(float a=0.;a<24.;a++){j=sqrt(a/24.)*i*.009;h=j*vec2(cos(a*2.4),sin(a*2.4));vec4 c=textureLod(A,clamp(e+h*vec2(R.y/R.x,1),.001,.999),i*1.4);n=step(j,c.a*.009+1e-4)+.08;b+=c.rgb*n;q+=n;}b/=q;for(float g=2.;g<6.;g++){h=exp2(g)/R.xy*vec2(cos(g*2.),sin(g*2.));r+=max(textureLod(A,clamp(e+h,.001,.999),g).rgb-.85,0.)+max(textureLod(A,clamp(e-h,.001,.999),g).rgb-.85,0.);}b=(b+r*.016)*(1.-dot(k,k)*.55)*.94;b=b*(2.51*b+.03)/(b*(2.43*b+.59)+.14);b=pow(clamp(b,0.,1.),vec3(.4545))*smoothstep(0.,.6,f)*smoothstep(59.8,58.2,f);for(int a=0;a<9;a++){float o=float(a==7?0:a>7?7:a),c=f-float[9](.3,2.2,8.2,20.2,32.2,46.2,52.2,53.2,53.2)[a],s=a<1?2.2:a<7?2.8:6.2,t=o<.5?1.15:.68;if(a>1&&a<7&&c>0.)b+=exp(-min(c*12.,30.))*(a==6?vec3(.25,.02,.02):vec3(.08));vec2 d=vec2(k.x/t+.5,(k.y-(o<.5?.09:a>7?-.08:-.37))*9./t+.5);if(c>0.&&c<s&&d.y>0.&&d.y<1.&&d.x>0.&&d.x<1.){d.y=(o+1.-d.y)/9.;i=l(min(c,s-c)*4.);j=l(texture(B,d+vec2(.003,-.005)).r*1.8+textureLod(B,d,2.5).r*3.5);b=mix(b*(1.-.92*j*i),a>5&&f>50.?vec3(1,.22,.18):vec3(1,.95,.82),l(texture(B,d).r*1.5)*i);}}O=vec4(b+(fract(sin(dot(p+m,vec2(12.9898,78.233)))*43758.5)-.5)*.008,1);}");
+  g.texParameteri(3553, 10241, 9987);
+  g.texParameteri(3553, 10242, 33071);
+  g.texParameteri(3553, 10243, 33071);
+  g.viewport(0, 0, W, H);
+  const fr = T => {
+    [F, null].map((f, i) => {
+      g.bindFramebuffer(36160, f);
+      i && g.generateMipmap(3553);
+      g.useProgram(i ? p2 : p1);
+      g.uniform4f(g.getUniformLocation(i ? p2 : p1, 'R'), W, H, T, 0);
+      g.drawArrays(4, 0, 3);
+    });
+  };
+  fr(0);
+  g.readPixels(0, 0, 1, 1, 6408, 5121, new Uint8Array(4));
+  window.fr = fr; window.cv = C; window.gl = g; window.fbo = F; //DEV
+  if (window.CAP) return; //DEV
+  await Y('CLICK TO PULL PLUNGER', 3);
+  onclick = e => {
+    onclick = 0;
+    P0.remove();
+    C.requestFullscreen();
+    const s = new AudioContext().createBufferSource(), L = q => {
+      z || (s.start(), z = q);
+      fr((q - z) / 1e3);
+      requestAnimationFrame(L);
+    };
+    s.buffer = u;
+    s.connect(s.context.destination);
+    requestAnimationFrame(L);
+  };
+})();
+
+</script>

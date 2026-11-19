@@ -1,0 +1,104 @@
+
+                  .-----------------------------------.
+                  |   (1000)                 (1000)   |
+                  |            ( 1000 )               |
+                  |     ========================      |
+                  |         *  J A C K P O T  *       |
+                  |                                   |
+                  |        \___\   (O)   /___/        |
+                  '-----------------------------------'
+
+           _______   _____   _        _______ 
+          |__   __| |_   _| | |      |__   __|
+             | |      | |   | |         | |   
+             | |      | |   | |____     | |   
+             |_|     |_____||______|    |_|   
+
+          an electromechanical pinball intro in 8k, by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,179 bytes, one HTML file (13 bytes free)
+      length ...... 1:42.4 (60 bars at 140.625 BPM)
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Gemini 4 Argon
+      graphics .... Gemini 4 Argon
+      music ....... Gemini 4 Argon
+      harness ..... Antigravity
+
+      Gemini 4 Argon is an AI model made by Google. It
+      researched the compo, designed the pinball playfield
+      and plumb-bob tilt switch, wrote the distance fields,
+      directed the 16 shots, and composed the arcade
+      synth-funk and solenoid chime score.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  I · SKILL SHOT — BALL 1
+            Right-hand shooter alley; a helical steel coil
+            spring compresses behind the brass plunger tip
+            and launches the mirror-chrome silverball around
+            the top arch through three rollover star lanes.
+
+      0:14  II · POP BUMPERS — 1000 PTS
+            The ball drops into a triangle of cyan, magenta
+            and solar-amber mushroom pop bumpers whose skirts
+            kick down and fire concentric shockwaves on every
+            solenoid chime strike.
+
+      0:34  III · DROP TARGETS — LOCK LIT
+            Twin rubber-ringed flippers snap up to bank the
+            silverball into a five-bank of drop targets,
+            knocking them flat one by one before climbing the
+            elevated four-rail chrome wireform skyway.
+
+      0:55  IV · JACKPOT MULTIBALL
+            Three mirror-chrome silverballs erupt across
+            extruded 3D neon acrylic prisms and graze each
+            other in mid-air inside the wireform ring.
+
+      1:18  V · PLUMB BOB — DANGER
+            The cabinet shudders sideways; inside the dark
+            mahogany cabinet, the swinging conical brass
+            plumb-bob slams into the circular contact ring
+            with a high-voltage blue-white electric arc.
+
+      1:29  VI · TILT — GAME OVER
+            All playfield inserts go dark under the crimson
+            TILT backglass reflection; the flippers go limp,
+            and the lone silverball rolls silently between
+            them into the outhole drain.
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows
+      10 or 11, wait for the orange neon bar, then click.
+      No server, no flags. ESC leaves fullscreen. A discrete
+      GPU is recommended. Tested on an RTX 5090.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Spaceballs / Digital Illusions (Pinball Dreams, 1992),
+      Inigo Quilez (SDF primitives and soft shadows),
+      Krzysztof Narkowicz (ACES filmic curve), Melissa
+      O'Neill / Latent 10_geode (uint PCG hash), Jean-Marc
+      Jot and Antoine Chaigne (Householder FDN reverb),
+      Latent shared tools (build, glslmin, capture, bands).
+
+      Greetings to the makers of Latent intros 01 to 23.
+
+                                            latent, 2026
