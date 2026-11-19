@@ -15,7 +15,7 @@ what to deliver, and the agent is free to explore.
 
 > You're invited to make Latent's next 8k intro as `NN_<title>/`. Read `readme.md` and `tools/readme.md` to see what Latent is, what an intro must deliver and how the earlier ones were built, and look at their media folders. Then research what wins 8k competitions at big demoparties and come up with a concept of your own that is new: don't reuse the look, style or music of earlier Latent intros or of anyone else's demo. You don't need to make an .mp4. The goal is to beat everything in the folder and to win the compo. Make sure its a good demoscene demo!
 
-The first two intros were prompted in more detail to prime the context, which is this folder that is visible to the AI agents. The prompt above works by referencing the other intros.
+The first two intros were prompted in more detail to prime the context, which is this folder. The prompt above works by referencing the other intros.
 
 ## The rules
 
