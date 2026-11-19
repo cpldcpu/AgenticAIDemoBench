@@ -30,7 +30,38 @@ start", click: it goes fullscreen and plays for 2:18. ESC leaves fullscreen.
 |---|---|---|
 | `intro.html` | 6,958 | the release; 1,234 bytes under the 8,192 limit |
 | `intro_fetch.html` | 6,687 | same intro with the common `fetch` bootstrap; needs http:// or `--allow-file-access-from-files` |
+| `intro_lean.html.br` | 5,468 | the lean version from `src_lean/`: no title screen, otherwise the same picture and sound; packed with brotli |
 | `dev.html` | about 17,000 | unpacked build used for capture and debugging |
+
+### Lean build
+
+`src_lean/` is a second version made for size. It differs from `src/` in three
+ways, none of which touch the intro itself:
+
+- No title screen. The page is black while the soundtrack is rendered and the
+  shaders compile, then shows a still of the opening. Click it to start.
+- The shader header (`#version`, precision, `R`, `O`) is added once in
+  JavaScript instead of being repeated in every shader.
+- The build searches for shader identifier names that brotli packs better
+  (`RENAME_OPT`, see [../tools/readme.md](../tools/readme.md)).
+
+Edge and Chrome cannot unpack brotli from a local file, so `run_lean.bat`
+starts a small local server (`tools/serve_br.ps1`) and opens
+http://localhost:8125 in the default browser; Ctrl+C in its window stops the
+server. Build it with:
+
+```
+$env:RENAME_OPT=3000; node tools/build.mjs 02_extended_thinking lean
+```
+
+The build also writes `intro_lean.html`, `intro_lean_fetch.html` and
+`dev_lean.html`, and the normal build writes `intro.html.br`; these are not
+kept in this folder.
+
+30 frames spread over the whole intro (rendered at 960x540) and all 13.3
+million audio samples were compared with the build from `src/`: they are
+bit-identical. The shaders compress to about 4.9 kB on their own, so a 4k
+version is not possible without removing visible or audible content.
 
 ## Timeline
 
