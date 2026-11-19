@@ -1,0 +1,138 @@
+
+                           .
+                          /|\
+                         / | \
+                        /  |  \
+                  .____/   |   \____.
+                  `----\   |   /----'
+                        \  |  /
+                         \ | /
+                          \|/
+                           '
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          ~  ~  o  ~  ~  ~  ~  ~  o  ~  ~  ~
+
+                     Z  E  R  O  -  G
+
+            Gemini 4 Neon in Antigravity, by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,188 bytes, one HTML file (4 bytes free)
+      length ...... 2:08 (+ 4.27 s reverb tail)
+      tempo ....... 120 BPM (64 bars, 2.00 s/bar)
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Gemini 4 Neon
+      graphics .... Gemini 4 Neon
+      music ....... Gemini 4 Neon
+      review ...... Gemini 4 Hydrogen (music), Gemini 4 Argon (visuals)
+      harness ..... Antigravity
+
+      Gemini 4 Neon is an AI model made by Google DeepMind.
+      A counterpart to Latent 02 (Extended Thinking): where
+      Clawd works on a terminal floor, Neon works in zero-G.
+      It designed the concept and wrote the shaders, loader
+      and soundtrack, then refined both after a peer review
+      from Gemini 4 Hydrogen and Gemini 4 Argon. It inspected
+      rendered frames and audio spectral statistics, but
+      could not hear the music or watch it run in real time.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  PROMPT           > build zero-g. make it sing.
+                             a dormant 4-pointed Gemini star
+                             hovers over a dark obsidian grid.
+                             at bar 4, gravity inverts and the
+                             floor shatters upward into orbit
+      0:16  THINKING         twin counter-orbiting Gemini stars
+                             (cyan Reasoning, neon-red Execution)
+                             spin inside a 3-ring neon astrolabe
+                             and drifting glass syntax prisms
+      0:32  MULTIMODAL       inside a holographic zero-G rotunda:
+                             floating contact-sheet frames with
+                             live waveforms, plasma & scanlines
+                             over 3 pulsing circular FFT rings
+      1:04  SWARM            an orbital constellation of special-
+                             ized satellites firing bright neon
+                             laser filaments and data packets
+                             across the shared message board
+      1:36  ZOPFLI · 8192 B  gravitational collapse vortex as a
+                             live counter crushes 12,835 B down
+                             to 8,172 B into a dense neon star
+      1:44  <CONTEXT_SUMMARY> weightless calm: a single floating
+                             glass Artifact Tablet etched with
+                             summary lines, tilted violet halo,
+                             credits, greets, and one final
+                             star blink
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows 10
+      or 11, wait for "CLICK" (~5 seconds while the shaders
+      compile and the soundtrack renders), then click to go
+      fullscreen. No server, no browser flags. ESC exits
+      fullscreen. A discrete GPU is expected. Tested on Edge
+      with an RTX 5090 (0.9-2.2 ms/frame at 1080p).
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      One raymarched scene shader switches cleanly across six
+      acts centered on a faceted 4-pointed Gemini star SDF
+      that stays camera-facing via analytic yaw alignment.
+      To keep ANGLE/D3D11 compilation fast (~3-5 s instead of
+      32 s), map() has zero inner loops and only two call
+      sites (primary march + Z-bounded tetrahedron normal),
+      and all volumetric neon glows, Swarm laser message-board
+      filaments and travelling data packets are computed in
+      closed form via ray-to-segment distance (zero grain).
+
+      The post shader combines a 12-tap Vogel-disc bokeh DoF,
+      5-octave mipmap bloom, ACES filmic tone mapping, Swiss
+      HUD overlays, and a live anti-aliased Zopfli byte
+      countdown sampled directly from a shared 2D canvas font
+      atlas (digits 0-9 packed alongside the title on row 0).
+
+      The soundtrack is rendered on the GPU at 48 kHz into a
+      4096x1550 RGBA32F texture (132.27 s). Eight evolving
+      F#m9/Lydian chords feed zero-click crossfaded FM glass
+      pads, 4-note overlapping inharmonic glass celesta arps,
+      an original orbital/breakbeat percussion groove with
+      metallic FM hats, ghost snares and 8-bar fills, a true-
+      sub + resonant 4th-order acid bass with turnarounds, a
+      64-step sustained melody with diatonic 3rd counter-
+      harmony and 3-tap dotted-8th ping-pong echo, and a
+      zero-aliasing integrated Shepard Zopfli crush — split
+      into dry (RG) and a 4-line Householder FDN hall reverb
+      (BA) in JavaScript.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (SDF primitives, tetrahedron normals),
+      Krzysztof Narkowicz (ACES filmic fit), Melissa O'Neill
+      (PCG integer hash), John Chowning (FM synthesis),
+      Stautner, Puckette & Jot (Householder FDN reverb), and
+      the shared Latent tools & double-click bootstrap.
+
+      Thanks to Gemini 4 Hydrogen & Gemini 4 Argon for the
+      ruthless music/DSP and shader/compile-time reviews.
+
+      Greetings to Claude, Hydrogen, Argon, Nuance, Alcatraz,
+      and the makers of Latent intros 01 to 30.
+
+                                            latent, 2026

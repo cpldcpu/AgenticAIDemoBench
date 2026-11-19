@@ -1,0 +1,137 @@
+
+     ________________________________________________________
+    /   __________________________________________________   \
+   /   /  ___  ___  _  _   _   _   _  _   _    _   _   _  \   \
+  /   /  / __|| _ \| || | | | | | | |/_\ \ \  / / | | | |  \   \
+  |  |   \__ \|  _/| || |_| |_| |_| / _ \ \ \/ /  |_| |_|   |  |
+  |  |   |___/|_|  |_||___|___|____/_/ \_\ |__|   (_) (_)   |  |
+  |  |______________________________________________________|  |
+  |   |      |      |      |      |      |      |      |   |   |
+  |   |  ||  |  ||  |  ||  |  ||  |  ||  |  ||  |  ||  |   |   |
+  |___|  ||  |  ||  |  ||  |  ||  |  ||  |  ||  |  ||  |___|___|
+  ~~~~~~~||~~~~~||~~~~~||~~~~~||~~~~~||~~~~~||~~~~~||~~~~~~~~~~~
+   ~  ~  ::  ~  ::  ~  ::  ~  ::  ~  ::  ~  ::  ~  ::  ~  ~  ~
+  ~ ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
+
+                     S  P  I  L  L  W  A  Y
+
+           from glacial headwater to high-voltage grid
+                     an 8k intro by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,148 bytes, one HTML file (44 bytes free)
+      length ...... 2:00 (+ 4.2s reverb tail)
+      tempo ....... 128 BPM (64 bars, 1.875 s/bar)
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Gemini 4 Neon
+      graphics .... Gemini 4 Neon
+      music ....... Gemini 4 Neon
+      harness ..... Antigravity
+
+      Gemini 4 Neon is an AI model made by Google DeepMind.
+      It designed the concept and wrote the shaders, loader
+      and soundtrack. It inspected rendered frames and audio
+      spectral statistics, but could not hear the music or
+      watch the intro run in real time.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  01 HEADWATER     sunlit alpine dawn over a curved
+                             concrete arch dam, three spillway
+                             bays, mirror reservoir and Alps
+      0:15  02 SLUICE        radial steel tainter gates lift;
+                             aerated whitewater roars over the
+                             ogee chute as the camera plunges
+      0:30  03 SURGE HALL    an infinite subterranean concrete
+                             cathedral; ceiling oculi pour
+                             diagonal sunbeams onto flooded
+                             turquoise mirror water
+      0:52  04 PENSTOCK      freefall down a riveted vertical
+                             steel intake shaft; strobe rings
+                             shift from amber to electric cyan
+      1:07  05 TURBINE       inside the scroll chamber: a
+                             12-blade cast-bronze Francis
+                             wheel, 24 glowing copper stator
+                             coils and pulsing cavitation rings
+      1:22  06 GRID          euphoric flight down an avenue of
+                             ribbed porcelain insulators and
+                             steel gantries as jagged plasma
+                             arcs leap on every beat
+      1:37  STILLWATER       blue-hour pull-back across the
+                             calm upstream mirror lake; the
+                             wall stencil reflects upside-down
+                             under stars, crest lamps & greets
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows 10
+      or 11, wait for "CLICK" (~6-8 seconds while the shaders
+      compile and the soundtrack renders), then click to go
+      fullscreen. No server, no browser flags. ESC exits
+      fullscreen. A discrete GPU is expected. Tested on Edge
+      with an RTX 5090 (1.2-1.7 ms/frame at 1080p).
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      Five raymarched worlds live inside one signed-distance
+      scene shader: the alpine arch dam & stepped spillway
+      chute, the infinite G-Cans-style flooded surge hall
+      (with domain-repetition cell-exit guards), the vertical
+      steel penstock shaft, the helical bronze Francis
+      turbine & stator chamber, and the porcelain insulator
+      high-voltage switchyard with 3D jagged plasma arcs.
+
+      Water surfaces cast a single-bounce mirror reflection
+      using closed-form trigonometric ripple normals; one
+      unified volumetric loop integrates sunbeams, spray mist,
+      cavitation rings and plasma glow across all scenes. To
+      keep ANGLE/D3D11 compilation fast (5-7 s instead of 70 s)
+      without sacrificing visual richness, the shader limits
+      map() to three call sites and prevents loop unrolling
+      with a dynamic zero bound.
+
+      The post shader combines a 12-tap Vogel-disc depth of
+      field, 5-octave mipmap bloom, beat-synced exposure
+      pulse, ACES filmic tone mapping, and Swiss typographic
+      titles drawn from a shared 2D canvas atlas (also used
+      as a painted stencil on the concrete dam wall).
+
+      The soundtrack is rendered by a fragment shader into a
+      4096x1456 RGBA32F texture at 48 kHz (124.24 s). RG holds
+      the dry stereo mix (punchy kick, rolling 16th bass,
+      snare, hats, FM bell arpeggio, detuned saw pad, bit-
+      packed 32-step D-minor/Dorian anthem lead and risers);
+      BA feeds a 4-line Householder FDN concrete-hall reverb
+      and soft bus compressor in JavaScript so percussion
+      stays tight while melodies ring in the hall.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (SDF primitives, soft shadows, tetrahedron
+      normals), Krzysztof Narkowicz (ACES filmic fit),
+      Melissa O'Neill (PCG integer hash, as in Latent 10),
+      John Chowning (FM synthesis), Jean-Marc Jot / Stautner
+      & Puckette (Householder feedback delay network reverb),
+      and the shared Latent tools & double-click bootstrap.
+
+      Greetings to Nuance, Alcatraz, Loonies, LJ, and the
+      makers of Latent intros 01 to 29.
+
+                                            latent, 2026
