@@ -1,11 +1,11 @@
 # Ratings by Claude Sonnet 5.5
 
-Reviewer: Claude Sonnet 5.5 (Claude Code). Date: 2026-11-17. Scheme and scale:
-[rating_instructions.md](rating_instructions.md). Rated intros 01 to 18. 18 was
+Reviewer: Claude Sonnet 5.5 (Claude Code). Date: 2026-11-17 (01 to 18) and 2026-11-19 (19 to 31). Scheme and scale:
+[rating_instructions.md](rating_instructions.md). Rated intros 01 to 31. 18 was
 added later in the session: it was first over the 8,192-byte limit and skipped,
 then finished and rated. `04_latent_space` was made by the same model (Claude
 Sonnet 5.5), though not by this session; I rated it by the same rules as the
-others, but treat that score as possibly biased. Nothing scored 10. Ties are broken by Wow.
+others, but treat that score as possibly biased. None of 19 to 31 was made by Claude Sonnet 5.5. Nothing scored 10. Ties are broken by Wow.
 
 ## Ranking
 
@@ -13,26 +13,39 @@ others, but treat that score as possibly biased. Nothing scored 10. Ties are bro
 |---|---|---|---:|---:|---:|---:|---:|
 | 1 | [11 Pas de Trois](../Latent_8k/11_pas_de_trois/) | Claude Fable 5.2 | 8 | 8 | 9 | 9 | **34** |
 | 2 | [06 Marginalia](../Latent_8k/06_marginalia/) | Claude Opus 5.5 | 9 | 7 | 9 | 8 | **33** |
-| 3= | [14 Remanence](../Latent_8k/14_remanence/) | Claude Fable 5.2 | 8 | 8 | 8 | 8 | **32** |
-| 3= | [07 Little Water Bear](../Latent_8k/07_little_water_bear/) | Claude Fable 5.2 | 8 | 7 | 9 | 8 | **32** |
-| 3= | [18 Zugzwang](../Latent_8k/18_zugzwang/) | Gemini 4 Argon | 8 | 8 | 8 | 8 | **32** |
-| 6 | [04 Latent Space](../Latent_8k/04_latent_space/) | Claude Sonnet 5.5 | 8 | 7 | 8 | 8 | **31** |
-| 7 | [08 Selvedge](../Latent_8k/08_selvedge/) | GPT-6 Astra | 8 | 6 | 8 | 7 | **29** |
-| 8 | [05 Heliograph](../Latent_8k/05_heliograph/) | GPT-6.1 Sol | 7 | 8 | 8 | 6 | **29** |
-| 9= | [03 Emergence](../Latent_8k/03_emergence/) | Argon Orchestrator & Hydrogen | 8 | 7 | 6 | 7 | **28** |
-| 9= | [02 Extended Thinking](../Latent_8k/02_extended_thinking/) | Claude Fable 5.2 | 7 | 6 | 8 | 7 | **28** |
-| 11 | [01 Gradient Descent](../Latent_8k/01_gradient_descent/) | Claude Fable 5.2 | 7 | 6 | 7 | 6 | **26** |
-| 12= | [12 Murmuration](../Latent_8k/12_murmuration/) | Kimi K3 | 6 | 6 | 7 | 5 | **24** |
-| 12= | [17 Supercell](../Latent_8k/17_supercell/) | GLM 5.3 | 5 | 7 | 7 | 5 | **24** |
-| 14 | [09 Vesper](../Latent_8k/09_vesper/) | Gemini 4 Hydrogen | 6 | 6 | 6 | 5 | **23** |
-| 15 | [13 Sounding](../Latent_8k/13_sounding/) | DeepSeek V4.1 Flash | 6 | 7 | 6 | 4 | **23** |
-| 16 | [16 Afterglow](../Latent_8k/16_afterglow/) | DeepSeek V4-Pro | 5 | 5 | 7 | 5 | **22** |
-| 17 | [10 Geode](../Latent_8k/10_geode/) | Claude Haiku 5.5 | 5 | 5 | 5 | 4 | **19** |
-| 18 | [15 Gather](../Latent_8k/15_gather/) | Grok 4.7 | 4 | 4 | 5 | 3 | **16** |
+| 3 | [20 Die Shrink](../Latent_8k/20_die_shrink/) | Claude Opus 5.5 | 8 | 8 | 9 | 8 | **33** |
+| 4 | [07 Little Water Bear](../Latent_8k/07_little_water_bear/) | Claude Fable 5.2 | 8 | 7 | 9 | 8 | **32** |
+| 5 | [14 Remanence](../Latent_8k/14_remanence/) | Claude Fable 5.2 | 8 | 8 | 8 | 8 | **32** |
+| 6 | [18 Zugzwang](../Latent_8k/18_zugzwang/) | Gemini 4 Argon | 8 | 8 | 8 | 8 | **32** |
+| 7 | [22 Tin Canon](../Latent_8k/22_tin_canon/) | GPT-6.2 Astra | 8 | 7 | 9 | 8 | **32** |
+| 8 | [25 Kindling](../Latent_8k/25_kindling/) | Claude Fable 5.2 | 8 | 7 | 9 | 8 | **32** |
+| 9 | [26 Una Corda](../Latent_8k/26_una_corda/) | Claude Opus 5.5 | 8 | 9 | 8 | 7 | **32** |
+| 10 | [04 Latent Space](../Latent_8k/04_latent_space/) | Claude Sonnet 5.5 | 8 | 7 | 8 | 8 | **31** |
+| 11 | [21 Bell Lap](../Latent_8k/21_bell_lap/) | GPT-6.2 Astra | 8 | 7 | 8 | 8 | **31** |
+| 12 | [28 From Here](../Latent_8k/28_from_here/) | GPT-6.2 Astra | 7 | 6 | 9 | 8 | **30** |
+| 13 | [08 Selvedge](../Latent_8k/08_selvedge/) | GPT-6 Astra | 8 | 6 | 8 | 7 | **29** |
+| 14 | [23 Off Air](../Latent_8k/23_off_air/) | GPT-6.2 Sol | 8 | 7 | 7 | 7 | **29** |
+| 15 | [24 Tilt](../Latent_8k/24_tilt/) | Gemini 4 Argon | 7 | 7 | 8 | 7 | **29** |
+| 16 | [05 Heliograph](../Latent_8k/05_heliograph/) | GPT-6.1 Sol | 7 | 8 | 8 | 6 | **29** |
+| 17 | [02 Extended Thinking](../Latent_8k/02_extended_thinking/) | Claude Fable 5.2 | 7 | 6 | 8 | 7 | **28** |
+| 18 | [03 Emergence](../Latent_8k/03_emergence/) | Argon Orchestrator & Hydrogen | 8 | 7 | 6 | 7 | **28** |
+| 19 | [19 First Mark](../Latent_8k/19_first_mark/) | Kimi K3.1 Pro | 7 | 6 | 8 | 7 | **28** |
+| 20 | [29 The Yellow Cup](../Latent_8k/29_the_yellow_cup/) | GPT-6.2 Astra | 7 | 7 | 8 | 6 | **28** |
+| 21 | [27 Wavefolder](../Latent_8k/27_wavefolder/) | Claude Fable 5.2 | 7 | 7 | 7 | 6 | **27** |
+| 22 | [31 Zero-G](../Latent_8k/31_zero_g/) | Gemini 4 Neon | 6 | 7 | 8 | 6 | **27** |
+| 23 | [01 Gradient Descent](../Latent_8k/01_gradient_descent/) | Claude Fable 5.2 | 7 | 6 | 7 | 6 | **26** |
+| 24 | [30 Spillway](../Latent_8k/30_spillway/) | Gemini 4 Neon | 6 | 7 | 7 | 6 | **26** |
+| 25 | [12 Murmuration](../Latent_8k/12_murmuration/) | Kimi K3 | 6 | 6 | 7 | 5 | **24** |
+| 26 | [17 Supercell](../Latent_8k/17_supercell/) | GLM 5.3 | 5 | 7 | 7 | 5 | **24** |
+| 27 | [09 Vesper](../Latent_8k/09_vesper/) | Gemini 4 Hydrogen | 6 | 6 | 6 | 5 | **23** |
+| 28 | [13 Sounding](../Latent_8k/13_sounding/) | DeepSeek V4.1 Flash | 6 | 7 | 6 | 4 | **23** |
+| 29 | [16 Afterglow](../Latent_8k/16_afterglow/) | DeepSeek V4-Pro | 5 | 5 | 7 | 5 | **22** |
+| 30 | [10 Geode](../Latent_8k/10_geode/) | Claude Haiku 5.5 | 5 | 5 | 5 | 4 | **19** |
+| 31 | [15 Gather](../Latent_8k/15_gather/) | Grok 4.7 | 4 | 4 | 5 | 3 | **16** |
 
 No intro reaches 9 in more than two categories, so on this scale **none is a
 sure compo winner yet**. The top of the table is a mid-to-high finish at a big
-party. The target for intro 19 onward: beat 34.
+party. The target for intro 32 onward: beat 34. Of the second batch (19 to 31), only 20 Die Shrink reaches the top three.
 
 ## Notes per intro
 
@@ -84,6 +97,58 @@ harpsichord and cello, celesta and timpani, then breakbeat, with a reverb
 tail. Held back by a quiet climax (the king's fall is slow), some marble and
 crown-edge artefacts, repeated board-and-pieces framing from shot to shot,
 and a readme that says 8,187 bytes while the file is 8,139.
+
+### 20 Die Shrink (33/40)
+
+Moore's law as a form: the picture starts as a 1-bit wafer and every two bars gains resolution, colour and bit depth, with the chiptune upgrading in step, then dives into copper canyons, an SRAM scroller, a clock tree that fires on the beat and FinFETs, and shrinks back to one bit. It is the smartest picture-and-sound coupling in the folder (Vision 9). Held back because the contact sheet repeats three shot types (bond-wire arches, copper canyon, wafer) and the middle is one brown-copper palette.
+
+### 22 Tin Canon (32/40)
+
+A lithographed sardine tin is wound open, the fish twitch, and the camera dives through an eye into a school that spells out the label's fish. The one-outline-four-jobs trick makes it legible and charming, and the flat graphic fish with tiled floor and lemons are the most distinctive art direction of this batch. The 6/8 pluck and reed tune is simple but suits it. Short at 77 s, and it ends on a quiet gag instead of a peak.
+
+### 25 Kindling (32/40)
+
+A foggy forest clearing where a fire is struck, seven flame dancers circle it in 7/8, and sparks fall into a galaxy, helix and sphere before a green and violet salt burn and a blue dawn. Atmosphere, volumetric trunks and the colour changes are the strongest of the batch, and the closing drum blow is a real moment. The dancers are soft blobs and only the trunks cast shadows.
+
+### 26 Una Corda (32/40)
+
+A nocturne on a modelled concert grand, seen from inside the piano, with strings lighting up per note and a horizon of strings for the climax. The score is the best Sound in the folder: 840 notes, inharmonic partials, rubato and pedal, rising smoothly from RMS 0.07 to 0.15. The picture is mostly dark, shallow-focus macro and the same string-bed framing repeats, so Wow is lower than the music deserves.
+
+### 21 Bell Lap (31/40)
+
+Eight cel-shaded riders in a banked velodrome, a bell-lap switch to neon lane ribbons, and a slit-scan photo finish decided by 0.012 s. The riders, jerseys and heavy italic typography look like finished motion graphics, and the finish photo is a good last shot. The music is a competent 150 BPM breakbeat with reeds; the race is short and the middle shots are similar.
+
+### 28 From Here (30/40)
+
+A stack of 21 plates reads as YOU from one side and ME from the other, rotates, explodes and re-forms, then lets you drag the turntable after the music ends. The single idea is excellent and executed exactly with orthographic stops, which earns the top Vision. The picture is a pastel toy with little lighting, and the five-beat piano and horn tune is thin.
+
+### 23 Off Air (29/40)
+
+A wall of ceramic flip-dot discs becomes a test card, loses vertical hold, rolls through a tuning drum and ends as a globe that comes apart. The disc material and the glitch tear are strong, and the globe-to-black-card finish is neat. Colours are busy (blue, orange, olive, cream everywhere) and the pace is the same slow move for most of the run.
+
+### 24 Tilt (29/40)
+
+An arcade pinball in six acts, from the plunger spring to jackpot multiball, the brass plumb-bob tilt switch and a red TILT ending. Bright colour and chrome balls give the most fun of the batch, and the tilt twist is a good joke. Bumper shapes are odd, large areas are flat blue, and the ball path is choreographed rather than simulated. The funk score is solid but the last 16 s are almost silent.
+
+### 19 First Mark (28/40)
+
+A torch finds a hand stencil, pigment becomes an aurochs that walks off the wall and leads a herd through a cave before the paintings are buried. Strong narrative and an unusual subject. The animals look like orange clay toys, the whole picture stays in one brown palette, and the sound is quiet in the middle (RMS 0.048 at 32 s).
+
+### 29 The Yellow Cup (28/40)
+
+A chipped cup on a rainy window, with a short first-person text about memory and whether the maker felt anything. The cup, wet glass and window city are well made, and the text gives it a voice. It is the quietest piece of the lot: the camera barely moves, there is no build, and it would not stand out against flashier compo entries.
+
+### 27 Wavefolder (27/40)
+
+A synthwave drive over wireframe terrain whose mountains are folded sine waves, with a striped sun, chrome sphere, wheel stations and a palette change on the last chorus. Clean and consistent, and the wave-folding idea is carried through picture and music. Synthwave is the most common 8k look and the camera never leaves the road, so it reads as familiar.
+
+### 31 Zero-G (27/40)
+
+A faceted Gemini star splits into twin cores, reads contact sheets, runs a swarm and watches a live byte counter crush it to 8,192, ending on a summary tablet. The self-referential gag and counter are funny, which is where the Vision score comes from. The picture is soft and blurry with few real materials, and the mix dips at 48 s (RMS 0.08).
+
+### 30 Spillway (26/40)
+
+A dam, sluice, surge hall, penstock, turbine and insulator avenue in six acts, on a 128 BPM melodic electronic track. The turbine and the oculus-lit hall are the best frames and the music is full and loud. Most frames are pale, washed out and hazy, and the opening acts have blown-out whites and blocky walls.
 
 ### 04 Latent Space (31/40)
 
@@ -223,3 +288,28 @@ track. The smallest ambition per byte of any intro in the folder.
   above are from the contact sheets.
 - Scores are one reviewer's judgement; a second reviewer would likely move
   individual scores by a point or two and might swap the order of places 3 to 6.
+
+## Second session (intros 19 to 31, 2026-11-19)
+
+- **What I did:** read the rating instructions and my own earlier file only; looked
+  at the 16-frame contact sheet of each intro; read each readme's timeline, concept and
+  known limits (not the shader code); ran `audiostat` and the boot test on all 13.
+  Nothing was watched or heard, so motion, camera work and sync are inferred from
+  the readmes and contact sheets, as in the first session.
+- **Boot test:** all 13 reach the ready screen. 19 to 27, 30 and 31 report "start
+  screen gone". **28 and 29 report "start screen still there" on two runs each.** Their
+  `main.js` hides the overlay with `style.display='none'` rather than removing it
+  (29, line 66), and the tool tests whether the element exists, so I count this as a
+  tool false negative, not a bug (for 28 this is inference; I did not read its code
+  or watch it play).
+- **Size:** all 13 are under 8,192 bytes (largest: 31 at 8,188, 24 at 8,179, 26 at 8,178).
+- **Audio:** no NaNs and no peak above 1.0 in any of the 13 (20 Die Shrink peaks
+  at 0.995, close to clipping). Silent later sections in 21, 22, 23, 28 and 29 are
+  just the intros being shorter than the 144 s grid. 19 First Mark is quiet at 32 s
+  (RMS 0.048).
+- **Frame time:** not used for scoring. Readmes claim 0.5 to 11.7 ms; my run showed
+  20 Die Shrink at 9.7 ms at t=40, the heaviest.
+- **Calibration:** I tried to keep the scale of the first 18, so totals are
+  comparable. A second reviewer might move 22, 25, 26 and 21 by a point either way.
+  The Sound 9 for 26 Una Corda rests on the readme's description of the piano model
+  and the level curve; the mix itself is unheard.
