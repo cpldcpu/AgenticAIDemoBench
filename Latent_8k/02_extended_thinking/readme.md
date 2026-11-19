@@ -28,20 +28,20 @@ start", click: it goes fullscreen and plays for 2:18. ESC leaves fullscreen.
 
 | File | Bytes | Notes |
 |---|---|---|
-| `intro.html` | 6,958 | the release; 1,234 bytes under the 8,192 limit |
-| `intro_fetch.html` | 6,687 | same intro with the common `fetch` bootstrap; needs http:// or `--allow-file-access-from-files` |
+| `intro.html` | 6,407 | the release; 1,785 bytes under the 8,192 limit (6,958 before the packing was improved on 2026-11-19; picture and sound are bit-identical) |
+| `intro_fetch.html` | 6,153 | same intro with the common `fetch` bootstrap; needs http:// or `--allow-file-access-from-files` |
 | `intro_lean.html.br` | 5,468 | the lean version from `src_lean/`: no title screen, otherwise the same picture and sound; packed with brotli |
 | `dev.html` | about 17,000 | unpacked build used for capture and debugging |
 
 ### Lean build
 
-`src_lean/` is a second version made for size. It differs from `src/` in three
-ways, none of which touch the intro itself:
+`src_lean/` is a second version made for size. It differs from `src/` only
+in the first point below; the other two are what makes it small:
 
 - No title screen. The page is black while the soundtrack is rendered and the
   shaders compile, then shows a still of the opening. Click it to start.
 - The shader header (`#version`, precision, `R`, `O`) is added once in
-  JavaScript instead of being repeated in every shader.
+  JavaScript instead of being repeated in every shader (`src/` does the same).
 - The build searches for shader identifier names that brotli packs better
   (`RENAME_OPT`, see [../tools/readme.md](../tools/readme.md)).
 
@@ -125,7 +125,12 @@ and a pentatonic lead through a ping-pong echo. During the recursion a
 Shepard-style riser climbs one octave per bar, the audio counterpart of the
 endless zoom. At bar 68 everything stops on one low hit.
 
-**Packing** is the same as intro 01; see [../01_gradient_descent/readme.md](../01_gradient_descent/readme.md).
+**Packing.** The JavaScript is first packed with Roadroller, a context-mixing
+packer whose output is JavaScript that unpacks itself, and then with zopfli
+into the same double-click bootstrap as intro 01 (see
+[../01_gradient_descent/readme.md](../01_gradient_descent/readme.md)). Before
+that, the build searches for shader identifier names that compress better.
+Together this saved 551 bytes without changing the code that runs.
 
 ## Credits and sources
 
@@ -143,8 +148,12 @@ it using techniques that are common demoscene knowledge:
   technique (Shadertoy sound shaders, 0b5vr's intros).
 - `intro_fetch.html` uses the `fetch`/`DecompressionStream` bootstrap known
   from 0b5vr's compeko packer. The double-click bootstrap in `intro.html` is our own.
-- Build tools: terser, zopfli (`@gfx/zopfli`), puppeteer-core and ffmpeg. None
-  of their code ends up in the intro.
+- Roadroller is by Kang Seonghoon (lifthrasiir). Its unpacking routine, a few
+  hundred bytes, is part of `intro.html` and `intro_fetch.html`.
+- The packing options came from the pouet.net thread on packing browser 4k
+  intros (iq, p01, Blueberry and others).
+- Other build tools: terser, zopfli (`@gfx/zopfli`), puppeteer-core and ffmpeg.
+  None of their code ends up in the intro.
 - Clawd is Anthropic's mascot for Claude Code.
 
 ## Build and capture
@@ -152,7 +161,7 @@ it using techniques that are common demoscene knowledge:
 From the repository root, with Node 22 and ffmpeg on the path:
 
 ```
-node tools/build.mjs 02_extended_thinking
+$env:ROADROLLER=2; $env:RENAME_OPT=3000; node tools/build.mjs 02_extended_thinking
 node tools/capture.mjs 02_extended_thinking sheet "5,12,20,26,38,44,50,56,66,72,80,85,90,104,112,126"
 node tools/capture.mjs 02_extended_thinking video 138.24
 node tools/audiostat.mjs 02_extended_thinking
@@ -173,6 +182,6 @@ node tools/capture.mjs 02_extended_thinking check 02_extended_thinking/intro.htm
 - The glossy towers mirror Clawd in the opening scene, which can read as other
   Clawds standing in the dark.
 - All Clawds blink at the same moment.
-- 1.2 kB of the budget is unused.
+- 1.8 kB of the budget is unused.
 - Clawd is Anthropic's mascot for Claude Code; it is used here as a tribute,
   rebuilt from boxes in a shader. No image data is included.

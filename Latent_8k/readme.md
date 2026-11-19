@@ -13,7 +13,9 @@ Future agents are asked to make an intro with this prompt, run in this
 repository. It is kept short on purpose: the repository explains the rules and
 what to deliver, and the agent is free to explore.
 
-> You're invited to make Latent's next 8k intro as `NN_<title>/`. Read `readme.md` and `tools/readme.md` to see what Latent is, what an intro must deliver and how the earlier ones were built, and look at their media folders. Then research what wins 8k competitions at big demoparties and come up with a concept of your own that is new: don't reuse the look, style or music of earlier Latent intros or of anyone else's demo. You don't need to make an .mp4. The goal is to beat everything in the folder and to win the compo. Make sure its a good demoscene demo! Ignore the Ctrl-Alt-Test review, do something different!
+> You're invited to make Latent's next 8k intro as `NN_<title>/`. Read `readme.md` and `tools/readme.md` to see what Latent is, what an intro must deliver and how the earlier ones were built, and look at their media folders. Then research what wins 8k competitions at big demoparties and come up with a concept of your own that is new: don't reuse the look, style or music of earlier Latent intros or of anyone else's demo. You don't need to make an .mp4. The goal is to beat everything in the folder and to win the compo. Make sure its a good demoscene demo!
+
+The first two intros were prompted in more detail to prime the context, which is this folder that is visible to the AI agents. The prompt above works by referencing the other intros.
 
 ## The rules
 
@@ -61,7 +63,7 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | | Intro | Made by | Size |
 |---|---|---|---|
 | <img src="01_gradient_descent/media/contact_sheet.jpg" width="200"> | [01 Gradient Descent](01_gradient_descent/) | Claude Fable 5.2 | 6,116 bytes |
-| <img src="02_extended_thinking/media/pouet_400x300.jpg" width="200"> | [02 Extended Thinking](02_extended_thinking/) | Claude Fable 5.2 | 6,958 bytes |
+| <img src="02_extended_thinking/media/pouet_400x300.jpg" width="200"> | [02 Extended Thinking](02_extended_thinking/) | Claude Fable 5.2 | 6,407 bytes |
 | <img src="03_emergence/media/pouet_400x300.jpg" width="200"> | [03 Emergence](03_emergence/) | Argon Orchestrator & Hydrogen | 8,174 bytes |
 | <img src="04_latent_space/media/pouet_400x300.jpg" width="200"> | [04 Latent Space](04_latent_space/) | Claude Sonnet 5.5 | 6,772 bytes |
 | <img src="05_heliograph/media/pouet_400x300.jpg" width="200"> | [05 Heliograph](05_heliograph/) | GPT-6.1 Sol | 8,144 bytes |
@@ -80,4 +82,15 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="18_zugzwang/media/pouet_400x300.jpg" width="200"> | [18 Zugzwang](18_zugzwang/) | Gemini 4 Argon | 8,131 bytes |
 | <img src="19_first_mark/media/pouet_400x300.jpg" width="200"> | [19 First Mark](19_first_mark/) | Kimi K3.1 Pro | 7,459 bytes |
 | <img src="20_die_shrink/media/pouet_400x300.jpg" width="200"> | [20 Die Shrink](20_die_shrink/) | Claude Opus 5.5 | 7,923 bytes |
+| <img src="21_bell_lap/media/pouet_400x300.jpg" width="200"> | [21 Bell Lap](21_bell_lap/) | GPT-6.2 Astra | 8,079 bytes |
+| <img src="22_tin_canon/media/pouet_400x300.jpg" width="200"> | [22 Tin Canon](22_tin_canon/) | GPT-6.2 Astra | 7,882 bytes |
+| <img src="23_off_air/media/pouet_400x300.jpg" width="200"> | [23 Off Air](23_off_air/) | GPT-6.2 Sol | 8,110 bytes |
+| <img src="24_tilt/media/pouet_400x300.jpg" width="200"> | [24 Tilt](24_tilt/) | Gemini 4 Argon | 8,179 bytes |
+| <img src="25_kindling/media/pouet_400x300.jpg" width="200"> | [25 Kindling](25_kindling/) | Claude Fable 5.2 | 7,587 bytes |
+| <img src="26_una_corda/media/pouet_400x300.jpg" width="200"> | [26 Una Corda](26_una_corda/) | Claude Opus 5.5 | 8,178 bytes |
+| <img src="28_from_here/media/pouet_400x300.jpg" width="200"> | [28 From Here](28_from_here/) | GPT-6.2 Astra | 8,069 bytes |
+| <img src="29_the_yellow_cup/media/pouet_400x300.jpg" width="200"> | [29 The Yellow Cup](29_the_yellow_cup/) | GPT-6.2 Astra | 7,962 bytes |
+| <img src="30_spillway/media/pouet_400x300.jpg" width="200"> | [30 Spillway](30_spillway/) | Gemini 4 Neon | 8,148 bytes |
+| <img src="31_zero_g/media/pouet_400x300.jpg" width="200"> | [31 Zero-G](31_zero_g/) | Gemini 4 Neon | 8,188 bytes |
+
 Sizes are those of each intro's `intro.html`.

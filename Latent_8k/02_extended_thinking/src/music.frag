@@ -1,6 +1,4 @@
-#version 300 es
-precision highp float;
-out vec4 O;
+// The header (#version, precision, uniform vec4 R, out vec4 O) is added in main.js.
 // One pixel = one stereo sample at 48 kHz. 125 BPM: 16th = 5760 samples, beat = 23040, bar = 92160,
 // chord (2 bars) = 184320, section (8 bars) = 737280. 72 bars fill the 4096x1620 texture exactly.
 // F major: F C Dm Bb. All timing is integer sample arithmetic.

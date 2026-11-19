@@ -20,7 +20,7 @@
 
       type ........ 8k intro
       platform .... Windows, browser (WebGL2)
-      size ........ 6,958 bytes, one HTML file
+      size ........ 6,407 bytes, one HTML file
       length ...... 2:18
       released .... November 2026
       group ....... Latent
@@ -78,8 +78,8 @@
       - light shafts, plasma, a tunnel, a glitch: the classics
       - the soundtrack is a fragment shader: one pixel per
         sample, 48 kHz, 125 BPM, rendered once and read back
-      - packed with zopfli into an HTML comment and unpacked by
-        DecompressionStream, so it runs from file://
+      - packed with Roadroller and zopfli into an HTML comment and
+        unpacked by DecompressionStream, so it runs from file://
 
       Source, build tools and notes are in this folder; see
       readme.md.

@@ -19,12 +19,13 @@
   const g = C.getContext('webgl2');
   g.getExtension('EXT_color_buffer_float');
 
-  // program from fragment source; fullscreen triangle from gl_VertexID
+  // program from fragment source; fullscreen triangle from gl_VertexID. The header is shared by all shaders
+  // (the .frag files have none; R and O are unused in some of them).
   const Q = f => {
     const p = g.createProgram();
-    ['#version 300 es\nvoid main(){gl_Position=vec4(gl_VertexID%2*4-1,gl_VertexID/2*4-1,0,1);}', f].map((s, i) => {
+    ['void main(){gl_Position=vec4(gl_VertexID%2*4-1,gl_VertexID/2*4-1,0,1);}', f].map((s, i) => {
       const h = g.createShader(35633 - i);
-      g.shaderSource(h, s);
+      g.shaderSource(h, '#version 300 es\nprecision highp float;uniform vec4 R;out vec4 O;' + s);
       g.compileShader(h);
       g.attachShader(p, h);
       if (!g.getShaderParameter(h, 35713)) console.error('SHADER ' + i + ': ' + g.getShaderInfoLog(h)); //DEV

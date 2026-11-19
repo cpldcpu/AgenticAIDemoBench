@@ -1,7 +1,4 @@
-#version 300 es
-precision highp float;
-uniform vec4 R;
-out vec4 O;
+// The header (#version, precision, uniform vec4 R, out vec4 O) is added in main.js.
 // T time, BT beats, M material of last map(), CM material of last cl(), D/DD distance without the cell guard,
 // W walk amount, BL eye openness, LV recursion level, OI star intensity
 float T,BT,M,CM,D,DD,W,BL,LV,OI,AH,FT; // AH arm lift

@@ -1,8 +1,5 @@
-#version 300 es
-precision highp float;
-uniform vec4 R;
+// The header (#version, precision, uniform vec4 R, out vec4 O) is added in main.js.
 uniform sampler2D A,B;
-out vec4 O;
 float h1(vec2 p){vec3 q=fract(p.xyx*.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}
 void main(){
   vec2 f=gl_FragCoord.xy,u=f/R.xy-.5,v=u,q;
