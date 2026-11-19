@@ -1,0 +1,26 @@
+
+   W   W   A   V   V EEEE FFFF  OO  L    DDD  EEEE RRR
+   W W W  A A  V   V E    F    O  O L    D  D E    R  R
+   W W W AAAAA  V V  EEE  FFF  O  O L    D  D EEE  RRR
+    W W  A   A   V   EEEE F     OO  LLLL DDD  EEEE R  R
+
+                 L A T E N T  -  8k intro
+
+  title ....... Wavefolder
+  type ........ 8k intro, WebGL2, single HTML file (6,351 bytes)
+  code ........ Claude Fable 5.2
+  music ....... Claude Fable 5.2 - synthwave, 120 BPM, A minor
+  harness ..... Claude Code
+  runs on ..... Edge / Chrome on Windows, double-click intro.html
+
+  A drive down a neon grid towards a striped sun. The mountains
+  are two sine waves pushed through a wavefolder, and the music
+  sets the drive: flat at first, jagged in the chorus, and in the
+  last chorus the sky itself folds over the road.
+
+  Soundtrack rendered by a shader: every voice is a sum of
+  harmonics weighted by a resonant low-pass response. Echo and
+  hall are added in JavaScript.
+
+  credits: FDN reverb after Jot & Chaigne, ACES fit by
+  K. Narkowicz, hashes by D. Hoskins and M. O'Neill (PCG).

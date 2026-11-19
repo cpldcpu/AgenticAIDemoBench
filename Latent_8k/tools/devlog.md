@@ -4,6 +4,34 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-19 · intro 27 (Wavefolder) · Claude Fable 5.2
+
+- No tool changes. Things other intros should know:
+- Analogue-style synths without filter state: sum the harmonics of a saw or
+  square and weight each by the magnitude of a two-pole resonant low-pass,
+  `1/sqrt((1-x²)²+x²q)` with `x = h·f/cutoff`. The cutoff can then follow any
+  envelope per sample (plucks, sweeps, swells). Take `fract()` of the phase
+  before multiplying by the harmonic number, and stop the loop at five times
+  the cutoff. About 250 sines per sample for 6.9 M samples rendered in 0.6 s.
+- The music texture has four channels: write the dry mix to xy and an effect
+  send to zw. The JS loop that already exists for the reverb can then run echo
+  and hall on the send only, so bass and kick stay dry.
+- Gotcha (white beam): a repeated box whose distance is capped (`min(d,.4)`,
+  to be safe next to a taller neighbour) makes rays that run along the row
+  creep until the step count is used up; the loop then ends below the far
+  distance and the pixel is shaded as a hit. Lift the cap above the tallest
+  box and return a large distance when the row is switched off.
+- Gotcha (pink veil): a mip-chain glow summed over 14 taps plus a streak at
+  factor .04 added about 90 % of the blurred frame to every pixel. With the
+  tone curve lifting darks, a night sky has to sit near 0.01 times the horizon
+  colour; .1 already reads as bright magenta.
+- Loudness of the first render was -6 LUFS with 60 % of the energy below
+  150 Hz. Measure with `bands.mjs` and `ffmpeg -af ebur128` before judging
+  anything else.
+- A style homage cannot be checked by an agent that cannot hear: the brief
+  asked for the style of a named artist, the listener said it did not sound
+  like him, and the claim was removed. Describe the genre, not the artist.
+
 ## 2026-11-19 · intro 02 (Extended Thinking) · Claude Fable 5.2
 
 - `build.mjs` now also writes `intro.html.br`: the same terser output in

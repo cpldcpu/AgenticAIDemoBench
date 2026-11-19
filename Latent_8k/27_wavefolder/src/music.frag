@@ -58,6 +58,10 @@ void main(){
   f=fq(d+7+2*k+k/3+(b>=48&&b<64?7:0));
   s=sw(f*x,f,300.+(400.+3e3*smoothstep(0.,8.,br))*(b>=32&&b<40?.4:1.+.4*sin(br*.785))*exp(-x*14.),.3,2.)*exp(-x*9.)*sat(x*800.)*smoothstep(71.,66.,br)*(.18-.06*sn);
   o+=s*(i%2<1?vec4(1,.5,1,.3):vec4(.5,1,.3,1));
+  // in the last chorus a second one sparkles two octaves above, three steps behind
+  k=(i+3)%8;k=k<5?k:8-k;
+  f=fq(d+21+2*k+k/3);
+  if(b>=56&&b<64)o+=sw(f*x,f,5e3,.5,2.)*exp(-x*14.)*sat(x*800.)*(i%2<1?vec4(.2,.6,.2,.6):vec4(.6,.2,.6,.2))*.1;
   // pad: a seventh chord, two detuned saws for each note, one to each ear; it swells on every chord
   a=sat(y*5.)*sat((2.-y)*30.)*du*smoothstep(3.,8.,br)*smoothstep(71.,66.,br)*.032;
   // in the chorus the same chord is stabbed in a 3-3-2 rhythm, an octave up: z is the time since the last stab
@@ -100,5 +104,7 @@ void main(){
   }
   // and a crash begins the next eight
   if(b>7&&b<72&&b%8<1)o+=hp*exp(-y*3.)*vec4(.2,.15,.1,.1);
+  // the last downbeat: one low drum and a cymbal, left to ring
+  if(b==68)o+=(sin(6.2832*(50.*y+6.*(1.-exp(-y*20.))))*exp(-y*3.)+hp*exp(-y*2.)*.3)*vec4(.6,.6,.3,.3);
   O=o;
 }

@@ -88,6 +88,7 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="24_tilt/media/pouet_400x300.jpg" width="200"> | [24 Tilt](24_tilt/) | Gemini 4 Argon | 8,179 bytes |
 | <img src="25_kindling/media/pouet_400x300.jpg" width="200"> | [25 Kindling](25_kindling/) | Claude Fable 5.2 | 7,587 bytes |
 | <img src="26_una_corda/media/pouet_400x300.jpg" width="200"> | [26 Una Corda](26_una_corda/) | Claude Opus 5.5 | 8,178 bytes |
+| <img src="27_wavefolder/media/pouet_400x300.jpg" width="200"> | [27 Wavefolder](27_wavefolder/) | Claude Fable 5.2 | 6,351 bytes |
 | <img src="28_from_here/media/pouet_400x300.jpg" width="200"> | [28 From Here](28_from_here/) | GPT-6.2 Astra | 8,069 bytes |
 | <img src="29_the_yellow_cup/media/pouet_400x300.jpg" width="200"> | [29 The Yellow Cup](29_the_yellow_cup/) | GPT-6.2 Astra | 7,962 bytes |
 | <img src="30_spillway/media/pouet_400x300.jpg" width="200"> | [30 Spillway](30_spillway/) | Gemini 4 Neon | 8,148 bytes |

@@ -95,7 +95,7 @@ void main(){
       // a tower: segments of light
       p=fd(p);
       w=0.;
-      col=mix(CA,CB,p.y*.4)*(.1+step(.3,fract(p.y*4.))*1.5);
+      col=mix(CA,CB,sat(p.y*.4))*(.03+step(.3,fract(p.y*4.))*.5);
     }else if(e<h){
       // chrome: it mirrors the sky above and the grid below
       n=vec3(0);
