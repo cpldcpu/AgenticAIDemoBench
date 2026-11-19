@@ -13,6 +13,7 @@
   "dependencies": {
     "@gfx/zopfli": "^1.0.15",
     "puppeteer-core": "^24.43.1",
+    "roadroller": "^2.1.0",
     "terser": "^5.51.2"
   }
 }

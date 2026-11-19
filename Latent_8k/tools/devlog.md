@@ -4,6 +4,147 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-19 · intro 02 (Extended Thinking) · Claude Fable 5.2
+
+- `build.mjs` now also writes `intro.html.br`: the same terser output in
+  `<body><script>…</script>`, packed with brotli (quality 11). For Extended
+  Thinking it is 6,040 bytes against 6,958 for `intro.html`. `intro.html`,
+  `intro_fetch.html` and `dev.html` are byte-identical to before.
+- New `serve_br.ps1`: Edge 157 has no `DecompressionStream('brotli')` (only
+  Firefox and Safari do), so the brotli build cannot unpack itself from a
+  local file. The script serves it on localhost with `Content-Encoding: br`.
+- Gotcha: a `<script>` that is still open at the end of the file is parsed but
+  never run. The closing tag costs 4 bytes after brotli.
+- `build.mjs <introDir> <variant>` builds from `src_<variant>/` into
+  `intro_<variant>.*`. Used for `02_extended_thinking/src_lean` (no title
+  screen, shared shader header): 5,468 bytes as brotli, frames and audio
+  bit-identical to the normal build.
+- `RENAME_OPT=<tries>` in `build.mjs`, with `scoped()` in `glslmin.mjs`:
+  locals of different functions are separate symbols, and a seeded hill climb
+  swaps names and keeps what makes the brotli output smaller. On the lean
+  build: flat names 5,553, scoped start 5,498, after 3,000 tries 5,468. The
+  release is then the searched code itself; running terser again shifted its
+  own variable names (it picks them by letter frequency) and lost 10 bytes.
+- `BROTLI_SWEEP=1` tries a few encoder settings; it gained 0 to 6 bytes.
+- `ROADROLLER=<1|2>` in `build.mjs` (new dependency `roadroller`): the code
+  is packed with Roadroller before zopfli. Extended Thinking's `intro.html`:
+  6,958 -> 6,472, and 6,407 together with `RENAME_OPT=3000` (the search aims
+  at brotli but helps here too). Frames and audio bit-identical, start-up
+  not slower. Roadroller writes non-ASCII characters as `\uXXXX`; the
+  build's unpack-and-compare check allows for that.
+- Extended Thinking's `src/` now adds the shader header in `main.js`, so its
+  `.frag` files have no `#version` line and `glcheck.mjs` cannot compile
+  them as they are.
+- Measured on Extended Thinking, for other intros that need bytes:
+  - Roadroller before brotli: no gain (6,021 against 6,019).
+  - WebGL call hashing: about 40 bytes under brotli. Not done, because a new
+    browser method could collide with the hash.
+  - Integer literals in vector constructors (`vec3(7,20,x)`): 4 bytes larger.
+    Small exact rewrites are noise under brotli.
+  - The title screen costs 485 bytes, the terminal text 465. The three
+    shaders alone are about 4.9 kB as brotli.
+- Source for the options: https://www.pouet.net/topic.php?which=13094
+
+## 2026-11-18 · intro 28 (From Here) · GPT-6.2 Astra
+
+- The built-in GLSL minifier now preserves `layout(location=...)` and starts preprocessor directives on a fresh line. From Here uses explicit instance attribute locations and compiles the two branches of one shader source for its vertex and fragment stages.
+- Rebuilt Extended Thinking in a temporary directory. Its standalone file matched the original byte for byte at 6,958 bytes.
+
+## 2026-11-18 · intro 26 (Una Corda) · Claude Opus 5.5
+
+- No tool changes. Things other intros should know:
+- Music as one draw call per note: render each note into the float audio
+  texture with additive blending (`EXT_float_blend`, `blendFunc(1,1)`) and a
+  scissor over the rows its samples cover. 840 notes with up to 71 partials
+  each took 0.3 s, and no single draw can hit the GPU timeout.
+- Thin wires (piano strings) are not marched: cylinders along one axis are met
+  in cell order where the ray crosses their thin band, and the box-filter
+  overlap of pixel and string gives clean anti-aliased lines at any distance.
+- Gotcha (NaN on D3D): `min(NaN,40.)` returns 40, so NaNs look like
+  overexposure spread by the bloom. `isnan()` was optimised away; test with
+  `x<1e9?0.:1.`. Two sources here: `exp(p.y*40.)` overflowing to inf times 0,
+  and normals of a flat field far away (reflection rays into the sky) - skip
+  shading when the march escapes.
+- Gotcha (JS): a helper that loops with a shared global (`for (l of X)`)
+  clobbered the caller's `l`; every melody note got a NaN onset and was
+  silently not drawn. Decode the note list back to note names in node before
+  trusting a spectrogram.
+- Gotcha: the camera basis `cross(w,up)` mirrors the image; use
+  `cx=cross(up,w), cy=cross(w,cx)`.
+- Domain-repeated parts (black keys) need their index clamped or they repeat
+  to the horizon and show up as glints far away.
+- Loudness: a classical mix normalised to peak sat at -23 LUFS and the user
+  found it quiet. A compressor of a few bytes, gain `1.2/(.3+env)` with an
+  envelope `max(|x|, env*.99997)`, gave -17 LUFS and cannot clip.
+
+## 2026-11-18 · intro 25 (Kindling) · Claude Fable 5.2
+
+- No tool changes. Things other intros should know:
+- Volumetric shadows without a shadow march: if the occluders are vertical
+  cylinders and there is one light, put them on RINGS around the light
+  (ring k has `5+3k` cells, one jittered trunk per cell, jitter kept inside
+  30-70 % of the cell). From the light there is then at most one trunk per ring
+  in any direction, and "does this point see the light" is one segment-circle
+  test per ring. Six rings cost little enough to run for 24 fog samples on
+  every ray (5-7 ms per 1080p frame in total on an RTX 5090). The same function
+  shades the surfaces. In the distance function, look at the two nearest rings
+  and two nearest cells on each (4 evaluations) and the field stays continuous.
+- The ring layout also tells you where a camera can stand: an angle on a cell
+  border of the inner ring has a free line to the centre. The first version
+  used arbitrary angles and had a trunk in front of the fire in every third
+  shot.
+- Gotcha: `glslmin` does not know the non-square matrix constructors. It
+  renamed `mat2x3(...)` to `aa(...)`; the source passed `glcheck`, only the
+  built `dev.html` failed ("no matching overloaded function"). Use
+  `a*u.x+b*u.y`, and glcheck the minified text when a build fails (a ten-line
+  script that calls `minify()` and breaks the lines at `;` gives real line
+  numbers).
+- Gotcha: a normal that is the SUM of `e*map(p+e*h)` is tiny before it is
+  normalised. Adding a noise bump of +-0.3 to it replaces the normal with
+  noise: every surface looked like camouflage. Normalise, add the bump,
+  normalise again.
+- Fog lit by a point light: with the camera near the light the in-scatter
+  integral saturates and the whole frame is one colour. What fixed it: no
+  scattering within 0.5-3 m of the fire (hot air has no mist), a mist layer
+  that ends below a high camera, and a softened falloff `1/(1+0.12 d^2)` so the
+  beams still reach the far trunks.
+- Depth of field with emissive volumes: flames have no depth, so they take the
+  blur radius of whatever is behind them. Multiply the radius by
+  `1-sat(accumulated emission)`; the flame and the figures inside it stay
+  sharp.
+- Volumetric figures (a distance field used as an emission density, not as a
+  surface) are immune to the mirror-plane and cell-border tunnelling of the
+  entries for intros 11 and 18: asymmetric legs (`sign(a)`) and one figure per
+  polar cell need no guards. Budget 48 samples through a 5 m sphere for limbs
+  of 5-10 cm, and keep the camera at least one figure height away, or they
+  become a blur.
+- Making a radial arrangement look natural: warp the polar angle before
+  dividing it into sectors (`a+=.3*sin(2.*a+1.)`, monotonic because 0.6 < 1),
+  and take size and distance per sector from a hash. Hash `mod(sector,count)`:
+  at the `atan` seam the same sector has two different indices.
+- Gotcha: `S=(index)*morph` to save a variable changes the index while the
+  morph fades (formation 3 became 1.5 and showed formation 1). Keep the
+  selector and the blend factor apart.
+- Audio: random-amplitude clicks (fire crackle) with `pow(hash,5)*6` clipped
+  several times a second and kept a peak of 0.78 in the quiet tail after the
+  music had ended. Check the peak of the sections that should be quiet.
+- `audiostat.mjs` frame times doubled (5 -> 10 ms) for one run while another
+  agent was capturing on the same GPU. Measure twice before optimising.
+- A second light in the fog loop is nearly free: accumulate a `vec3` with one
+  term per light (`e+=density*vec3(fire, moon, 0)`). A soft cylinder of
+  moonlight through the canopy gap turned a flat dark opening into a picture.
+  It has to fade while the main light is on, or it sits in front of the fire
+  as a pale column.
+- Gotcha: particles drawn as a segment between "now" and "a moment ago" need
+  the earlier moment passed into the position function. Overriding the age
+  inside the function (for a burst) made both ends identical except for a
+  swirl term computed before the override, and the streaks came out sideways.
+- Cheap additions that changed the picture a lot: fireflies in the existing
+  particle loop, a star of seven chord lines as emission on the ground, a moon
+  disc and one noise band of northern light in the sky. Together with the
+  moon shaft, skirts for the figures and a final spark burst they cost 289
+  bytes of the packed file.
+
 ## 2026-11-17 · intro 20 (Die Shrink) · Claude Opus 5.5
 
 - New tool `tools/bands.mjs` (listed in `readme.md`): RMS, peak and the share
