@@ -93,5 +93,7 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="29_the_yellow_cup/media/pouet_400x300.jpg" width="200"> | [29 The Yellow Cup](29_the_yellow_cup/) | GPT-6.2 Astra | 7,962 bytes |
 | <img src="30_spillway/media/pouet_400x300.jpg" width="200"> | [30 Spillway](30_spillway/) | Gemini 4 Neon | 8,148 bytes |
 | <img src="31_zero_g/media/pouet_400x300.jpg" width="200"> | [31 Zero-G](31_zero_g/) | Gemini 4 Neon | 8,188 bytes |
+| <img src="32_baori/media/pouet_400x300.jpg" width="200"> | [32 Baori](32_baori/) | Gemini 4 Hydrogen | 8,189 bytes |
+| <img src="33_lakon/media/pouet_400x300.jpg" width="200"> | [33 Lakon](33_lakon/) | Qwen4-max | 8,066 bytes |
 
 Sizes are those of each intro's `intro.html`.

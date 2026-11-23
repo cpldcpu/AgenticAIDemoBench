@@ -1,0 +1,35 @@
+<h1 class="pt">scene stats</h1>
+<p class="lead scene-lead">Release history for the human demoscene, drawn from Pouët. <span id="scene-snapshot"></span></p>
+<details class="box scene-summary">
+  <summary>The release data shows no clear scene-wide surge as AI tools became available.</summary>
+  <div>
+    <p>Four checks from the November 2026 snapshot</p>
+    <ul>
+      <li><strong>Overall output was flat.</strong> Pouët recorded 996 coded releases in January–October 2026 and 1,001 in the same months of 2025.</li>
+      <li><strong>Launch timing showed no clear overall increase.</strong> This held after accounting for seasonality, long-term trends, major parties, and the COVID period.</li>
+      <li><strong>Groups active in both years shipped less.</strong> Across 238 matched groups, credited output fell about 6%, with shared releases divided among the credited groups.</li>
+      <li><strong>Most of the 4K increase was party-tagged.</strong> Of the 32 additional 4K releases, 27 carried a party tag.</li>
+    </ul>
+    <p>Pouët can include AI-assisted releases and has no structured AI-use field in this snapshot. Release counts capture what shipped. Time saved and changes in project scope are outside that measure.</p>
+  </div>
+</details>
+<div id="scene-stats">
+  <div class="tabs scene-tabs" role="tablist" aria-label="Scene stats views">
+    <button id="scene-tab-platforms" role="tab" aria-selected="true" aria-controls="scene-view" data-scene-tab="platforms">Platforms</button>
+    <button id="scene-tab-formats" role="tab" aria-selected="false" aria-controls="scene-view" data-scene-tab="formats" tabindex="-1">Formats</button>
+    <button id="scene-tab-events" role="tab" aria-selected="false" aria-controls="scene-view" data-scene-tab="events" tabindex="-1">Events</button>
+    <button id="scene-tab-peaks" role="tab" aria-selected="false" aria-controls="scene-view" data-scene-tab="peaks" tabindex="-1">Peaks</button>
+  </div>
+  <section id="scene-view" class="scene-view" role="tabpanel" aria-labelledby="scene-tab-platforms">
+    <p role="status">Loading release data…</p>
+  </section>
+  <details class="scene-methods">
+    <summary>Data &amp; methods</summary>
+    <p>One Pouët production counts once in the all-platform total and once on each platform it tags. The event view uses the five highest-ranked platforms as its combined series. Peaks use complete calendar years. Winter runs from December through February and takes the year it ends. Releases with only a known year appear in annual counts.</p>
+    <p>Format stacks assign one category per coded release in this order: coded wild, size-limited, demo, intro or dentro, then other. Coded wild uses entries with a qualifying coded type. Size-tag views include all coded entries with that tag.</p>
+    <p>Party status comes from Pouët competition credits. Event dates mark timing.</p>
+    <p><a href="https://data.pouet.net/">Pouët data exports</a> · <a href="scene-data.json" download>Download chart data</a></p>
+  </details>
+</div>
+<noscript><p>Enable JavaScript to explore the charts. <a href="scene-data.json" download>Download chart data</a></p></noscript>
+<script type="module" src="scene-stats.js"></script>

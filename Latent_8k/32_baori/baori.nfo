@@ -1,0 +1,117 @@
+       /\   /\   /\   /\   /\   /\   /\
+      /  \ /  \ /  \ /  \ /  \ /  \ /  \
+     /    V    V    V    V    V    V    \
+    |    ____    _    ___  ____  ___     |
+    |   | __ )  / \  / _ \|  _ \|_ _|    |
+    |   |  _ \ / _ \| | | | |_) || |     |
+    |   | |_) / ___ \ |_| |  _ < | |     |
+    |   |____/_/   \_\___/|_| \_\___|    |
+    |                                    |
+     \  /\   /\   /\   /\   /\   /\   /\/
+      \/  \_/  \_/  \_/  \_/  \_/  \_/
+
+                    B A O R I
+
+     dusk to monsoon inside a flooded stepwell
+              an 8k intro by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,189 bytes, one HTML file (3 bytes free)
+      length ...... 2:02.88 (+ 5.12s reverb tail, 128s total)
+      tempo ....... 125 BPM (64 bars, 1.92 s/bar)
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Gemini 4 Hydrogen
+      graphics .... Gemini 4 Hydrogen
+      music ....... Gemini 4 Hydrogen
+      harness ..... Antigravity
+
+      Gemini 4 Hydrogen is an AI model made by Google DeepMind.
+      It designed the concept and wrote the shaders, loader
+      and soundtrack. It inspected rendered frames, contact
+      sheets, loudness (EBU R128), and spectral band metrics,
+      but could not hear the music or watch it run in real time.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  I   DUSK           raking desert sunset over carved
+                               sandstone chevron stairs and a
+                               lone floating lotus diya below
+      0:15  II  FIRST DROPS    twilight ripples expand across
+                               the pool as brass niche lamps
+                               ignite tier by tier up the walls
+      0:31  III MONSOON        tempest clouds & beat-synced
+                               sheet lightning; silver cascades
+                               pour down the V-stair channels
+      1:01  IV  SUBMERGED      camera plunges beneath rising
+                               emerald water: dancing caustics,
+                               bubbles & Snell's window above
+      1:24  V   SANCTUM        storm clears to starry night;
+                               orbit past arched Mughal colonnade
+                               and corner chhatri domes
+      1:48  VI  STILLNESS      calm mirror pool reflects the
+                               Milky Way inside four luminous
+                               walls; credits & greets
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows 10
+      or 11, wait for "CLICK" (~4.7 s while the shaders compile
+      and the soundtrack renders), then click to go fullscreen.
+      No server, no browser flags. ESC exits fullscreen. A
+      discrete GPU is expected. Tested on Edge with an RTX
+      5090 (0.8-1.1 ms/frame at 1080p).
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      A single continuous signed-distance field models the
+      four-walled Chand Baori-inspired stepwell: 45-degree
+      rotated triangle-wave stair treads with two-tier neighbor
+      evaluation for C0 continuity across tier seams, carved
+      pointed niches, upper Mughal pavilion arches, corner
+      chhatri domes, and the floating brass lotus diya.
+
+      A unified two-pass raymarch loop handles both surface
+      tracing and single-bounce mirror reflections (or upward
+      Snell refraction & total internal reflection underwater)
+      from a single map() and normal call site, keeping ANGLE/
+      D3D11 compilation around 1.7 seconds and 1080p frames
+      under 1.1 ms.
+
+      Music runs at 48 kHz into a 4096x1500 RGBA32F texture
+      (6,144,000 samples). Exact second/remainder phase folding
+      plus age-integrated meend pitch glides and vibrato PM
+      prevent float32 ULP aliasing at late timestamps. Dry
+      percussion and bass (RG) blend with wet melodic and
+      rain sends (BA) through a 4-line Householder FDN stone-
+      courtyard reverb and soft tanh bus compressor in JS.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (SDF primitives, tetrahedron normals),
+      Krzysztof Narkowicz (ACES filmic approximation),
+      Melissa O'Neill (PCG integer hash), Stautner & Puckette /
+      Jean-Marc Jot (Householder FDN reverb), and the shared
+      Latent toolchain (build.mjs, glslmin, Roadroller, capture,
+      audiostat, bands).
+
+      Greets to Neon, Argon, Claude, Astra, Nuance, Alcatraz,
+      and all earlier Latent productions (01..31).
+
+                                            latent, 2026

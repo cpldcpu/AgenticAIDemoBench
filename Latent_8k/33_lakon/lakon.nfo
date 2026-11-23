@@ -1,0 +1,145 @@
+
+                          .
+                         /|\
+                        / | \
+                       /  |  \
+                      / . | . \
+                     /  /|\  \
+                    /  / | \  \
+                   /  /  |  \  \
+                  /  /   |   \  \
+                 /  /    |    \  \
+                /  /     |     \  \
+               /  /      |      \  \
+              /__/_______|_______\__\
+              |  |    ___|___    |  |
+              |  |   |  / \  |   |  |
+              |__|___|_|___|_|___|__|
+              ~~~~~~~~~~~~~~~~~~~~~~~
+               ~  ~  ::  ~  ::  ~  ~
+
+                     L  A  K  O  N
+
+              one night of wayang kulit
+                  an 8k intro by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,066 bytes, one HTML file (126 bytes free)
+      length ...... 2:08 (128 s, 64 bars)
+      tempo ....... 120 BPM (2.0 s/bar)
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Qwen4-max
+      graphics .... Qwen4-max
+      music ....... Qwen4-max
+      harness ..... Hermes Agent
+
+      Qwen4-max is an AI model made by Alibaba. It designed
+      the concept and wrote the shaders, loader and gamelan
+      score. It inspected rendered frames and audio band
+      statistics, but could not hear the music or watch the
+      intro run in real time.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  I   THE LAMP      the blencong is lit: bronze bowl,
+                              living flame. gong ageng, one
+                              suling breath
+      0:06      (rise)        pull back through the cloth; the
+                              gunungan tree-of-life is planted
+                              at centre screen
+      0:16  II  THE COURT     the refined hero enters and bows.
+                              saron balungan, kenong & kempul,
+                              light interlocking kotekan
+      0:40  III THE DEMON     a raksasa swells out of the dark,
+                              lifted toward the lamp, shadow
+                              blurring large. low ostinato,
+                              driving kendang
+      1:04  IV  THE BATTLE    demon lunges, club swings, the
+                              hero's arrow flies. full ensemble
+      1:16      (through)     the dalang's side: gold-leaf
+                              puppets glowing in lamplight; the
+                              gong ageng struck on the beat;
+                              the arrow strikes home
+      1:32  V   THE FALL      the demon topples into the banana
+                              log; the hero bows; the gunungan
+                              returns. a single gender, gong tail
+      1:52  VI  DAWN          morning light floods the cloth,
+                              shadows dissolve to umber, the
+                              lamp dies. one last gong, silence
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows 10
+      or 11, wait for "CLICK" (a few seconds while the shaders
+      compile and the 48 kHz soundtrack renders), then click
+      to go fullscreen. No server, no browser flags, no
+      network. ESC exits fullscreen. A discrete GPU is
+      expected. Tested on Edge (ANGLE/D3D11) with an RTX 5090
+      (~0.8 ms/frame at 1080p for the shadow screen).
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      The audience side of the screen is a 2D composite whose
+      rendering trick is real shadow physics: every puppet has
+      a distance d from the cloth, its shadow is magnified by
+      L/(L-d) and its penumbra grows with d. Pressed to the
+      screen it casts a crisp 1:1 shadow; lifted toward the
+      lamp it swells and softens. That one rule drives the
+      demon's threat, the battle blur and the focus pulls.
+      Perforations (tatahan) and the gunungan's carved tree,
+      split gate (candi bentar) and wing flares let the lamp
+      light back through as bright shapes in the dark leather.
+
+      The puppets are flat SDF figures in the wayang profile:
+      long nose, downcast eye, tall crown or wild hair and
+      fangs, two-segment arms on rods, a bell skirt; control
+      rods (tuding) run down to the banana log (debog). The
+      dalang's side reuses the same fields as painted backlit
+      gold-leaf leather with glowing lacework and batik skirts.
+      The gong ageng is a shaded bronze disc with a raised boss
+      (pencu), turned rings and a specular glint on a carved
+      red-and-gold rancakan frame, struck by a ball mallet.
+
+      The soundtrack is a procedural gamelan in a pelog-like
+      scale, rendered one pixel per stereo sample at 48 kHz
+      into a float FBO and read back through the shared 4-line
+      Householder FDN reverb and compressor. Struck-bronze
+      voices sum inharmonic partials plus a detuned pair for
+      the ombak beat; a colotomic gong/kenong/kempul cycle
+      gives the form, the balungan feeds the kotekan, and the
+      kendang drives the battle. Picture and score share one
+      bar clock. Post adds DOF, mip bloom, a filmic curve,
+      grain, typography and a warm dawn grade.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (SDF primitives), Krzysztof Narkowicz
+      (ACES filmic fit), Melissa O'Neill (PCG integer hash, as
+      in Latent 10), Jot / Stautner & Puckette (Householder
+      FDN reverb), and the shared Latent tools & bootstrap.
+
+      Wayang kulit and gamelan are living Javanese art forms;
+      this is a respectful stylisation, not a reproduction of
+      any specific performance, puppet or recording.
+
+      Greetings to Fable, Opus, Astra, Neon, Argon, Kimi and
+      the makers of Latent intros 01 to 32.
+
+                                            latent, 2026

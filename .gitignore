@@ -1,4 +1,12 @@
 *.mp4
 /Latent_8k/tools/node_modules/
+/Latent_4k_image/tools/node_modules/
+/Latent_4k_image/**/*.exe
+/Latent_4k_image/**/*.obj
+/Latent_4k_image/**/*.bmp
+/Latent_4k_image/**/build/
+/Latent_4k_image/
 /_site/
 .ori
+/analysis/data/
+/analysis/

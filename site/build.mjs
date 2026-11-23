@@ -204,6 +204,7 @@ function page(file, title, body, o = {}) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(o.desc || cfg.tagline)}">
+${o.noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(o.desc || cfg.tagline)}">
 ${o.image ? `<meta property="og:image" content="${esc(o.image)}">` : ''}
@@ -238,7 +239,9 @@ const card = p => `<a class="card" href="p/${p.id}/index.html" data-n="${p.n}" d
 // ---------- build ----------
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
-for (const f of ['style.css', 'app.js']) fs.copyFileSync(path.join(here, f), path.join(out, f));
+for (const f of ['style.css', 'app.js', 'scene-stats.js', 'scene-chart.js', 'scene-data.json']) {
+  fs.copyFileSync(path.join(here, f), path.join(out, f));
+}
 fs.writeFileSync(path.join(out, '.nojekyll'), '');
 
 // front page
@@ -366,6 +369,8 @@ ${rows.map((r, i) => `<div class="model" id="${slug(r.m)}"><div class="rank">${i
 <div class="who"><h3>${esc(r.m)}</h3><span>${[...new Set(r.ps.map(p => p.harness).filter(Boolean))].map(h => `<span class="hn">${esc(h)}</span>`).join('')}${r.ps.length} prod${r.ps.length > 1 ? 's' : ''} · avg score ${r.score.toFixed(1)} · 👍 ${r.up} · 👎 ${r.down} · ❤️ ${r.heart} · avg ${num(Math.round(r.ps.reduce((a, p) => a + p.size, 0) / r.ps.length))} bytes</span></div>
 <div class="thumbs">${r.ps.map(p => `<a href="p/${p.id}/index.html" title="${esc(p.title)}"><img loading="lazy" src="p/${p.id}/media/${p.shot}" alt="${esc(p.title)}"></a>`).join('')}</div></div>`).join('\n')}
 </div>`, { nav: 'models' });
+
+page('scene-stats.html', `scene stats — ${cfg.name}`, read(path.join(here, 'scene-stats.html')), { noindex: true });
 
 // about
 page('about.html', `about — ${cfg.name}`, `

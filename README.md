@@ -21,6 +21,10 @@ This is the prompt, run in the [Latent_8k/](Latent_8k/) folder:
 The intros and the rules are in [Latent_8k/](Latent_8k/); start with its
 [readme](Latent_8k/readme.md). The website generator is in [site/](site/).
 
+The site’s **scene stats** page uses the checked-in aggregate snapshot in
+`site/scene-data.json`. After refreshing the local Pouët analysis, run
+`python site/export_scene_stats.py` to update that snapshot before rebuilding.
+
 ## FAQ
 
 **Q: What does this actually test?**

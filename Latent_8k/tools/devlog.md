@@ -4,6 +4,45 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-20 · intro 33 (Lakon) · Qwen4-max
+
+- No tool changes. Things other intros should know:
+- A flat 2D/2.5D intro can still spend the whole 8k: six scenes (lamp close-up,
+  shadow screen, court, demon, battle, dalang's-side colour world, gong close-up,
+  dawn) plus a full gamelan score packed to 8,066 bytes only with `ROADROLLER=2`
+  (plain zopfli was ~300 bytes over). Budget for Roadroller when a 2D intro has
+  many scenes.
+- The wayang shadow trick: give each puppet a distance `d` from the cloth, magnify
+  its SDF shadow by `L/(L-d)` and grow the penumbra with `d`. Pressed to the screen
+  = crisp 1:1; lifted toward the lamp = swollen and soft. One physical rule drives
+  threat, battle blur and focus pulls. Keep the near-screen penumbra tiny
+  (`ss(.0016,-.0016,sdf)` ≈ 2 px at 1080p) or the leather reads as fuzz.
+- Gotcha (slab sign): a skirt slab `y∈[a,b]` is `max(a-y, y-b)`, NOT `max(y-a, b-y)`
+  (the latter is the empty complement and the skirt silently never renders, leaving
+  floating legs). Same family as the half-space-vs-slab trap in intro 17.
+- Gotcha (ACES kills warm dawn): the filmic curve desaturates bright colours hard —
+  a warm `vec3(1,.86,.62)` dawn cloth came out neutral taupe after tone mapping. Fix:
+  apply the dawn colour grade (warm multiply + sun glow + horizon rose band) in the
+  POST shader AFTER the tone curve, not in the scene. Also fade shadows only partly
+  (`sh *= 1-dawn*.62`) so umber silhouettes stay readable against the glow.
+- A 2.5D "painted leather" puppet side reads as flat clip-art unless it is clearly
+  BACKLIT: add a warm transmission glow to the whole body, dense glowing lacework
+  (not sparse random dots), saturated batik skirts and a strong warm rim. Even then
+  it reads as a stylised backlit icon, not photoreal carved leather — keep it a brief
+  accent, not a sustained hero shot.
+- Battle staging: figures must CLOSE distance and overlap weapons, not stand apart.
+  Lunge the demon toward the hero, swing the club, fly a visible arrow between them,
+  and fade the gunungan out of the battle (it signals "scene divider", not combat).
+  Keep the demon magnified but check on a still that it does not overlap the hero
+  into one blob — perspective compression merges them.
+- Vision backend rate-limits frequently; `hermes chat -Q -m anthropic/claude-fable-5
+  --max-turns 2 --image ABS_PATH -q "..."` is a reliable independent full-frame
+  review. Numeric per-still mean RGB / dark-pixel bbox catches dawn-that-is-gray and
+  missing subjects when no vision is available.
+- Long combined PowerShell commands (build+capture+capture) hit the 5-minute approval
+  timeout when the user is away; keep captures as single short commands. Pure-node
+  `build.mjs` runs from bash without approval.
+
 ## 2026-11-19 · intro 27 (Wavefolder) · Claude Fable 5.2
 
 - No tool changes. Things other intros should know:
