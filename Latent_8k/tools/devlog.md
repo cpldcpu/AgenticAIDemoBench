@@ -4,6 +4,74 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-23 · intro 38 (Snow Globe) · Mistral Large 4 in Mistral Vibe
+
+- No tool changes. Things other intros should know:
+
+- Gotcha (text windows): overlapping on-screen text windows in post.frag draw
+  two lines on top of each other. Make the windows half-open and abutting
+  (`z1[i]==z0[i+1]`); the per-window smoothstep fades then hand over cleanly
+  with no frame where both are visible.
+
+- Gotcha (glass through-view and reflection): `room()` contains a lamp disc
+  (`pow(l,1200.)*5`) and a moon disc; sampled unclamped through the glass or
+  in the fresnel reflection they bloom into a white blob on the sphere.
+  Clamp both lookups: `min(room(...),vec3(.25))` for the through-glass view,
+  `min(room(...),vec3(.4))` for the reflection.
+
+- Gotcha (volumetric puffs along a ray): smoke puffs sampled per ray step
+  accumulate over all samples. Keep the per-puff gain tiny
+  (`.0011/(dd*dd*3.+.05+ag*.08)`, 3 puffs) or the chimney becomes a white
+  blob on the glass.
+
+- Snow that reads well: point flakes along a ray read as speckle; integrate a
+  density field instead and return transmittance, attenuating what is behind
+  (`colIn*sn.a`). Density = settled bed `exp(-(y-ground)*3.5)` plus, when the
+  shake envelope `SW` (same one as the camera shake and the shaker noise in
+  music.frag) is high, a vortex-ring cloud: cellular clump mask
+  `smoothstep(.3,.8,h3(floor(p*1.3)))` times swirled sine noise, in a ring
+  `exp(-((r-1.35)/.5)^2)`, lit by the lantern and cabin window. Keep a few
+  hashed flakes only for sparkle. 50 samples along the chord is 1.0-1.6 ms/frame
+  at 1080p on an RTX 5090. First version was far too dense - the whole globe
+  went solid white; keep densities low and the cloud patchy so the scene
+  shows through.
+
+- GLSL gotchas: mutually recursive helpers need prototypes declared before
+  use; `K==1.?` lexes as the float literal `1.` - write `K==1 ?` with a
+  space; int/float mixes in ternaries need explicit `float(...)`.
+
+- Size: 7,673 bytes, plain zopfli, 519 under the limit.
+
+## 2026-11-23 · intro 37 (Turbo Boost) · Claude Opus 5.5
+
+- No tool changes. Things other intros should know:
+- Gotcha (blocky glow): the scene texture's default min filter is
+  NEAREST_MIPMAP_LINEAR, so `textureLod(A,..,l)` at coarse levels returns
+  square blocks around bright lights. Intros hid this with a per-pixel random
+  tap angle, which turns into speckle around very bright sources (headlights).
+  Set `texParameteri(3553,10241,9987)` on the scene texture after creating it;
+  then fixed tap angles are smooth.
+- Stars in `sky()` also sparkle as noise when the same function is used for
+  reflections on glossy paint; gate them with a flag that only the primary
+  sky lookup sets.
+- Fog towards a horizon colour taken from `sky()` at a low elevation picks up
+  the mesa silhouette and draws vertical bands on far ground; use a constant
+  fog colour.
+- One shared formula (here the scanner head, `-cos(t*pi/beat)`) used in both
+  scene and music gives exact audio-visual sync for free; same for a voice box:
+  hash the sixteenth index with the same integer hash in both shaders.
+- With the ground as an analytic plane, the wet-road reflection is one extra
+  march from the hit point, cheap enough at 1080p (under 1 ms per frame on an
+  RTX 5090 at all sample points).
+- Gotcha (ghost lamps): a horizontal lens streak with one tap per mip level
+  at `12*2^l` pixels draws separate copies of a very bright light at doubling
+  distances. Two taps per level at `3*2^l` and `6*2^l` overlap and give a
+  continuous streak.
+- Gotcha (pitch sign): with `p.yz*=rt(a)` on local coordinates, a positive
+  angle tilts the object nose-down towards +z. The ramp and the car's pitch had
+  the opposite sign from what was intended; check on a side view.
+- Size: 7,828 bytes with `ROADROLLER=2`; plain zopfli was over the limit.
+
 ## 2026-11-20 · intro 33 (Lakon) · Qwen4-max
 
 - No tool changes. Things other intros should know:

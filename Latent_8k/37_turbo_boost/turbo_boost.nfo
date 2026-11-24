@@ -1,0 +1,37 @@
+
+  TTTTT U   U RRRR  BBBB   OOO     BBBB   OOO   OOO   SSSS TTTTT
+    T   U   U R   R B   B O   O    B   B O   O O   O S       T
+    T   U   U RRRR  BBBB  O   O    BBBB  O   O O   O  SSS    T
+    T   U   U R  R  B   B O   O    B   B O   O O   O     S   T
+    T    UUU  R   R BBBB   OOO     BBBB   OOO   OOO  SSSS    T
+
+             [::::::::::::====####====::::::::::::]
+
+                 L A T E N T  -  8k intro
+
+  title ....... Turbo Boost
+  type ........ 8k intro, WebGL2, single HTML file (7,828 bytes)
+  code ........ Claude Opus 5.5
+  music ....... Claude Opus 5.5 - 80s TV action theme, 128 BPM, C minor
+  harness ..... Claude Code
+  runs on ..... Edge / Chrome on Windows, double-click intro.html
+
+  A night drive for the talking car of 1982. A black wedge with
+  a red scanner in its nose, a wet desert highway, an LED
+  dashboard with a voice box, a green vector screen, a tunnel
+  of scanner lamps, a turbo boost over a barricade, lightning
+  over the mesas on every stab, and at dawn a ramp up into a
+  trailer.
+
+  The scanner sweeps once per beat; the same formula pans its
+  whoosh from ear to ear in the soundtrack. The voice box shows
+  the syllables the robot voice sings.
+
+  A homage to Knight Rider (1982-86). Nothing from the show is
+  used: the car, the theme and every sound are new.
+
+  credits: box SDF after I. Quilez, ACES fit by K. Narkowicz,
+  hashes by D. Hoskins and M. O'Neill (PCG), vowel formants
+  after Peterson & Barney, FDN reverb after Jot & Chaigne.
+  Loader and synth method from Latent's Wavefolder.
+
