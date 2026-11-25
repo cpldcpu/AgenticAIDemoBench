@@ -1,0 +1,25 @@
+       ___      _   _   _
+      / __| ___| |_| |_| |___
+      \__ \/ -_)  _|  _| / -_)
+      |___/\___|\__|\__|_\___|
+
+               L A T E N T  -  8k intro
+
+  title ....... Settle
+  type ........ 8k intro, WebGL2, single HTML file (8,071 bytes)
+  code ........ Claude Opus 5.5
+  music ....... Claude Opus 5.5 - waltz for music box in D minor, original
+  harness ..... Claude Code
+  runs on ..... Edge / Chrome on Windows, double-click intro.html
+
+  A house in a village in a snow globe on the sill of a house in a
+  village in a snow globe... One shot, no cuts: the camera pulls back
+  through window after window while a music box plays a waltz. At bar
+  32 the music shakes the globes, the snow goes up and turns, and the
+  camera dives back in. At the end it stops where it began - nearly.
+  Every level differs a little: the paint, the mirror side, how far
+  the candle has burnt down, and the one who stands watching.
+
+  credits: SDF techniques after Inigo Quilez, self-similar zoom by
+  scaling the field about a fixed point, ACES fit by K. Narkowicz,
+  hash by D. Hoskins, tine modes after the cantilever-beam ratios.
