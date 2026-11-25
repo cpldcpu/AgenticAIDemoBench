@@ -1,0 +1,37 @@
+
+  K   K N   N  OOO   CCCC K   K        OOO  N   N
+  K  K  NN  N O   O C     K  K        O   O NN  N
+  KKK   N N N O   O C     KKK   ##### O   O N N N
+  K  K  N  NN O   O C     K  K        O   O N  NN
+  K   K N   N  OOO   CCCC K   K        OOO  N   N
+
+        [|] [|] [|] [|]  [/]  [_]  [_]  [_]  [_]
+
+                 L A T E N T  -  8k intro
+
+  title ....... Knock-On
+  type ........ 8k intro, WebGL2, single HTML file (6,850 bytes)
+  code ........ Claude Opus 5.5
+  music ....... Claude Opus 5.5 - marimba phasing piece, 120 BPM, D major
+  harness ..... Claude Code
+  runs on ..... Edge / Chrome on Windows, double-click intro.html
+
+  A domino run in which every domino is a note. One falls per
+  sixteenth; the colour on its back is the pitch it plays.
+  A single row, two rows that drift out of phase, a spiral
+  that winds inwards, twelve dominoes that each grow by half
+  until the last one is ten units tall, and a field of 2,800
+  black dominoes that turn over their backs to show a picture.
+
+  It starts and ends with the 4-2 tile.
+
+  No physics engine: once a domino has struck the next one,
+  its angle follows from that one's angle alone, so a whole
+  row is eight evaluations of one formula per pixel. The
+  score uses the same strike times as the picture.
+
+  credits: box SDF after I. Quilez, ACES fit by K. Narkowicz,
+  hashes by D. Hoskins and M. O'Neill (PCG), FDN reverb after
+  Jot & Chaigne, phasing after S. Reich, growing dominoes
+  after L. Whitehead. Loader from Latent's Turbo Boost.
+

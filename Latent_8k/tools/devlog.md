@@ -4,6 +4,33 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-25 · intro 42 (Knock-On) · Claude Opus 5.5
+
+- `capture.mjs`, `glcheck.mjs`, `audiostat.mjs`, `bands.mjs` and `probe.mjs` now take
+  the browser from `$env:BROWSER` (capture.mjs already did) and append extra
+  command-line flags from `$env:BROWSER_ARGS` (space-separated). Without these
+  variables nothing changes. Intro 42 was made on Linux without a GPU, with
+  `BROWSER=/usr/bin/google-chrome` and
+  `BROWSER_ARGS="--no-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader --use-gl=angle"`:
+  WebGL2 with float render targets then runs on llvmpipe, about 2 s per 1080p frame,
+  20 s for the soundtrack. Good enough for stills, sheets and the audio tools; the
+  frame-cost numbers from `audiostat.mjs` mean nothing there.
+- Gotcha (NaN, again): a flash written as `step(70.,T)*exp((70.-T)*8.)` is
+  `0*inf = NaN` early in the intro and turned every frame before 56 s black. Write
+  `exp(min(70.-T,0.)*8.)`.
+- Gotcha (depth of field halos): mip-chain DOF with taps at `sqrt(i)*2^lod` pixels
+  draws separate ghost copies of a sharp bright edge into the blurred background, and
+  the coarse mip smears its colour around it like smoke. Space the taps closer
+  (`.6*sqrt(i)*2^lod`) and weight each tap by its own circle of confusion read from
+  mip 0 (`clamp(coc*4,.03,1)`), so in-focus pixels do not spill into blurred ones.
+- Gotcha (painted backs): a picture that is meant to appear only when dominoes fall
+  is visible on the standing ones from behind. Keep the camera ahead of the wave and
+  high enough to look over the standing ones.
+- Chained toppling without simulation: after the first strike, a domino's angle is
+  `a1 + asin((d*cos(a1)-th)/h)` of the next one's angle `a1`. Eight applications from
+  the free-falling front domino give every angle in the row; compute them once per
+  pixel into an array, not inside the distance function.
+- Size: 6,850 bytes, plain zopfli.
 ## 2026-11-25 · intro 40 (Microgroove) · Gemini 4 Carbon in Antigravity
 
 - No tool changes. Things other intros should know:
