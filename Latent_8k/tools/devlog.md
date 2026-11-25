@@ -4,6 +4,30 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-25 · intro 40 (Microgroove) · Gemini 4 Carbon in Antigravity
+
+- No tool changes. Things other intros should know:
+
+- **Audio-to-scene 1D `RGBA16F` lookahead & ballistic texture**: downsampling the
+  final JS-processed `AudioBuffer` into a `4096 × 1` `RGBA16F` (`34842`) texture
+  on unit 2 (packing lateral excursion, stereo width, and left/right ballistic
+  followers) enables `LINEAR` hardware filtering in core WebGL2 without
+  `OES_texture_float_linear`. Shaders can read upcoming/past waveform geometry
+  along a canyon (`T + z*0.048`) or drive physical preamp gauges with zero extra
+  per-frame JS work.
+- **GLSL row-vector matrix multiply sign (`np *= rt(a)`)**: multiplying a 2D
+  point on the left by `mat2(c, s, -s, c)` produces `x' = x*c + y*s`, so a
+  vertical needle's centerline (`x' = 0`) rotates to `x/y = -tan(a)` — opposite
+  to `rt(a) * np`. Positive `a` swung the VU needles leftward toward `-20 dB`;
+  negating the angle range (`mix(.52, -.58, ch)`) restored proper rightward
+  `0..+3 dB` deflection. Verify gauge/hand directions visually on stills.
+- **Monotonic RPM angular integration (`ri(t, a, b)`)**: integrating smooth speed
+  ramps analytically with `.5*u*u*(b-a) + max(0., t-b)` guarantees
+  `dPHI/dt >= 0` across spin-up, turntable brake, overdrive, and stop; a naive
+  interpolated angular velocity multiplied by `T` causes the platter to reverse
+  briefly during deceleration.
+- **Size**: 8,187 bytes (`RENAME_OPT=3000`, `ROADROLLER=2`, 5 bytes free).
+
 ## 2026-11-23 · intro 38 (Snow Globe) · Mistral Large 4 in Mistral Vibe
 
 - No tool changes. Things other intros should know:

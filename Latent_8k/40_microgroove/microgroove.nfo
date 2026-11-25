@@ -1,0 +1,105 @@
+       ____________________________________________________
+      /                                                    \
+     |    __  __ ___ ____ ____   ___   ____ ____   ___      |
+     |   |  \/  |_ _/ ___|  _ \ / _ \ / ___|  _ \ / _ \     |
+     |   | |\/| || | |   | |_) | | | | |  _| |_) | | | |    |
+     |   | |  | || | |___|  _ <| |_| | |_| |  _ <| |_| |    |
+     |   |_|  |_|___\____|_| \_\\___/ \____|_| \_\\___/     |
+     |                  __     __ _____                     |
+     |                  \ \   / /| ____|                    |
+     |                   \ \ / / |  _|                      |
+     |                    \_/    |_____|   L A T E N T      |
+      \____________________________________________________/
+
+                   M I C R O G R O O V E
+      analog vinyl, diamond & tube signal path in 8 kilobytes
+                    an 8k intro by Latent
+
+  ------------------------------------------------------------
+
+      type ........ 8k intro
+      platform .... Windows, browser (WebGL2)
+      size ........ 8,187 bytes, one HTML file (5 bytes free)
+      length ...... 2:02.88 (64 bars @ 125 BPM, 1.92 s/bar)
+      tempo ....... 125 BPM, F Dorian / F Minor (Picardy Fmaj9)
+      released .... November 2026
+      group ....... Latent
+
+  ------------------------------------------------------------
+    credits
+  ------------------------------------------------------------
+
+      code ........ Gemini 4 Carbon
+      graphics .... Gemini 4 Carbon
+      music ....... Gemini 4 Carbon
+      harness ..... Antigravity
+
+      Gemini 4 Carbon is an AI model made by Google DeepMind.
+      It designed the concept and wrote the shaders, loader
+      and soundtrack. It inspected rendered frames, contact
+      sheets, loudness/RMS stats, and spectral band metrics,
+      but could not hear the music or watch it run in real time.
+
+  ------------------------------------------------------------
+    the programme
+  ------------------------------------------------------------
+
+      0:00  I   33 1/3 RPM       turntable plinth, chrome strobe
+                                 turret & dots, diamond drop at bar 4
+      0:15  II  45/45 STEREO     curved obsidian stereo V-groove
+                                 canyon & octahedral carbon stylus
+      0:42  III CLASS A          twin vacuum tubes: 2400K tungsten
+                                 heaters, cobalt-violet plasma & VU
+      1:01  IV  ANTI-SKATE       power-brake drop, floating bokeh
+                                 crystals & spin-up snare build
+      1:16  V   45 RPM           overdrive canyon, 45 RPM rainbow
+                                 spectrum LP, glowing tubes & VU push
+      1:47  VI  LOCKED GROOVE    Picardy Fmaj9 run-out, cue-lift of
+                                 diamond off vinyl mirror, credits
+
+  ------------------------------------------------------------
+    how to run
+  ------------------------------------------------------------
+
+      Double-click intro.html in Edge or Chrome on Windows 10
+      or 11, wait for "CLICK" (~4.4 s while shaders compile and
+      the soundtrack renders), then click for fullscreen.
+      No server, no browser flags. ESC exits fullscreen. A
+      discrete GPU is expected. Tested on Edge with an RTX
+      5090 (2.1-5.9 ms/frame at 1080p).
+
+  ------------------------------------------------------------
+    inside
+  ------------------------------------------------------------
+
+      Four raymarched stages (turntable, 45/45 stereo canyon,
+      Class-A vacuum tube preamp, dual backlit analog VU
+      meters) share a unified 2-bounce raymarcher, 9-step
+      adaptive shadow+AO loop, and a 4096x1 RGBA16F groove &
+      ballistic VU texture downsampled directly from the
+      synthesised AudioBuffer so canyon walls, tube plasma,
+      45 RPM LP ridges, and meter needles lock 1:1 to audio.
+
+      Soundtrack runs at 48 kHz into a 4096x1440 RGBA32F
+      texture (5,898,240 samples): Rhodes FM electric piano,
+      resonant saw chord pad, FM clavinet 16th chops, octave
+      slap funk bass, kick/clap/16th hats/crashes, resonant
+      portamento lead hooks, needle-drop thump & turntable
+      brake, processed through a 4-line Householder FDN with
+      17,280-sample dotted-eighth echo and tanh bus limiter.
+
+  ------------------------------------------------------------
+    thanks and sources
+  ------------------------------------------------------------
+
+      Inigo Quilez (SDF primitives, tetrahedron normals),
+      Krzysztof Narkowicz (ACES filmic approximation),
+      Melissa O'Neill (PCG integer hash), John Chowning (FM),
+      Stautner & Puckette / Jean-Marc Jot (Householder FDN),
+      and the shared Latent toolchain (build.mjs, glslmin,
+      Roadroller, capture, audiostat, bands).
+
+      Greets to Opus, Fable, Astra, Neon, Hydrogen, Argon,
+      and Revision.
+
+                                            latent, 2026
