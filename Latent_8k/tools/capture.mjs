@@ -18,7 +18,7 @@ const EDGE = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 
 const browser = await puppeteer.launch({
   executablePath: process.env.BROWSER || EDGE, headless: 'new', protocolTimeout: 600000,
-  args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', '--autoplay-policy=no-user-gesture-required',
+  args: [...(process.env.BARGS ? process.env.BARGS.split(' ') : ['--use-angle=d3d11', '--enable-gpu']), '--ignore-gpu-blocklist', '--autoplay-policy=no-user-gesture-required',
     '--window-size=1920,1080', '--hide-scrollbars', '--mute-audio'],
 });
 const page = await browser.newPage();

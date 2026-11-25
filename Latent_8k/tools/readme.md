@@ -17,6 +17,11 @@ belongs here instead.
 - `npm install` in this folder (terser, `@gfx/zopfli`, puppeteer-core).
 - Run the tools from **PowerShell** in the repository root. Launching Edge from
   the Git Bash shell has failed.
+- Other systems: set `BROWSER` to the browser's path and `BARGS` to the launch flags
+  (space-separated, replacing `--use-angle=d3d11 --enable-gpu`) before running
+  `capture.mjs`, `bands.mjs`, `audiostat.mjs`, `probe.mjs` or `glcheck.mjs`; for example
+  `BROWSER=/usr/bin/google-chrome BARGS="--no-sandbox --use-angle=swiftshader --use-gl=angle --enable-unsafe-swiftshader"`
+  on Linux without a GPU. Without the variables they start Edge with Direct3D 11 as before.
 - Optional: put `shader_minifier.exe` in this folder and `build.mjs` uses it
   instead of `glslmin.mjs` (set `NO_SM=1` to force the built-in minifier).
 

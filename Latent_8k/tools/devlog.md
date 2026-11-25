@@ -4,6 +4,58 @@ Changes to the shared tools, newest first. See [readme.md](readme.md) for the
 rules. Entries before 2026-11-15 (intro 06) were written afterwards from the
 intros' readmes and project notes, so they are less exact.
 
+## 2026-11-25 · intro 41 (Deckle) · Claude Sonnet 5.5 in Claude Code
+
+- Tool change (backwards compatible): `capture.mjs`, `audiostat.mjs`, `probe.mjs`,
+  `bands.mjs` and `glcheck.mjs` now read two optional environment variables.
+  `BROWSER` is the path of the browser to launch (`capture.mjs` already had it; the
+  others now have it too) and `BARGS` is a space-separated list that replaces
+  `--use-angle=d3d11 --enable-gpu`. Reason: this intro was made on Linux with Chrome
+  and no GPU, where Edge and Direct3D 11 do not exist. Without the variables the
+  launch arguments are exactly as before, so nothing changes on Windows. Linux without
+  a GPU: `BROWSER=/usr/bin/google-chrome BARGS="--no-sandbox --use-angle=swiftshader --use-gl=angle --enable-unsafe-swiftshader"`.
+  A 1920x1080 frame takes about 0.25 s there.
+  `build.mjs` was not touched, so every intro builds to the same bytes as before.
+
+- Gotcha (NaN through the mip-chain bloom): one NaN pixel in the scene framebuffer
+  (in intro 41 it came from the lighthouse beam) spreads through the mip levels and
+  shows as a black block in the final picture. If the picture has black blocks, look
+  for a division, `normalize`, `sqrt` or `pow` in the scene that can see zero or a
+  negative value, and clamp its input.
+
+- Gotcha (`pow` with a negative base): `pow(x,y)` is undefined for `x<0` in GLSL. A
+  shape taper written as `pow(1.-d/4.7,1.2)` produced NaN past the end of the
+  taper; `pow(max(1.-d/4.7,0.),1.2)` fixed it.
+
+- Gotcha (GLSL ES 3.0 arrays): a ternary cannot select between two arrays
+  (`c?a:b` with array operands does not compile). Use `if` or index with `int(c)`
+  into one longer array.
+
+- Gotcha (flicker from animated hash seeds): a cell-based shape (here the clouds)
+  must not take its cell size or its hash input from an animated value. Intro 41's
+  clouds used the storm value in the cell width and in the hash seed, so every cell
+  boundary and every random shape moved while the storm value changed (50-59 s and
+  73-79 s) and the clouds jumped from frame to frame. Keep the cell size and the seed
+  constant and animate only continuous parameters (radius, height). To find this kind
+  of fault, render two stills 0.04 s apart (`capture.mjs still t out.png`) and show the
+  absolute difference: moving things show as thin outlines, jumping shapes as filled areas.
+
+- Gotcha (variable reuse): in a long `main`, a variable `a` that was used for two
+  different quantities was overwritten before its second use and drew stripes and black
+  dots. Giving the second quantity its own name (`dp`) fixed it. When a picture has
+  isolated artefacts, check for reused short names first.
+
+- Note (smoothstep): `smoothstep(e0,e1,x)` with `e0>e1` is undefined by the GLSL
+  specification. Intro 41 and earlier intros use it (for example `smoothstep(130.,126.,T)`
+  for a fade-out) and it gave the expected result on Chrome with SwiftShader/llvmpipe;
+  it was not tested on other drivers.
+
+- Music: a stateless sound shader needs every note to be a function of the sample
+  index alone. Notes that overlap a bar line (a held tone, a ring) have to be
+  evaluated for the previous note too, otherwise the cut at the bar line clicks.
+  `main.js` of intro 41 does the final `tanh` with gain 0.8; a gain of 2 gave
+  -7.9 LUFS and a peak at -0.1 dBFS. -14.9 LUFS and -1.5 dBFS is the final value.
+
 ## 2026-11-23 · intro 38 (Snow Globe) · Mistral Large 4 in Mistral Vibe
 
 - No tool changes. Things other intros should know:

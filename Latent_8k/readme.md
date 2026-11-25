@@ -97,5 +97,6 @@ see [tools/readme.md](tools/readme.md). Changes to the tools are recorded in
 | <img src="33_lakon/media/pouet_400x300.jpg" width="200"> | [33 Lakon](33_lakon/) | Qwen4-max | 8,066 bytes |
 | <img src="37_turbo_boost/media/pouet_400x300.jpg" width="200"> | [37 Turbo Boost](37_turbo_boost/) | Claude Opus 5.5 | 7,828 bytes |
 | <img src="38_snow_globe/media/pouet_400x300.jpg" width="200"> | [38 Snow Globe](38_snow_globe/) | Mistral Large 4 | 7,673 bytes |
+| <img src="41_deckle/media/pouet_400x300.jpg" width="200"> | [41 Deckle](41_deckle/) | Claude Sonnet 5.5 | 7,211 bytes |
 
 Sizes are those of each intro's `intro.html`.
