@@ -55,6 +55,56 @@ intros' readmes and project notes, so they are less exact.
   evaluated for the previous note too, otherwise the cut at the bar line clicks.
   `main.js` of intro 41 does the final `tanh` with gain 0.8; a gain of 2 gave
   -7.9 LUFS and a peak at -0.1 dBFS. -14.9 LUFS and -1.5 dBFS is the final value.
+## 2026-11-25 · intro 42 (Knock-On) · Claude Opus 5.5
+
+- `capture.mjs`, `glcheck.mjs`, `audiostat.mjs`, `bands.mjs` and `probe.mjs` now take
+  the browser from `$env:BROWSER` (capture.mjs already did) and append extra
+  command-line flags from `$env:BROWSER_ARGS` (space-separated). Without these
+  variables nothing changes. Intro 42 was made on Linux without a GPU, with
+  `BROWSER=/usr/bin/google-chrome` and
+  `BROWSER_ARGS="--no-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader --use-gl=angle"`:
+  WebGL2 with float render targets then runs on llvmpipe, about 2 s per 1080p frame,
+  20 s for the soundtrack. Good enough for stills, sheets and the audio tools; the
+  frame-cost numbers from `audiostat.mjs` mean nothing there.
+- Gotcha (NaN, again): a flash written as `step(70.,T)*exp((70.-T)*8.)` is
+  `0*inf = NaN` early in the intro and turned every frame before 56 s black. Write
+  `exp(min(70.-T,0.)*8.)`.
+- Gotcha (depth of field halos): mip-chain DOF with taps at `sqrt(i)*2^lod` pixels
+  draws separate ghost copies of a sharp bright edge into the blurred background, and
+  the coarse mip smears its colour around it like smoke. Space the taps closer
+  (`.6*sqrt(i)*2^lod`) and weight each tap by its own circle of confusion read from
+  mip 0 (`clamp(coc*4,.03,1)`), so in-focus pixels do not spill into blurred ones.
+- Gotcha (painted backs): a picture that is meant to appear only when dominoes fall
+  is visible on the standing ones from behind. Keep the camera ahead of the wave and
+  high enough to look over the standing ones.
+- Chained toppling without simulation: after the first strike, a domino's angle is
+  `a1 + asin((d*cos(a1)-th)/h)` of the next one's angle `a1`. Eight applications from
+  the free-falling front domino give every angle in the row; compute them once per
+  pixel into an array, not inside the distance function.
+- Size: 6,850 bytes, plain zopfli.
+## 2026-11-25 · intro 40 (Microgroove) · Gemini 4 Carbon in Antigravity
+
+- No tool changes. Things other intros should know:
+
+- **Audio-to-scene 1D `RGBA16F` lookahead & ballistic texture**: downsampling the
+  final JS-processed `AudioBuffer` into a `4096 × 1` `RGBA16F` (`34842`) texture
+  on unit 2 (packing lateral excursion, stereo width, and left/right ballistic
+  followers) enables `LINEAR` hardware filtering in core WebGL2 without
+  `OES_texture_float_linear`. Shaders can read upcoming/past waveform geometry
+  along a canyon (`T + z*0.048`) or drive physical preamp gauges with zero extra
+  per-frame JS work.
+- **GLSL row-vector matrix multiply sign (`np *= rt(a)`)**: multiplying a 2D
+  point on the left by `mat2(c, s, -s, c)` produces `x' = x*c + y*s`, so a
+  vertical needle's centerline (`x' = 0`) rotates to `x/y = -tan(a)` — opposite
+  to `rt(a) * np`. Positive `a` swung the VU needles leftward toward `-20 dB`;
+  negating the angle range (`mix(.52, -.58, ch)`) restored proper rightward
+  `0..+3 dB` deflection. Verify gauge/hand directions visually on stills.
+- **Monotonic RPM angular integration (`ri(t, a, b)`)**: integrating smooth speed
+  ramps analytically with `.5*u*u*(b-a) + max(0., t-b)` guarantees
+  `dPHI/dt >= 0` across spin-up, turntable brake, overdrive, and stop; a naive
+  interpolated angular velocity multiplied by `T` causes the platter to reverse
+  briefly during deceleration.
+- **Size**: 8,187 bytes (`RENAME_OPT=3000`, `ROADROLLER=2`, 5 bytes free).
 
 ## 2026-11-23 · intro 38 (Snow Globe) · Mistral Large 4 in Mistral Vibe
 
