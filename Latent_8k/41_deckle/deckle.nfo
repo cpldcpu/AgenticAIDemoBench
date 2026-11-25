@@ -1,0 +1,36 @@
+
+  DDDD   EEEEE  CCCC  K   K  L      EEEEE
+  D   D  E     C      K  K   L      E
+  D   D  EEEE  C      KKK    L      EEEE
+  D   D  E     C      K  K   L      E
+  DDDD   EEEEE  CCCC  K   K  LLLLL  EEEEE
+
+             [::::::::::::====####====::::::::::::]
+
+                 L A T E N T  -  8k intro
+
+  title ....... Deckle
+  type ........ 8k intro, WebGL2, single HTML file (7,211 bytes)
+  code ........ Claude Sonnet 5.5
+  music ....... Claude Sonnet 5.5 - chamber-folk piece, 100 BPM, D major
+                to E major
+  harness ..... Claude Code
+  runs on ..... Edge / Chrome, double-click intro.html
+
+  A paper boat sails through a day and a night: dusk, lanterns
+  and a lighthouse, a storm with one great wave, a calm after it,
+  and a dawn with cranes. Every layer of the picture is cut paper
+  with a bright cut edge and a shadow on the layer behind it. At
+  the end the picture shrinks into a frame on a desk and the torn
+  sheet it is printed on comes down over the screen.
+
+  The soundtrack is computed by a fragment shader, one pixel per
+  stereo sample, when the page loads: kalimba, flute, strings,
+  glockenspiel, brush shaker, thunder and paper sounds. The paper
+  sound at 7.2 s and at 116.4 s uses the same timing as the
+  sheet on screen.
+
+  credits: box SDF after I. Quilez, ACES fit by K. Narkowicz,
+  hashes by D. Hoskins and M. O'Neill (PCG), FDN reverb after
+  Jot & Chaigne. Loader and synth method from Latent's
+  Turbo Boost and Wavefolder.

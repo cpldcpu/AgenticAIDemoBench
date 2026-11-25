@@ -5,7 +5,7 @@ import puppeteer from 'puppeteer-core';
 const dir = path.resolve(process.argv[2]);
 const browser = await puppeteer.launch({
   executablePath: process.env.BROWSER || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless: 'new',
-  args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', ...(process.env.BROWSER_ARGS || '').split(' ').filter(Boolean)],
+  args: [...(process.env.BARGS ? process.env.BARGS.split(' ') : ['--use-angle=d3d11', '--enable-gpu']), '--ignore-gpu-blocklist'],
 });
 const page = await browser.newPage();
 page.on('console', m => console.log('[page]', m.text()));

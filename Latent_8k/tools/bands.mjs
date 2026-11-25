@@ -4,7 +4,7 @@ import path from 'node:path'; import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import puppeteer from 'puppeteer-core';
 const dir = path.resolve(process.argv[2]);
-const browser = await puppeteer.launch({ executablePath: process.env.BROWSER || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless: 'new', args: ['--use-angle=d3d11','--enable-gpu','--ignore-gpu-blocklist', ...(process.env.BROWSER_ARGS || '').split(' ').filter(Boolean)] });
+const browser = await puppeteer.launch({ executablePath: process.env.BROWSER || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', headless: 'new', args: [...(process.env.BARGS ? process.env.BARGS.split(' ') : ['--use-angle=d3d11', '--enable-gpu']), '--ignore-gpu-blocklist'] });
 const page = await browser.newPage();
 await page.evaluateOnNewDocument(() => { window.CAP = 1; });
 await page.goto(pathToFileURL(path.join(dir, 'dev.html')).href);
