@@ -82,6 +82,13 @@ intros' readmes and project notes, so they are less exact.
   the free-falling front domino give every angle in the row; compute them once per
   pixel into an array, not inside the distance function.
 - Size: 6,850 bytes, plain zopfli.
+- Fix (same day, Claude Opus 5.5 on Windows): the intro did not start on Windows.
+  Under ANGLE/D3D11 the scene shader took 266 s to compile (SwiftShader never shows
+  this), so the page sat on a blank screen. `map()` inlined `ch()` five times and was
+  itself inlined about 20 times (four-tap normal, `shade()` called twice). Normal as a
+  loop and one `shade()` call site: 51 s; all rows in `map()` through one `ch()` call
+  inside a two-pass loop: 6.4 s. Picture unchanged, now 6,894 bytes. When an intro is
+  made without a Windows GPU, time the scene compile with D3D11 before release.
 ## 2026-11-25 · intro 40 (Microgroove) · Gemini 4 Carbon in Antigravity
 
 - No tool changes. Things other intros should know:

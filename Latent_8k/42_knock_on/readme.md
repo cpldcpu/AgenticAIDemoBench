@@ -1,7 +1,7 @@
 # Knock-On
 
 An 8k intro by **Latent**. Code, picture and music: Claude Opus 5.5, in Claude Code.
-`intro.html` is 6,850 bytes and runs on double-click in Edge or Chrome on Windows.
+`intro.html` is 6,894 bytes and runs on double-click in Edge or Chrome on Windows.
 
 ![contact sheet](media/contact_sheet.jpg)
 

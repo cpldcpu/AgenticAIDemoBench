@@ -48,32 +48,9 @@ float ch(vec3 q,float x,float N,int o){
 }
 float zc(float x){return 1.6*(1.-cos(.11*x));}
 float map(vec3 p){
-  float d,e,k,i,h,j,z;
-  vec3 l;
-  if(S<2){
-    C=0.;
-    p.z-=zc(p.x);
-    return ch(p,T<8.?max(T-7.,0.):(T-8.)/.125+1.,999.,0);
-  }
-  if(S==2){
-    // two rows, struck at the same moment, the right one a little faster: they drift apart like two players phasing
-    p.z-=zc(p.x);
-    d=ch(p-vec3(0,0,.85),(T-24.)/.125,999.,0);
-    l=L;k=K;
-    e=ch(p+vec3(0,0,.85),(T-24.)/.1212,999.,8);
-    C=d<e?1.:2.;
-    if(d<e){L=l;K=k;}
-    return min(d,e);
-  }
-  if(S==3){
-    // an Archimedean spiral r = .191*phi, walked from the outside in
-    z=length(p.xz);
-    h=atan(p.z,p.x);
-    h+=6.2832*round((z/.191-h)/6.2832);
-    h=max(h,9.);
-    C=3.;
-    return ch(vec3(98.1-.0955*h*h,p.y,z-.191*h),(T-40.)/.125,128.,0)*.8;
-  }
+  float d=1e3,e,k,i,h,j,z,x,N=999.,c;
+  vec3 l,q;
+  int o=0;
   if(S==4){
     // each domino half again as tall as the one before: .12 to 10.4
     k=clamp(floor(log2(1.+max(p.x,0.)/.1704)/.585),0.,11.);
@@ -89,19 +66,49 @@ float map(vec3 p){
     L=l;C=4.;
     return d;
   }
+  // all other scenes are rows of dominoes; ch() has a single call site in this loop, because D3D inlines every call
+  // site of it into every call site of map()
+  // an Archimedean spiral r = .191*phi, walked from the outside in
+  z=length(p.xz);
+  h=atan(p.z,p.x);
+  h+=6.2832*round((z/.191-h)/6.2832);
+  h=max(h,9.);
   // the field: 40 rows of 70, struck from the middle row outwards, two dominoes later for each row further out
   j=clamp(floor(p.z/.62+20.),0.,39.);
-  d=1e3;
   for(int n=0;n<2;n++){
-    z=(j-19.5)*.62;
-    e=ch(vec3(p.x+24.5,p.y,p.z-z),(T-72.)/.125-2.*floor(abs(j-19.5)),70.,0);
-    if(e<d){d=e;l=L;k=K;P=vec2(K*D-24.1,z);}
-    j=clamp(j+(p.z>z?1.:-1.),0.,39.);
+    q=p;
+    q.z-=zc(p.x);
+    if(S<2){
+      c=0.;
+      x=T<8.?max(T-7.,0.):(T-8.)/.125+1.;
+    }else if(S==2){
+      // two rows, struck at the same moment, the right one a little faster: they drift apart like two players phasing
+      c=float(n+1);
+      q.z+=n>0?.85:-.85;
+      x=(T-24.)/(n>0?.1212:.125);
+      o=n*8;
+    }else if(S==3){
+      c=3.;
+      q=vec3(98.1-.0955*h*h,p.y,z-.191*h);
+      x=(T-40.)/.125;
+      N=128.;
+    }else{
+      c=5.;
+      z=(j-19.5)*.62;
+      q=vec3(p.x+24.5,p.y,p.z-z);
+      x=(T-72.)/.125-2.*floor(abs(j-19.5));
+      N=70.;
+      j=clamp(j+(p.z>z?1.:-1.),0.,39.);
+    }
+    e=ch(q,x,N,o)*(S==3?.8:1.);
+    if(e<d){d=e;l=L;k=K;C=c;P=vec2(K*D-24.1,z);}
+    if(S!=2&&S!=5)break;
   }
-  L=l;K=k;C=5.;
+  L=l;K=k;
   return d;
 }
-vec3 nr(vec3 p){vec2 e=vec2(.002,-.002);return normalize(e.xyy*map(p+e.xyy)+e.yyx*map(p+e.yyx)+e.yxy*map(p+e.yxy)+e.xxx*map(p+e.xxx));}
+// normal from four taps in a loop: one map() call site instead of four (D3D inlines every call site)
+vec3 nr(vec3 p){vec3 n=vec3(0),e;for(int i=0;i<4;i++){e=.002*(2.*vec3((i+3)>>1&1,i>>1&1,i&1)-1.);n+=e*map(p+e);}return normalize(n);}
 float top(){return S==4?11.:1.05;}
 // march the dominoes only; the table is the plane y = 0 and is intersected exactly
 float march(vec3 o,vec3 r,float m){
@@ -237,20 +244,24 @@ void main(){
   vec3 a=normalize(cross(vec3(0,1,0),w)),b=cross(w,a),r=normalize(u.x*a+u.y*b+f*w);
   s=o.y/max(-r.y,1e-4);
   if(r.y>=0.)s=1e3;
+  // shade() is called at one place only, for the direct hit or for the reflection in the table
   x=march(o,r,s);
-  if(x<s){
-    c=shade(o+r*x,r,1.);
-  }else if(s<1e3){
+  p=o+r*x;
+  y=1.;
+  k=x<s?1.:0.;
+  if(x>=s&&s<1e3){
     // the table: black lacquer, with a sharp reflection of the dominoes
     p=o+r*s;
     n=vec3(0,1,0);
-    k=.04+.96*pow(1.-max(-r.y,0.),5.);
+    h=.04+.96*pow(1.-max(-r.y,0.),5.);
     c=lit(p,n,vec3(.02,.017,.014),.0,sh(p+n*.002),r);
     r.y=-r.y;
     y=march(p,r,40.);
-    c+=(y<40.?shade(p+r*y,r,0.):env(r))*(.06+.6*k);
+    if(y<40.){p+=r*y;k=.06+.6*h;}else c+=env(r)*(.06+.6*h);
+    y=0.;
     x=s;
   }
+  if(k>0.)c+=shade(p,r,y)*k;
   c*=lf;
   // circle of confusion for the post shader: thin focus around the target, like a macro lens
   O=vec4(c,clamp(abs(x-length(t-o))/x*(S==3?.6:S==5&&T>82.?.6-.6*smoothstep(86.,90.,T):1.6),0.,1.));
